@@ -10,18 +10,14 @@ config_version=5
 
 [application]
 
-config/name="BeaverKnightApp"
-run/main_scene="uid://bis8w6sjl016k"
-config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
+config/name="BeaverKnight"
+run/main_scene="uid://clrv2kd5hbnw4"
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
-
-[autoload]
-
-Global="*uid://dygj5e7m0vlj8"
 
 [dotnet]
 
-project/assembly_name="BeaverKnightApp"
+project/assembly_name="BeaverKnight"
 
 [physics]
 
