@@ -1,28 +1,28 @@
-[gd_resource type="AnimatedTexture" load_steps=9 format=2]
+[gd_resource type="AnimatedTexture" format=3 uid="uid://brhw4o5hmxq81"]
 
-[ext_resource path="res://Assets/Water/water_tileset8.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Water/water_tileset2.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Water/water_tileset5.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Water/water_tileset6.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Water/water_tileset7.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Water/water_tileset1.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Water/water_tileset3.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Water/water_tileset4.png" type="Texture" id=8]
+[ext_resource type="Texture2D" uid="uid://cwi2um7vq73rv" path="res://Assets/Water/water_tileset8.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://o7bpyaneearx" path="res://Assets/Water/water_tileset2.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cnne4p2qatem4" path="res://Assets/Water/water_tileset5.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bgvsrhppg5wvt" path="res://Assets/Water/water_tileset6.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://c5gd5hw2eet0e" path="res://Assets/Water/water_tileset7.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bddgpbbpv18mp" path="res://Assets/Water/water_tileset1.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dj1n8yv0x1egd" path="res://Assets/Water/water_tileset3.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dn55i18ifs8t5" path="res://Assets/Water/water_tileset4.png" id="8"]
 
 [resource]
 frames = 8
-frame_0/texture = ExtResource( 6 )
-frame_1/texture = ExtResource( 2 )
-frame_1/delay_sec = 0.0
-frame_2/texture = ExtResource( 7 )
-frame_2/delay_sec = 0.0
-frame_3/texture = ExtResource( 8 )
-frame_3/delay_sec = 0.0
-frame_4/texture = ExtResource( 3 )
-frame_4/delay_sec = 0.0
-frame_5/texture = ExtResource( 4 )
-frame_5/delay_sec = 0.0
-frame_6/texture = ExtResource( 5 )
-frame_6/delay_sec = 0.0
-frame_7/texture = ExtResource( 1 )
-frame_7/delay_sec = 0.0
+frame_0/texture = ExtResource("6")
+frame_1/texture = ExtResource("2")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("7")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("8")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("3")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("4")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("5")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("1")
+frame_7/duration = 1.0
