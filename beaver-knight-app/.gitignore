@@ -1,3 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+# Ignora configurações e metadados locais dos agentes de IA
+.agents/
