@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://daqe3lxlrgblw"]
+
+[ext_resource type="Texture2D" uid="uid://cdid4simnfvit" path="res://Assets/UI/BeaverKnight-BG.png" id="1_06t4h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
+content_margin_left = 7.0
+content_margin_top = 8.0
+content_margin_right = 7.0
+content_margin_bottom = 8.0
+bg_color = Color(0.0627451, 0.23921569, 0.16470589, 0.9098039)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5372549, 0.3254902, 0.18431373, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu7sn"]
+bg_color = Color(0.22352941, 0.47843137, 0.22745098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9607843, 0.92941177, 0.8117647, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jix8l"]
+bg_color = Color(0.08627451, 0.56078434, 0.6901961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9607843, 0.92941177, 0.8117647, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glbon"]
+bg_color = Color(0.5372549, 0.3254902, 0.18431373, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9607843, 0.92941177, 0.8117647, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="MainMenu" type="Control" unique_id=1179119746]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=924106157]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 321.0
+offset_bottom = 182.0
+mouse_filter = 2
+texture = ExtResource("1_06t4h")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MenuPanel" type="PanelContainer" parent="." unique_id=1565931734]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 48.0
+offset_right = 310.0
+offset_bottom = 168.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7vrkn")
+
+[node name="Buttons" type="VBoxContainer" parent="MenuPanel" unique_id=2046848145]
+layout_mode = 2
+theme_override_constants/separation = 7
+alignment = 1
+
+[node name="StartButton" type="Button" parent="MenuPanel/Buttons" unique_id=1481149679]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9607843, 0.92941177, 0.8117647, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_fu7sn")
+text = "START GAME"
+
+[node name="OptionsButton" type="Button" parent="MenuPanel/Buttons" unique_id=505701591]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_jix8l")
+text = "OPTIONS"
+
+[node name="ExitButton" type="Button" parent="MenuPanel/Buttons" unique_id=1409574104]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_glbon")
+text = "EXIT GAME"
