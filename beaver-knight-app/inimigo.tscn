@@ -1,15 +1,17 @@
-[gd_scene format=3 uid="uid://c37v58kgtjlpr"]
+[gd_scene format=3 uid="uid://ckfhu7y44ngcu"]
 
-[ext_resource type="Texture2D" uid="uid://c0hnv56xyaeol" path="res://Assets/Player/Male_Spritesheet.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://mnj2art8qqrl" path="res://inimigo.gd" id="1_0b8xr"]
+[ext_resource type="Texture2D" uid="uid://c0hnv56xyaeol" path="res://Assets/Player/Male_Spritesheet.png" id="1_030df"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(16, 16)
 
-[node name="Player" type="CharacterBody2D" unique_id=1808212248 groups=["player"]]
+[node name="Inimigo" type="CharacterBody2D" unique_id=1808212248]
+script = ExtResource("1_0b8xr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=470647290]
 texture_filter = 1
-texture = ExtResource("1_4flbx")
+texture = ExtResource("1_030df")
 centered = false
 offset = Vector2(0, -4)
 hframes = 3

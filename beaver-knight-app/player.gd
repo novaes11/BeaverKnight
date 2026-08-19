@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var walk_speed = 3.0
+@export var walk_speed: float = 100.0
 const TILE_SIZE = 16
 
 @onready var anim_tree = $AnimationTree
