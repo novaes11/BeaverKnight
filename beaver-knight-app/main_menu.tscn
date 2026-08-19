@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://daqe3lxlrgblw"]
 
 [ext_resource type="Texture2D" uid="uid://cdid4simnfvit" path="res://Assets/UI/BeaverKnight-BG.png" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://ba17v3wewfyoe" path="res://Assets/UI/MenuPanel-Border.png" id="2_7vrkn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
 content_margin_left = 7.0
@@ -62,12 +63,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=924106157]
+[node name="BG" type="TextureRect" parent="." unique_id=924106157]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 2.0
+offset_top = 1.0
 offset_right = 321.0
-offset_bottom = 182.0
+offset_bottom = 179.0
 mouse_filter = 2
 texture = ExtResource("1_06t4h")
 expand_mode = 1
@@ -107,3 +107,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_glbon")
 text = "EXIT GAME"
+
+[node name="LeafFrame" type="TextureRect" parent="." unique_id=373990613]
+custom_minimum_size = Vector2(110, 125)
+layout_mode = 0
+offset_left = 193.0
+offset_top = 38.0
+offset_right = 322.0
+offset_bottom = 177.0
+mouse_filter = 2
+texture = ExtResource("2_7vrkn")
+expand_mode = 1
