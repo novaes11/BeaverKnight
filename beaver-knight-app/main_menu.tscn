@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://daqe3lxlrgblw"]
 
 [ext_resource type="Texture2D" uid="uid://cdid4simnfvit" path="res://Assets/UI/BeaverKnight-BG.png" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://cjxo33g1hep11" path="res://main_menu.gd" id="1_jix8l"]
 [ext_resource type="Texture2D" uid="uid://ba17v3wewfyoe" path="res://Assets/UI/MenuPanel-Border.png" id="2_7vrkn"]
+[ext_resource type="FontFile" uid="uid://crnfpf3jj63td" path="res://Assets/UI/pkmnfl.ttf" id="2_fu7sn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
 content_margin_left = 7.0
@@ -62,12 +64,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jix8l")
 
 [node name="BG" type="TextureRect" parent="." unique_id=924106157]
 layout_mode = 0
-offset_top = 1.0
-offset_right = 321.0
-offset_bottom = 179.0
+offset_right = 320.0
+offset_bottom = 180.0
 mouse_filter = 2
 texture = ExtResource("1_06t4h")
 expand_mode = 1
@@ -90,6 +92,7 @@ alignment = 1
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9607843, 0.92941177, 0.8117647, 1)
+theme_override_fonts/font = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_fu7sn")
 text = "START GAME"
@@ -97,6 +100,7 @@ text = "START GAME"
 [node name="OptionsButton" type="Button" parent="MenuPanel/Buttons" unique_id=505701591]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_jix8l")
 text = "OPTIONS"
@@ -104,6 +108,7 @@ text = "OPTIONS"
 [node name="ExitButton" type="Button" parent="MenuPanel/Buttons" unique_id=1409574104]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBoxFlat_glbon")
 text = "EXIT GAME"
@@ -118,3 +123,5 @@ offset_bottom = 177.0
 mouse_filter = 2
 texture = ExtResource("2_7vrkn")
 expand_mode = 1
+
+[connection signal="pressed" from="MenuPanel/Buttons/StartButton" to="." method="_on_start_button_pressed"]
