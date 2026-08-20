@@ -742,7 +742,6 @@ tile_set = SubResource("TileSet_gwqsq")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1152908839 groups=["player"]]
 script = ExtResource("1_dwdjc")
-walk_speed = null
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=512537247]

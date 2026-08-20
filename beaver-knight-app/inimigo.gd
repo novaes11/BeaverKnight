@@ -1,17 +1,24 @@
 extends CharacterBody2D
 
-@export var move_speed: float = 2.0  # Passos por segundo
+# Configurações de Vida do Inimigo
+@export var max_health: int = 50
+var current_health: int
+
+@export var move_speed: float = 2.0
+@export var attack_cooldown: float = 1.0
 const TILE_SIZE: int = 16
 
 var player: Node2D = null
 var initial_position: Vector2 = Vector2.ZERO
 var is_moving: bool = false
+var is_attacking: bool = false
 var percent_moved: float = 0.0
 var target_direction: Vector2 = Vector2.ZERO
+var can_attack: bool = true
 
 func _ready() -> void:
 	initial_position = position
-	# Procura o Player assim que o inimigo entra na árvore
+	current_health = max_health # Inicializa o HP do inimigo
 	find_player()
 
 func find_player() -> void:
@@ -20,7 +27,6 @@ func find_player() -> void:
 		player = players[0]
 
 func _physics_process(delta: float) -> void:
-	# Se ainda não encontrou o player, tenta buscar de novo
 	if player == null:
 		find_player()
 		return
@@ -31,16 +37,17 @@ func _physics_process(delta: float) -> void:
 		decide_next_move()
 
 func decide_next_move() -> void:
-	if player == null:
+	if player == null or is_attacking:
 		return
 		
 	var diff = player.global_position - global_position
+	var distance = diff.length()
 	
-	# Se já está na mesma casa do player, aguarda
-	if diff.length() < TILE_SIZE / 2.0:
+	if distance <= TILE_SIZE:
+		if can_attack:
+			attack_player()
 		return
-		
-	# Trava a movimentação apenas para 1 eixo por vez (grid de tiles)
+
 	if abs(diff.x) > abs(diff.y):
 		target_direction = Vector2(sign(diff.x), 0)
 	else:
@@ -58,3 +65,26 @@ func move_to_next_tile(delta: float) -> void:
 		is_moving = false
 	else:
 		position = initial_position + (target_direction * TILE_SIZE * percent_moved)
+
+func attack_player() -> void:
+	is_attacking = true
+	can_attack = false
+	
+	if player.has_method("take_damage"):
+		player.take_damage(10)
+	
+	await get_tree().create_timer(attack_cooldown).timeout
+	can_attack = true
+	is_attacking = false
+
+# FUNÇÃO NOVA: Inimigo recebe dano e morre
+func take_damage(amount: int) -> void:
+	current_health -= amount
+	print("Inimigo recebeu dano! HP restante: ", current_health)
+	
+	if current_health <= 0:
+		die()
+
+func die() -> void:
+	print("Inimigo derrotado!")
+	queue_free() # Remove o nó do inimigo da árvore de cena
