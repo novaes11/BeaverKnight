@@ -1,12 +1,16 @@
 extends CharacterBody2D
 
-# Configurações de Vida do Inimigo
+# Configurações de Vida
 @export var max_health: int = 50
 var current_health: int
 
 @export var move_speed: float = 2.0
 @export var attack_cooldown: float = 1.0
 const TILE_SIZE: int = 16
+
+# Referências de Animação
+@onready var anim_tree: AnimationTree = $AnimationTree
+@onready var anim_state = anim_tree.get("parameters/playback")
 
 var player: Node2D = null
 var initial_position: Vector2 = Vector2.ZERO
@@ -17,8 +21,9 @@ var target_direction: Vector2 = Vector2.ZERO
 var can_attack: bool = true
 
 func _ready() -> void:
+	anim_tree.active = true
 	initial_position = position
-	current_health = max_health # Inicializa o HP do inimigo
+	current_health = max_health
 	find_player()
 
 func find_player() -> void:
@@ -32,8 +37,10 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if is_moving:
+		anim_state.travel("Walk")
 		move_to_next_tile(delta)
 	else:
+		anim_state.travel("Idle")
 		decide_next_move()
 
 func decide_next_move() -> void:
@@ -48,13 +55,23 @@ func decide_next_move() -> void:
 			attack_player()
 		return
 
+	# Calcula o eixo de maior distância
 	if abs(diff.x) > abs(diff.y):
 		target_direction = Vector2(sign(diff.x), 0)
 	else:
 		target_direction = Vector2(0, sign(diff.y))
 		
+	# Atualiza a direção no AnimationTree (Idle, Walk e Turn)
+	update_animation_direction(target_direction)
+	
 	initial_position = position
 	is_moving = true
+
+func update_animation_direction(direction: Vector2) -> void:
+	if direction != Vector2.ZERO:
+		anim_tree.set("parameters/Idle/blend_position", direction)
+		anim_tree.set("parameters/Walk/blend_position", direction)
+		anim_tree.set("parameters/Turn/blend_position", direction)
 
 func move_to_next_tile(delta: float) -> void:
 	percent_moved += move_speed * delta
@@ -77,7 +94,6 @@ func attack_player() -> void:
 	can_attack = true
 	is_attacking = false
 
-# FUNÇÃO NOVA: Inimigo recebe dano e morre
 func take_damage(amount: int) -> void:
 	current_health -= amount
 	print("Inimigo recebeu dano! HP restante: ", current_health)
@@ -87,4 +103,4 @@ func take_damage(amount: int) -> void:
 
 func die() -> void:
 	print("Inimigo derrotado!")
-	queue_free() # Remove o nó do inimigo da árvore de cena
+	queue_free()
