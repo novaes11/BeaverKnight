@@ -1,0 +1,817 @@
+[gd_scene format=4 uid="uid://clrv2kd5hbnw4"]
+
+[ext_resource type="Script" uid="uid://b31kj8tobgwag" path="res://player.gd" id="1_dwdjc"]
+[ext_resource type="Texture2D" uid="uid://c0hnv56xyaeol" path="res://Assets/Player/Male_Spritesheet.png" id="1_x5mr4"]
+[ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="3_e8yg3"]
+[ext_resource type="Script" uid="uid://cwajbq5kbxsgo" path="res://enemy_spawn.gd" id="4_gwqsq"]
+[ext_resource type="Script" uid="uid://do440w4o2q6d6" path="res://enemy_movement.gd" id="6_tkreh"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dwdjc"]
+load_path = "res://.godot/imported/grass1_tileset.png-9f0cfb888730e1a54739d6a21aa6c0f5.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e8yg3"]
+resource_name = "gass1_tileset"
+texture = SubResource("CompressedTexture2D_dwdjc")
+3:0/next_alternative_id = 5
+3:0/0 = 0
+3:0/0/probability = 10.0
+3:1/next_alternative_id = 6
+3:1/0 = 0
+3:1/0/probability = 5.0
+3:2/next_alternative_id = 3
+3:2/0 = 0
+3:2/0/probability = 1.5
+3:3/next_alternative_id = 2
+3:3/0 = 0
+3:3/0/probability = 3.0
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/bottom_left_corner = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/bottom_left_corner = 0
+2:0/0/terrains_peering_bit/left_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_right_corner = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_right_corner = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/bottom_left_corner = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/terrains_peering_bit/top_right_corner = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/bottom_left_corner = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
+2:1/0/terrains_peering_bit/top_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+0:2/0/terrains_peering_bit/top_right_corner = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_left_corner = 0
+1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/terrains_peering_bit/top_right_corner = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_left_corner = 0
+2:2/0/terrains_peering_bit/top_side = 0
+0:3/0 = 0
+0:3/0/terrain_set = 0
+0:3/0/terrain = 0
+0:3/0/terrains_peering_bit/right_side = 0
+0:3/0/terrains_peering_bit/bottom_side = 0
+0:3/0/terrains_peering_bit/bottom_left_corner = 0
+0:3/0/terrains_peering_bit/left_side = 0
+0:3/0/terrains_peering_bit/top_left_corner = 0
+0:3/0/terrains_peering_bit/top_side = 0
+0:3/0/terrains_peering_bit/top_right_corner = 0
+1:3/0 = 0
+1:3/0/terrain_set = 0
+1:3/0/terrain = 0
+1:3/0/terrains_peering_bit/right_side = 0
+1:3/0/terrains_peering_bit/bottom_right_corner = 0
+1:3/0/terrains_peering_bit/bottom_side = 0
+1:3/0/terrains_peering_bit/left_side = 0
+1:3/0/terrains_peering_bit/top_left_corner = 0
+1:3/0/terrains_peering_bit/top_side = 0
+1:3/0/terrains_peering_bit/top_right_corner = 0
+0:4/0 = 0
+0:4/0/terrain_set = 0
+0:4/0/terrain = 0
+0:4/0/terrains_peering_bit/right_side = 0
+0:4/0/terrains_peering_bit/bottom_right_corner = 0
+0:4/0/terrains_peering_bit/bottom_side = 0
+0:4/0/terrains_peering_bit/bottom_left_corner = 0
+0:4/0/terrains_peering_bit/left_side = 0
+0:4/0/terrains_peering_bit/top_left_corner = 0
+0:4/0/terrains_peering_bit/top_side = 0
+1:4/0 = 0
+1:4/0/terrain_set = 0
+1:4/0/terrain = 0
+1:4/0/terrains_peering_bit/right_side = 0
+1:4/0/terrains_peering_bit/bottom_right_corner = 0
+1:4/0/terrains_peering_bit/bottom_side = 0
+1:4/0/terrains_peering_bit/bottom_left_corner = 0
+1:4/0/terrains_peering_bit/left_side = 0
+1:4/0/terrains_peering_bit/top_side = 0
+1:4/0/terrains_peering_bit/top_right_corner = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwqsq"]
+texture = ExtResource("3_e8yg3")
+use_texture_padding = false
+0:0/animation_speed = 4.0
+0:0/0 = 0
+0:0/0/terrain_set = 1
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/animation_speed = 4.0
+1:0/0 = 0
+1:0/0/terrain_set = 1
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/bottom_left_corner = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/animation_speed = 4.0
+2:0/0 = 0
+2:0/0/terrain_set = 1
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/bottom_left_corner = 0
+2:0/0/terrains_peering_bit/left_side = 0
+0:1/animation_speed = 4.0
+0:1/0 = 0
+0:1/0/terrain_set = 1
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_right_corner = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/animation_speed = 4.0
+1:1/0 = 0
+1:1/0/terrain_set = 1
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_right_corner = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/bottom_left_corner = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/terrains_peering_bit/top_right_corner = 0
+2:1/animation_speed = 4.0
+2:1/0 = 0
+2:1/0/terrain_set = 1
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/bottom_left_corner = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
+2:1/0/terrains_peering_bit/top_side = 0
+0:2/animation_speed = 4.0
+0:2/0 = 0
+0:2/0/terrain_set = 1
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+0:2/0/terrains_peering_bit/top_right_corner = 0
+1:2/animation_speed = 4.0
+1:2/0 = 0
+1:2/0/terrain_set = 1
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_left_corner = 0
+1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/terrains_peering_bit/top_right_corner = 0
+2:2/animation_speed = 4.0
+2:2/0 = 0
+2:2/0/terrain_set = 1
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_left_corner = 0
+2:2/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSet" id="TileSet_gwqsq"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "path 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+terrain_set_1/mode = 0
+terrain_set_1/terrain_0/name = "water 0"
+terrain_set_1/terrain_0/color = Color(0, 0, 1, 1)
+sources/1 = SubResource("TileSetAtlasSource_e8yg3")
+sources/8 = SubResource("TileSetAtlasSource_gwqsq")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_dwdjc"]
+resource_name = "IdleDown"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_e8yg3"]
+resource_name = "IdleLeft"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gwqsq"]
+resource_name = "IdleRight"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_nki3b"]
+resource_name = "IdleUp"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_tkreh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mqebe"]
+resource_name = "TurnDown"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished_turning"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_kjw1v"]
+resource_name = "TurnLeft"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished_turning"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gttat"]
+resource_name = "TurnRight"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished_turning"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_civ0g"]
+resource_name = "TurnUp"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finished_turning"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_525j1"]
+resource_name = "WalkDown"
+length = 0.8
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_xtgmq"]
+resource_name = "WalkLeft"
+length = 0.8
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fi1dd"]
+resource_name = "WalkRight"
+length = 0.8
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_oghek"]
+resource_name = "WalkUp"
+length = 0.8
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mqebe"]
+_data = {
+&"IdleDown": SubResource("Animation_dwdjc"),
+&"IdleLeft": SubResource("Animation_e8yg3"),
+&"IdleRight": SubResource("Animation_gwqsq"),
+&"IdleUp": SubResource("Animation_nki3b"),
+&"RESET": SubResource("Animation_tkreh"),
+&"TurnDown": SubResource("Animation_mqebe"),
+&"TurnLeft": SubResource("Animation_kjw1v"),
+&"TurnRight": SubResource("Animation_gttat"),
+&"TurnUp": SubResource("Animation_civ0g"),
+&"WalkDown": SubResource("Animation_525j1"),
+&"WalkLeft": SubResource("Animation_xtgmq"),
+&"WalkRight": SubResource("Animation_fi1dd"),
+&"WalkUp": SubResource("Animation_oghek")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nki3b"]
+animation = &"IdleLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tkreh"]
+animation = &"IdleRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_525j1"]
+animation = &"IdleDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xtgmq"]
+animation = &"IdleUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_njdcc"]
+auto_triangles = false
+triangles = PackedInt32Array()
+blend_mode = 1
+blend_point_0/node = SubResource("AnimationNodeAnimation_nki3b")
+blend_point_0/pos = Vector2(-1, 0.1)
+blend_point_0/name = &"0"
+blend_point_1/node = SubResource("AnimationNodeAnimation_tkreh")
+blend_point_1/pos = Vector2(1, 0.1)
+blend_point_1/name = &"1"
+blend_point_2/node = SubResource("AnimationNodeAnimation_525j1")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_2/name = &"2"
+blend_point_3/node = SubResource("AnimationNodeAnimation_xtgmq")
+blend_point_3/pos = Vector2(0, -1)
+blend_point_3/name = &"3"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fi1dd"]
+animation = &"TurnLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oghek"]
+animation = &"TurnRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mqebe"]
+animation = &"TurnDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kjw1v"]
+animation = &"TurnUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_tkreh"]
+blend_mode = 1
+blend_point_0/node = SubResource("AnimationNodeAnimation_fi1dd")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_0/name = &"0"
+blend_point_1/node = SubResource("AnimationNodeAnimation_oghek")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_1/name = &"1"
+blend_point_2/node = SubResource("AnimationNodeAnimation_mqebe")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_2/name = &"2"
+blend_point_3/node = SubResource("AnimationNodeAnimation_kjw1v")
+blend_point_3/pos = Vector2(0, -1)
+blend_point_3/name = &"3"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gttat"]
+animation = &"WalkLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_civ0g"]
+animation = &"WalkRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vl6sd"]
+animation = &"WalkDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_njdcc"]
+animation = &"WalkUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_tsyqs"]
+auto_triangles = false
+triangles = PackedInt32Array()
+blend_mode = 1
+blend_point_0/node = SubResource("AnimationNodeAnimation_gttat")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_0/name = &"0"
+blend_point_1/node = SubResource("AnimationNodeAnimation_civ0g")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_1/name = &"1"
+blend_point_2/node = SubResource("AnimationNodeAnimation_vl6sd")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_2/name = &"2"
+blend_point_3/node = SubResource("AnimationNodeAnimation_njdcc")
+blend_point_3/pos = Vector2(0, -1)
+blend_point_3/name = &"3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0rrug"]
+reset = false
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lxbdl"]
+reset = false
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ypel8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_525j1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xtgmq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fi1dd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oghek"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e8yg3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_x0j2p"]
+states/End/position = Vector2(677.6, 88.578896)
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_njdcc")
+states/Idle/position = Vector2(327.59995, 49.23084)
+states/Start/position = Vector2(172, 88.1748)
+states/Turn/node = SubResource("AnimationNodeBlendSpace2D_tkreh")
+states/Turn/position = Vector2(440.4, 116.8)
+states/Walk/node = SubResource("AnimationNodeBlendSpace2D_tsyqs")
+states/Walk/position = Vector2(534.8, 49.61379)
+transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_0rrug"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_lxbdl"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ypel8"), "Idle", "Turn", SubResource("AnimationNodeStateMachineTransition_525j1"), "Turn", "Idle", SubResource("AnimationNodeStateMachineTransition_xtgmq"), "Walk", "Turn", SubResource("AnimationNodeStateMachineTransition_fi1dd"), "Turn", "Walk", SubResource("AnimationNodeStateMachineTransition_oghek"), "Walk", "End", SubResource("AnimationNodeStateMachineTransition_e8yg3")]
+
+[node name="Town" type="Node2D" unique_id=1173611975]
+position = Vector2(286, 203)
+metadata/_edit_group_ = true
+
+[node name="OverworldTileMap" type="TileMap" parent="." unique_id=1708541266]
+tile_set = SubResource("TileSet_gwqsq")
+format = 2
+
+[node name="tipo_terreno" type="TileMapLayer" parent="OverworldTileMap" unique_id=52919505]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAABAP7/AQADAAMAAAABAP//AQAAAAAAAAABAAAAAQAAAAEAAAABAAEAAQABAAQAAAABAAIAAQABAAEAAAABAAMAAQABAAMAAAACAP7/AQADAAAAAAACAP//AQABAAAAAAACAAAAAQABAAEAAAACAAEAAQABAAEAAAACAAIAAQABAAEAAAACAAMAAQABAAEAAAADAP7/AQADAAEAAAADAP//AQABAAAAAAADAAAAAQABAAEAAAADAAEAAQABAAEAAAADAAIAAQABAAEAAAADAAMAAQABAAEAAAAEAP7/AQADAAEAAAAEAP//AQACAAAAAAAEAAAAAQACAAEAAAAEAAEAAQAAAAQAAAAEAAIAAQABAAEAAAAEAAMAAQAAAAMAAAAFAP7/AQADAAAAAAAFAP//AQADAAMAAAAFAAAAAQADAAIAAAAFAAEAAQABAAAAAAAFAAIAAQABAAEAAAAFAAMAAQABAAIAAAAGAP7/AQADAAEAAAAGAP//AQADAAAAAAAGAAAAAQADAAIAAAAGAAEAAQABAAAAAAAGAAIAAQABAAEAAAAGAAMAAQABAAIAAAAHAP7/AQADAAAAAAAHAP//AQADAAAAAAAHAAAAAQADAAAAAAAHAAEAAQABAAAAAAAHAAIAAQABAAEAAAAHAAMAAQABAAIAAAAIAP7/AQADAAMAAAAIAP//AQADAAAAAAAIAAAAAQADAAAAAAAIAAEAAQABAAAAAAAIAAIAAQABAAEAAAAIAAMAAQABAAIAAAD7//7/AQADAAMAAAD7////AQADAAEAAAD8//7/AQADAAEAAAD8////AQADAAAAAAD9//7/AQADAAEAAAD9////AQADAAIAAAD+//7/AQADAAAAAAD+////AQADAAMAAAD///7/AQADAAEAAAD/////AQADAAAAAAAAAP7/AQADAAAAAAD7/wAAAQADAAAAAAD7/wEAAQABAAAAAAD7/wIAAQABAAEAAAD7/wMAAQABAAIAAAD8/wAAAQADAAAAAAD8/wEAAQABAAAAAAD8/wIAAQABAAEAAAD8/wMAAQABAAIAAAD9/wAAAQADAAAAAAD9/wEAAQABAAAAAAD9/wIAAQABAAEAAAD9/wMAAQABAAIAAAD+/wAAAQADAAEAAAD+/wEAAQABAAAAAAD+/wIAAQABAAEAAAD+/wMAAQABAAIAAAD//wAAAQADAAIAAAD//wEAAQABAAAAAAD//wIAAQABAAEAAAD//wMAAQABAAIAAAAAAAEAAQABAAAAAAAAAAIAAQABAAEAAAAAAAMAAQABAAIAAADz//j/AQADAAAAAADz//n/AQADAAAAAADz//r/AQADAAAAAADz//v/AQADAAAAAADz//z/AQADAAMAAADz//3/AQADAAMAAADz//7/AQADAAMAAADz////AQADAAIAAADz/wAAAQADAAEAAADz/wEAAQADAAIAAADz/wIAAQADAAAAAADz/wMAAQADAAEAAADz/wQAAQADAAAAAADz/wUAAQADAAAAAADz/wYAAQADAAMAAADz/wcAAQADAAAAAADz/wgAAQADAAMAAADz/wkAAQADAAAAAAD0//j/AQADAAAAAAD0//n/AQADAAEAAAD0//r/AQADAAAAAAD0//v/AQADAAEAAAD0//z/AQADAAAAAAD0//3/AQADAAEAAAD0//7/AQADAAAAAAD0////AQADAAMAAAD0/wAAAQADAAAAAAD0/wEAAQADAAMAAAD0/wIAAQADAAEAAAD0/wMAAQADAAAAAAD0/wQAAQADAAAAAAD0/wUAAQADAAAAAAD0/wYAAQADAAEAAAD0/wcAAQADAAAAAAD0/wgAAQADAAIAAAD0/wkAAQADAAIAAAD1//j/AQADAAAAAAD1//n/AQADAAAAAAD1//r/AQADAAAAAAD1//v/AQADAAAAAAD1//z/AQADAAAAAAD1//3/AQADAAAAAAD1//7/AQADAAEAAAD1////AQADAAEAAAD1/wAAAQADAAAAAAD1/wEAAQADAAEAAAD1/wIAAQADAAEAAAD1/wMAAQADAAAAAAD1/wQAAQADAAIAAAD1/wUAAQADAAAAAAD1/wYAAQADAAMAAAD1/wcAAQADAAEAAAD1/wgAAQADAAEAAAD1/wkAAQADAAEAAAD2//j/AQADAAEAAAD2//n/AQADAAAAAAD2//r/AQADAAMAAAD2//v/AQADAAAAAAD2//z/AQADAAAAAAD2//3/AQADAAMAAAD2//7/AQADAAAAAAD2////AQADAAAAAAD2/wAAAQADAAAAAAD2/wEAAQAAAAAAAAD2/wIAAQAAAAEAAAD2/wMAAQAAAAIAAAD2/wQAAQADAAAAAAD2/wUAAQADAAAAAAD2/wYAAQAAAAAAAAD2/wcAAQAAAAEAAAD2/wgAAQAAAAIAAAD2/wkAAQADAAAAAAD3//j/AQADAAEAAAD3//n/AQADAAAAAAD3//r/AQADAAAAAAD3//v/AQADAAEAAAD3//z/AQADAAEAAAD3//3/AQADAAEAAAD3//7/AQADAAMAAAD3////AQADAAEAAAD3/wAAAQADAAEAAAD3/wEAAQABAAAAAAD3/wIAAQABAAEAAAD3/wMAAQABAAIAAAD3/wQAAQADAAAAAAD3/wUAAQADAAMAAAD3/wYAAQABAAAAAAD3/wcAAQABAAEAAAD3/wgAAQABAAIAAAD3/wkAAQADAAAAAAD4//j/AQADAAEAAAD4//n/AQADAAAAAAD4//r/AQADAAMAAAD4//v/AQADAAAAAAD4//z/AQADAAMAAAD4//3/AQADAAEAAAD4//7/AQADAAAAAAD4////AQADAAAAAAD4/wAAAQADAAAAAAD4/wEAAQABAAAAAAD4/wIAAQABAAEAAAD4/wMAAQABAAIAAAD4/wQAAQADAAMAAAD4/wUAAQADAAEAAAD4/wYAAQABAAAAAAD4/wcAAQABAAEAAAD4/wgAAQABAAIAAAD4/wkAAQADAAAAAAD5//j/AQADAAAAAAD5//n/AQADAAEAAAD5//r/AQADAAEAAAD5//v/AQADAAAAAAD5//z/AQADAAAAAAD5//3/AQADAAEAAAD5//7/AQADAAMAAAD5////AQADAAIAAAD5/wAAAQADAAMAAAD5/wEAAQABAAAAAAD5/wIAAQABAAEAAAD5/wMAAQABAAIAAAD5/wQAAQADAAAAAAD5/wUAAQADAAEAAAD5/wYAAQABAAAAAAD5/wcAAQABAAEAAAD5/wgAAQABAAIAAAD5/wkAAQADAAAAAAD6//j/AQADAAMAAAD6//n/AQADAAAAAAD6//r/AQADAAMAAAD6//v/AQADAAAAAAD6//z/AQADAAMAAAD6//3/AQADAAAAAAD6//7/AQADAAMAAAD6////AQADAAEAAAD6/wAAAQADAAAAAAD6/wEAAQABAAAAAAD6/wIAAQABAAEAAAD6/wMAAQABAAIAAAD6/wQAAQADAAMAAAD6/wUAAQADAAAAAAD6/wYAAQABAAAAAAD6/wcAAQABAAEAAAD6/wgAAQABAAIAAAD6/wkAAQADAAMAAAD7//j/AQADAAAAAAD7//n/AQADAAAAAAD7//r/AQADAAEAAAD7//v/AQADAAAAAAD7//z/AQADAAEAAAD7//3/AQADAAIAAAD7/wQAAQADAAEAAAD7/wUAAQADAAAAAAD7/wYAAQABAAAAAAD7/wcAAQABAAEAAAD7/wgAAQABAAIAAAD7/wkAAQADAAAAAAD8//j/AQADAAEAAAD8//n/AQADAAIAAAD8//r/AQADAAEAAAD8//v/AQADAAMAAAD8//z/AQADAAAAAAD8//3/AQADAAAAAAD8/wQAAQADAAAAAAD8/wUAAQADAAEAAAD8/wYAAQABAAAAAAD8/wcAAQABAAEAAAD8/wgAAQABAAIAAAD8/wkAAQADAAAAAAD9//j/AQADAAAAAAD9//n/AQADAAAAAAD9//r/AQADAAAAAAD9//v/AQADAAAAAAD9//z/AQADAAEAAAD9//3/AQADAAAAAAD9/wQAAQADAAAAAAD9/wUAAQADAAAAAAD9/wYAAQABAAAAAAD9/wcAAQABAAEAAAD9/wgAAQABAAIAAAD9/wkAAQADAAIAAAD+//j/AQADAAAAAAD+//n/AQADAAAAAAD+//r/AQADAAIAAAD+//v/AQADAAAAAAD+//z/AQADAAEAAAD+//3/AQADAAMAAAD+/wQAAQADAAEAAAD+/wUAAQADAAAAAAD+/wYAAQABAAAAAAD+/wcAAQABAAEAAAD+/wgAAQABAAIAAAD+/wkAAQADAAAAAAD///j/AQADAAIAAAD///n/AQADAAEAAAD///r/AQADAAAAAAD///v/AQADAAAAAAD///z/AQADAAIAAAD///3/AQADAAEAAAD//wQAAQADAAAAAAD//wUAAQADAAMAAAD//wYAAQABAAAAAAD//wcAAQABAAEAAAD//wgAAQABAAIAAAD//wkAAQADAAEAAAAAAPj/AQADAAAAAAAAAPn/AQADAAMAAAAAAPr/AQADAAEAAAAAAPv/AQADAAEAAAAAAPz/AQADAAAAAAAAAP3/AQADAAAAAAAAAAQAAQADAAAAAAAAAAUAAQADAAIAAAAAAAYAAQABAAAAAAAAAAcAAQABAAEAAAAAAAgAAQABAAIAAAAAAAkAAQADAAMAAAABAPj/AQADAAAAAAABAPn/AQADAAAAAAABAPr/AQADAAAAAAABAPv/AQADAAAAAAABAPz/AQADAAAAAAABAP3/AQADAAAAAAABAAQAAQAAAAEAAAABAAUAAQAAAAEAAAABAAYAAQABAAQAAAABAAcAAQABAAEAAAABAAgAAQABAAIAAAABAAkAAQADAAAAAAACAPj/AQADAAAAAAACAPn/AQADAAAAAAACAPr/AQADAAAAAAACAPv/AQADAAEAAAACAPz/AQADAAMAAAACAP3/AQADAAEAAAACAAQAAQABAAEAAAACAAUAAQABAAEAAAACAAYAAQABAAEAAAACAAcAAQABAAEAAAACAAgAAQABAAIAAAACAAkAAQADAAAAAAADAPj/AQADAAAAAAADAPn/AQADAAAAAAADAPr/AQADAAMAAAADAPv/AQADAAAAAAADAPz/AQADAAAAAAADAP3/AQADAAEAAAADAAQAAQABAAEAAAADAAUAAQABAAEAAAADAAYAAQABAAEAAAADAAcAAQABAAEAAAADAAgAAQABAAIAAAADAAkAAQADAAEAAAAEAPj/AQADAAEAAAAEAPn/AQADAAEAAAAEAPr/AQADAAAAAAAEAPv/AQADAAEAAAAEAPz/AQADAAAAAAAEAP3/AQADAAAAAAAEAAQAAQACAAEAAAAEAAUAAQACAAEAAAAEAAYAAQAAAAQAAAAEAAcAAQABAAEAAAAEAAgAAQABAAIAAAAEAAkAAQADAAAAAAAFAPj/AQADAAAAAAAFAPn/AQADAAAAAAAFAPr/AQADAAAAAAAFAPv/AQADAAAAAAAFAPz/AQADAAMAAAAFAP3/AQADAAAAAAAFAAQACAAAAAAAAAAFAAUACAAAAAIAAAAFAAYAAQABAAAAAAAFAAcAAQABAAEAAAAFAAgAAQABAAIAAAAFAAkAAQADAAMAAAAGAPj/AQADAAAAAAAGAPn/AQADAAAAAAAGAPr/AQADAAEAAAAGAPv/AQADAAAAAAAGAPz/AQADAAMAAAAGAP3/AQADAAEAAAAGAAQACAABAAAAAAAGAAUACAABAAIAAAAGAAYAAQABAAAAAAAGAAcAAQABAAEAAAAGAAgAAQABAAIAAAAGAAkAAQADAAEAAAAHAPj/AQADAAAAAAAHAPn/AQADAAAAAAAHAPr/AQADAAEAAAAHAPv/AQADAAEAAAAHAPz/AQADAAAAAAAHAP3/AQADAAAAAAAHAAQACAABAAAAAAAHAAUACAABAAIAAAAHAAYAAQABAAAAAAAHAAcAAQABAAEAAAAHAAgAAQABAAIAAAAHAAkAAQADAAAAAAAIAPj/AQADAAAAAAAIAPn/AQADAAEAAAAIAPr/AQADAAEAAAAIAPv/AQADAAAAAAAIAPz/AQADAAAAAAAIAP3/AQADAAEAAAAIAAQACAABAAAAAAAIAAUACAABAAIAAAAIAAYAAQABAAAAAAAIAAcAAQABAAEAAAAIAAgAAQABAAIAAAAIAAkAAQADAAAAAAAJAPj/AQADAAAAAAAJAPn/AQADAAAAAAAJAPr/AQADAAAAAAAJAPv/AQADAAAAAAAJAPz/AQADAAAAAAAJAP3/AQADAAAAAAAJAP7/AQADAAAAAAAJAP//AQADAAAAAAAJAAAAAQADAAAAAAAJAAEAAQABAAAAAAAJAAIAAQABAAEAAAAJAAMAAQABAAIAAAAJAAUACAABAAIAAAAJAAYAAQABAAAAAAAJAAcAAQABAAEAAAAJAAgAAQABAAIAAAAJAAkAAQADAAAAAAAKAPj/AQADAAAAAAAKAPn/AQADAAEAAAAKAPr/AQADAAAAAAAKAPv/AQADAAAAAAAKAPz/AQADAAAAAAAKAP3/AQADAAMAAAAKAP7/AQADAAAAAAAKAP//AQADAAAAAAAKAAAAAQADAAEAAAAKAAEAAQABAAAAAAAKAAIAAQABAAEAAAAKAAMAAQABAAIAAAAKAAQACAABAAAAAAAKAAUACAABAAIAAAAKAAYAAQABAAAAAAAKAAcAAQABAAEAAAAKAAgAAQABAAIAAAAKAAkAAQADAAEAAAALAPj/AQADAAAAAAALAPn/AQADAAEAAAALAPr/AQADAAAAAAALAPv/AQADAAAAAAALAPz/AQADAAAAAAALAP3/AQADAAAAAAALAP7/AQADAAAAAAALAP//AQADAAAAAAALAAAAAQADAAAAAAALAAEAAQABAAAAAAALAAIAAQABAAEAAAALAAMAAQABAAIAAAALAAQACAABAAAAAAALAAUACAABAAIAAAALAAYAAQABAAAAAAALAAcAAQABAAEAAAALAAgAAQABAAIAAAALAAkAAQADAAAAAAAMAPj/AQADAAMAAAAMAPn/AQADAAAAAAAMAPr/AQADAAMAAAAMAPv/AQADAAIAAAAMAPz/AQADAAEAAAAMAP3/AQADAAAAAAAMAP7/AQADAAEAAAAMAP//AQADAAEAAAAMAAAAAQADAAAAAAAMAAEAAQABAAAAAAAMAAIAAQABAAEAAAAMAAMAAQABAAIAAAAMAAQACAABAAAAAAAMAAUACAABAAIAAAAMAAYAAQABAAAAAAAMAAcAAQABAAEAAAAMAAgAAQABAAIAAAAMAAkAAQADAAAAAAANAPj/AQADAAEAAAANAPn/AQADAAAAAAANAPr/AQADAAEAAAANAPv/AQADAAEAAAANAPz/AQADAAMAAAANAP3/AQADAAAAAAANAP7/AQADAAIAAAANAP//AQADAAEAAAANAAAAAQADAAAAAAANAAEAAQABAAAAAAANAAIAAQABAAEAAAANAAMAAQABAAIAAAANAAQACAABAAAAAAANAAUACAABAAIAAAANAAYAAQABAAAAAAANAAcAAQABAAEAAAANAAgAAQABAAIAAAANAAkAAQADAAAAAAAOAPj/AQADAAEAAAAOAPn/AQADAAIAAAAOAPr/AQADAAAAAAAOAPv/AQADAAEAAAAOAPz/AQADAAAAAAAOAP3/AQADAAEAAAAOAP7/AQADAAAAAAAOAP//AQADAAAAAAAOAAAAAQADAAAAAAAOAAEAAQABAAAAAAAOAAIAAQABAAEAAAAOAAMAAQABAAIAAAAOAAQACAABAAAAAAAOAAUACAABAAIAAAAOAAYAAQABAAAAAAAOAAcAAQABAAEAAAAOAAgAAQABAAIAAAAOAAkAAQADAAAAAAAPAPj/AQADAAMAAAAPAPn/AQADAAIAAAAPAPr/AQADAAAAAAAPAPv/AQADAAMAAAAPAPz/AQADAAAAAAAPAP3/AQADAAAAAAAPAP7/AQADAAAAAAAPAP//AQADAAMAAAAPAAAAAQADAAAAAAAPAAEAAQACAAAAAAAPAAIAAQACAAEAAAAPAAQACAABAAAAAAAPAAUACAABAAIAAAAPAAYAAQACAAAAAAAPAAcAAQACAAEAAAAPAAgAAQACAAIAAAAPAAkAAQADAAAAAAAQAPj/AQADAAAAAAAQAPn/AQADAAAAAAAQAPr/AQADAAEAAAAQAPv/AQADAAAAAAAQAPz/AQADAAMAAAAQAP3/AQADAAMAAAAQAP7/AQADAAAAAAAQAP//AQADAAAAAAAQAAAAAQADAAMAAAAQAAQACAABAAEAAAAQAAUACAABAAEAAAAQAAYACAAAAAEAAAAQAAcACAAAAAEAAAAQAAgACAAAAAIAAAAQAAkAAQADAAEAAAARAPj/AQADAAAAAAARAPn/AQADAAAAAAARAPr/AQADAAIAAAARAPv/AQADAAAAAAARAPz/AQADAAAAAAARAP3/AQADAAMAAAARAP7/AQADAAIAAAARAP//AQADAAEAAAARAAAAAQADAAEAAAARAAMACAABAAEAAAARAAQACAABAAEAAAARAAUACAABAAEAAAARAAYACAABAAEAAAARAAcACAABAAEAAAARAAgACAABAAIAAAARAAkAAQADAAAAAAASAPj/AQADAAEAAAASAPn/AQADAAEAAAASAPr/AQADAAEAAAASAPv/AQADAAEAAAASAPz/AQADAAAAAAASAP3/AQADAAEAAAASAP7/AQADAAAAAAASAP//AQADAAAAAAASAAAAAQADAAAAAAASAAEACAACAAAAAAASAAIACAACAAEAAAASAAMACAACAAEAAAASAAQACAACAAEAAAASAAUACAACAAEAAAASAAYACAACAAEAAAASAAcACAACAAEAAAASAAgACAACAAIAAAASAAkAAQADAAEAAAATAPj/AQADAAAAAAATAPn/AQADAAEAAAATAPr/AQADAAMAAAATAPv/AQADAAEAAAATAPz/AQADAAMAAAATAP3/AQADAAIAAAATAP7/AQADAAAAAAATAP//AQADAAEAAAATAAAAAQADAAAAAAATAAEAAQADAAAAAAATAAIAAQADAAAAAAATAAMAAQADAAAAAAATAAQAAQADAAMAAAATAAUAAQADAAIAAAATAAYAAQADAAMAAAATAAcAAQADAAAAAAATAAgAAQADAAEAAAATAAkAAQADAAAAAAAUAPj/AQADAAMAAAAUAPn/AQADAAAAAAAUAPr/AQADAAAAAAAUAPv/AQADAAAAAAAUAPz/AQADAAAAAAAUAP3/AQADAAAAAAAUAP7/AQADAAEAAAAUAP//AQADAAAAAAAUAAAAAQADAAAAAAAUAAEAAQADAAEAAAAUAAIAAQADAAAAAAAUAAMAAQADAAIAAAAUAAQAAQADAAAAAAAUAAUAAQADAAMAAAAUAAYAAQADAAAAAAAUAAcAAQADAAAAAAAUAAgAAQADAAAAAAAUAAkAAQADAAEAAAAVAPj/AQADAAAAAAAVAPn/AQADAAMAAAAVAPr/AQADAAAAAAAVAPv/AQADAAEAAAAVAPz/AQADAAMAAAAVAP3/AQADAAAAAAAVAP7/AQADAAAAAAAVAP//AQADAAMAAAAVAAAAAQADAAAAAAAVAAEAAQADAAIAAAAVAAIAAQADAAMAAAAVAAMAAQADAAAAAAAVAAQAAQADAAMAAAAVAAUAAQADAAAAAAAVAAYAAQADAAAAAAAVAAcAAQADAAIAAAAVAAgAAQADAAAAAAAVAAkAAQADAAAAAAAWAPj/AQADAAAAAAAWAPn/AQADAAEAAAAWAPr/AQADAAEAAAAWAPv/AQADAAAAAAAWAPz/AQADAAAAAAAWAP3/AQADAAEAAAAWAP7/AQADAAAAAAAWAP//AQADAAAAAAAWAAAAAQADAAEAAAAWAAEAAQADAAEAAAAWAAIAAQADAAAAAAAWAAMAAQADAAAAAAAWAAQAAQADAAAAAAAWAAUAAQADAAMAAAAWAAYAAQADAAAAAAAWAAcAAQADAAMAAAAWAAgAAQADAAMAAAAWAAkAAQADAAAAAAAJAAQACAABAAAAAAAPAAMAAQACAAIAAAAQAAMACAAAAAEAAAAQAAIACAAAAAEAAAAQAAEACAAAAAAAAAARAAIACAABAAEAAAARAAEACAABAAAAAAAAAP//AQADAAAAAAAAAAAAAQADAAEAAAA=")
+tile_set = SubResource("TileSet_gwqsq")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1152908839]
+script = ExtResource("1_dwdjc")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=512537247]
+texture_filter = 1
+texture = ExtResource("1_x5mr4")
+centered = false
+offset = Vector2(0, -4)
+flip_h = true
+hframes = 3
+vframes = 3
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1091469910]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player" unique_id=439167291]
+libraries/ = SubResource("AnimationLibrary_mqebe")
+
+[node name="AnimationTree" type="AnimationTree" parent="Player" unique_id=1359412259]
+active = false
+tree_root = SubResource("AnimationNodeStateMachine_x0j2p")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Turn/blend_position = Vector2(0, 0)
+parameters/Walk/blend_position = Vector2(0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2067244600]
+
+[node name="EnemySpawn" type="Node2D" parent="." unique_id=1125107560]
+script = ExtResource("4_gwqsq")
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawn" unique_id=844712367]
+wait_time = 2.0
+autostart = true
+
+[node name="Inimigo" type="CharacterBody2D" parent="." unique_id=889744586]
+script = ExtResource("6_tkreh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Inimigo" unique_id=1166356278]
+texture_filter = 1
+texture = ExtResource("1_x5mr4")
+centered = false
+offset = Vector2(0, -4)
+flip_h = true
+hframes = 3
+vframes = 3
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Inimigo" unique_id=1457451105]
+libraries/ = SubResource("AnimationLibrary_mqebe")
+
+[node name="AnimationTree" type="AnimationTree" parent="Inimigo" unique_id=232617870]
+active = false
+tree_root = SubResource("AnimationNodeStateMachine_x0j2p")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Turn/blend_position = Vector2(0, 0)
+parameters/Walk/blend_position = Vector2(0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Inimigo" unique_id=633701481]
+
+[node name="DetectionArea" type="Area2D" parent="Inimigo" unique_id=908718565]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inimigo/DetectionArea" unique_id=41942258]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Hitbox" type="Area2D" parent="Inimigo" unique_id=1877127649]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inimigo/Hitbox" unique_id=411481094]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_onrkg")
