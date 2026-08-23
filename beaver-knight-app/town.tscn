@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b31kj8tobgwag" path="res://player.gd" id="1_dwdjc"]
 [ext_resource type="Texture2D" uid="uid://c0hnv56xyaeol" path="res://Assets/Player/Male_Spritesheet.png" id="1_x5mr4"]
 [ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="3_e8yg3"]
+[ext_resource type="AudioStream" uid="uid://bbw7v445ekgi7" path="res://Sounds/SoundTrack/Som-musicaCombate.mp3" id="4_gwqsq"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dwdjc"]
 load_path = "res://.godot/imported/grass1_tileset.png-9f0cfb888730e1a54739d6a21aa6c0f5.ctex"
@@ -621,7 +622,7 @@ animation = &"IdleUp"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_njdcc"]
 auto_triangles = false
-triangles = PackedInt32Array(1, 2, 3, 0, 2, 3)
+triangles = PackedInt32Array()
 blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_kjw1v")
 blend_point_0/pos = Vector2(-1, 0.1)
@@ -677,7 +678,7 @@ animation = &"WalkUp"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_tsyqs"]
 auto_triangles = false
-triangles = PackedInt32Array(0, 1, 2, 0, 1, 3)
+triangles = PackedInt32Array()
 blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_2k44d")
 blend_point_0/pos = Vector2(-1, 0)
@@ -768,3 +769,7 @@ parameters/Turn/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2067244600]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1552245904]
+stream = ExtResource("4_gwqsq")
+autoplay = true
