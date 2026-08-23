@@ -772,4 +772,5 @@ parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1552245904]
 stream = ExtResource("4_gwqsq")
+volume_db = -20.0
 autoplay = true
