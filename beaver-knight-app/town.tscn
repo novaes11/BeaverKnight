@@ -10639,6 +10639,7 @@ tile_map_data = PackedByteArray("AAAbAPP/AAAHAAYAAAAbAPT/AAAHAAcAAAAbAPX/AAAHAAg
 tile_set = SubResource("TileSet_rih8s")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1152908839 groups=["player"]]
+script = ExtResource("1_dwdjc")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=512537247]
 texture_filter = 1
@@ -10666,10 +10667,6 @@ parameters/Turn/blend_position = Vector2(0, 0)
 parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2067244600]
-
-[node name="Player2" type="CharacterBody2D" parent="." unique_id=490805565]
-script = ExtResource("1_dwdjc")
-metadata/_edit_group_ = true
 
 [node name="EnemySpawn" type="Node2D" parent="." unique_id=1125107560]
 script = ExtResource("4_gwqsq")
