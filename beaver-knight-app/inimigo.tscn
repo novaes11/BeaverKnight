@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ckfhu7y44ngcu"]
 
 [ext_resource type="Script" uid="uid://mnj2art8qqrl" path="res://inimigo.gd" id="1_0b8xr"]
-[ext_resource type="Texture2D" uid="uid://c0hnv56xyaeol" path="res://Assets/Player/Male_Spritesheet.png" id="1_030df"]
+[ext_resource type="Texture2D" uid="uid://bwxvpu2n584c2" path="res://Assets/Inimigos/ChatGPT Image 23 de ago. de 2026, 17_08_31.png" id="2_0b8xr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(16, 16)
@@ -510,13 +510,12 @@ script = ExtResource("1_0b8xr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=470647290]
 texture_filter = 1
-texture = ExtResource("1_030df")
+scale = Vector2(0.06926407, 0.043010753)
+texture = ExtResource("2_0b8xr")
 centered = false
-offset = Vector2(0, -4)
 flip_h = true
-hframes = 3
-vframes = 3
-frame = 2
+region_enabled = true
+region_rect = Rect2(656.71545, 175.64645, 231.4347, 372.04)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1160831018]
 position = Vector2(8, 8)
