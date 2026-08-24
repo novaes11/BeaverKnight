@@ -6,9 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="3_e8yg3"]
 [ext_resource type="Texture2D" uid="uid://cm60rp8uvnoya" path="res://Assets/Grass/grass_step_animation.png" id="3_xtgmq"]
 [ext_resource type="Texture2D" uid="uid://cil3wg1rqr0rd" path="res://Assets/Grass/stepped_tall_grass.png" id="4_fi1dd"]
-[ext_resource type="Script" uid="uid://cwajbq5kbxsgo" path="res://enemy_spawn.gd" id="4_gwqsq"]
-[ext_resource type="PackedScene" uid="uid://ckfhu7y44ngcu" path="res://inimigo.tscn" id="5_nki3b"]
 [ext_resource type="Texture2D" uid="uid://gepgncekcsej" path="res://Assets/Grass/tall_grass.png" id="5_oghek"]
+[ext_resource type="AudioStream" uid="uid://bbw7v445ekgi7" path="res://Sounds/SoundTrack/Som-musicaCombate.mp3" id="9_fi1dd"]
 [ext_resource type="Texture2D" uid="uid://cu7wjngq3ffvs" path="res://spites/beaverSprite.png" id="8_oghek"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dwdjc"]
@@ -10669,10 +10668,7 @@ parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2067244600]
 
-[node name="EnemySpawn" type="Node2D" parent="." unique_id=1125107560]
-script = ExtResource("4_gwqsq")
-enemy_scene = ExtResource("5_nki3b")
-
-[node name="SpawnTimer" type="Timer" parent="EnemySpawn" unique_id=844712367]
-wait_time = 2.0
-autostart = true
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1552245904]
+stream = ExtResource("9_fi1dd")
+volume_db = -20.0
+autoplay = true
