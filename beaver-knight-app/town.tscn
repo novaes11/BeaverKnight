@@ -5,12 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://c0hnv56xyaeol" path="res://Assets/Player/Male_Spritesheet.png" id="1_x5mr4"]
 [ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="2_525j1"]
 [ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="3_e8yg3"]
-[ext_resource type="AudioStream" uid="uid://bbw7v445ekgi7" path="res://Sounds/SoundTrack/Som-musicaCombate.mp3" id="4_gwqsq"]
 [ext_resource type="Texture2D" uid="uid://cm60rp8uvnoya" path="res://Assets/Grass/grass_step_animation.png" id="3_xtgmq"]
 [ext_resource type="Texture2D" uid="uid://cil3wg1rqr0rd" path="res://Assets/Grass/stepped_tall_grass.png" id="4_fi1dd"]
-[ext_resource type="Script" uid="uid://cwajbq5kbxsgo" path="res://enemy_spawn.gd" id="4_gwqsq"]
-[ext_resource type="PackedScene" uid="uid://ckfhu7y44ngcu" path="res://inimigo.tscn" id="5_nki3b"]
 [ext_resource type="Texture2D" uid="uid://gepgncekcsej" path="res://Assets/Grass/tall_grass.png" id="5_oghek"]
+[ext_resource type="AudioStream" uid="uid://bbw7v445ekgi7" path="res://Sounds/SoundTrack/Som-musicaCombate.mp3" id="9_fi1dd"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dwdjc"]
 load_path = "res://.godot/imported/grass1_tileset.png-9f0cfb888730e1a54739d6a21aa6c0f5.ctex"
@@ -10509,7 +10507,6 @@ animation = &"IdleUp"
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_njdcc"]
 auto_triangles = false
 triangles = PackedInt32Array()
-triangles = PackedInt32Array()
 blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_nki3b")
 blend_point_0/pos = Vector2(-1, 0.1)
@@ -10565,7 +10562,6 @@ animation = &"WalkUp"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_tsyqs"]
 auto_triangles = false
-triangles = PackedInt32Array()
 triangles = PackedInt32Array()
 blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_gttat")
@@ -10672,6 +10668,6 @@ parameters/Walk/blend_position = Vector2(0, 0)
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2067244600]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1552245904]
-stream = ExtResource("4_gwqsq")
+stream = ExtResource("9_fi1dd")
 volume_db = -20.0
 autoplay = true
