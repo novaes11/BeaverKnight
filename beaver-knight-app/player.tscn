@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(16, 16)
 
-[node name="Player" type="CharacterBody2D" unique_id=1808212248]
+[node name="Player" type="CharacterBody2D" unique_id=1808212248 groups=["player"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=470647290]
 texture_filter = 1
