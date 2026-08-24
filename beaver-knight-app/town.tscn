@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b31kj8tobgwag" path="res://player.gd" id="1_dwdjc"]
 [ext_resource type="Texture2D" uid="uid://c1n1e0kb2mrnu" path="res://Assets/levels/buildings.png" id="1_tkreh"]
-[ext_resource type="Texture2D" uid="uid://c0hnv56xyaeol" path="res://Assets/Player/Male_Spritesheet.png" id="1_x5mr4"]
 [ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="2_525j1"]
 [ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="3_e8yg3"]
 [ext_resource type="Texture2D" uid="uid://cm60rp8uvnoya" path="res://Assets/Grass/grass_step_animation.png" id="3_xtgmq"]
@@ -10,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cwajbq5kbxsgo" path="res://enemy_spawn.gd" id="4_gwqsq"]
 [ext_resource type="PackedScene" uid="uid://ckfhu7y44ngcu" path="res://inimigo.tscn" id="5_nki3b"]
 [ext_resource type="Texture2D" uid="uid://gepgncekcsej" path="res://Assets/Grass/tall_grass.png" id="5_oghek"]
+[ext_resource type="Texture2D" uid="uid://cu7wjngq3ffvs" path="res://spites/beaverSprite.png" id="8_oghek"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dwdjc"]
 load_path = "res://.godot/imported/grass1_tileset.png-9f0cfb888730e1a54739d6a21aa6c0f5.ctex"
@@ -10107,7 +10107,7 @@ sources/0 = SubResource("TileSetAtlasSource_civ0g")
 sources/1 = SubResource("TileSetAtlasSource_vl6sd")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(16, 16)
+size = Vector2(24, 24)
 
 [sub_resource type="Animation" id="Animation_dwdjc"]
 resource_name = "IdleDown"
@@ -10162,7 +10162,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_gwqsq"]
@@ -10190,7 +10190,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_nki3b"]
@@ -10293,7 +10293,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -10328,7 +10328,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("Sprite2D:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -10336,7 +10336,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -10403,7 +10403,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_xtgmq"]
 resource_name = "WalkLeft"
-length = 0.8
 step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -10424,10 +10423,10 @@ tracks/1/path = NodePath("Sprite2D:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.001),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, true]
 }
 
 [sub_resource type="Animation" id="Animation_fi1dd"]
@@ -10453,10 +10452,10 @@ tracks/1/path = NodePath("Sprite2D:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.8),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_oghek"]
@@ -10612,7 +10611,7 @@ states/Walk/position = Vector2(534.8, 49.61379)
 transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_0rrug"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_lxbdl"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_ypel8"), "Idle", "Turn", SubResource("AnimationNodeStateMachineTransition_525j1"), "Turn", "Idle", SubResource("AnimationNodeStateMachineTransition_xtgmq"), "Walk", "Turn", SubResource("AnimationNodeStateMachineTransition_fi1dd"), "Turn", "Walk", SubResource("AnimationNodeStateMachineTransition_oghek"), "Walk", "End", SubResource("AnimationNodeStateMachineTransition_e8yg3")]
 
 [node name="Town" type="Node2D" unique_id=1173611975]
-position = Vector2(80, 112)
+position = Vector2(96, 96)
 metadata/_edit_group_ = true
 
 [node name="OverworldTileMap" type="TileMap" parent="." unique_id=1708541266]
@@ -10643,16 +10642,18 @@ script = ExtResource("1_dwdjc")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=512537247]
 texture_filter = 1
-texture = ExtResource("1_x5mr4")
+scale = Vector2(0.96, 1)
+texture = ExtResource("8_oghek")
 centered = false
 offset = Vector2(0, -4)
 flip_h = true
 hframes = 3
 vframes = 3
 frame = 2
+region_rect = Rect2(16, 0, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1091469910]
-position = Vector2(8, 8)
+position = Vector2(12, 20)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player" unique_id=439167291]
