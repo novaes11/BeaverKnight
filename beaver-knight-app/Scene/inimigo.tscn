@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckfhu7y44ngcu"]
 
-[ext_resource type="Script" uid="uid://mnj2art8qqrl" path="res://inimigo.gd" id="1_0b8xr"]
+[ext_resource type="Script" uid="uid://mnj2art8qqrl" path="res://Scripts/Character/Enemy/inimigo.gd" id="1_0b8xr"]
 [ext_resource type="Texture2D" uid="uid://bwxvpu2n584c2" path="res://Assets/Inimigos/ChatGPT Image 23 de ago. de 2026, 17_08_31.png" id="2_0b8xr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
