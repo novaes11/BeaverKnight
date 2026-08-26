@@ -1,15 +1,16 @@
 [gd_scene format=4 uid="uid://clrv2kd5hbnw4"]
 
-[ext_resource type="Script" uid="uid://b31kj8tobgwag" path="res://player.gd" id="1_dwdjc"]
-[ext_resource type="Texture2D" uid="uid://c1n1e0kb2mrnu" path="res://Assets/levels/buildings.png" id="1_tkreh"]
-[ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="2_525j1"]
-[ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="3_e8yg3"]
-[ext_resource type="Texture2D" uid="uid://cm60rp8uvnoya" path="res://Assets/Grass/grass_step_animation.png" id="3_xtgmq"]
-[ext_resource type="Texture2D" uid="uid://cil3wg1rqr0rd" path="res://Assets/Grass/stepped_tall_grass.png" id="4_fi1dd"]
-[ext_resource type="Script" uid="uid://cwajbq5kbxsgo" path="res://enemy_spawn.gd" id="4_gwqsq"]
-[ext_resource type="PackedScene" uid="uid://ckfhu7y44ngcu" path="res://inimigo.tscn" id="5_nki3b"]
-[ext_resource type="Texture2D" uid="uid://gepgncekcsej" path="res://Assets/Grass/tall_grass.png" id="5_oghek"]
-[ext_resource type="Texture2D" uid="uid://cu7wjngq3ffvs" path="res://spites/beaverSprite.png" id="8_oghek"]
+[ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="1_x4n5j"]
+[ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="2_0mekn"]
+[ext_resource type="Texture2D" uid="uid://cm60rp8uvnoya" path="res://Assets/Grass/grass_step_animation.png" id="3_p57dp"]
+[ext_resource type="Texture2D" uid="uid://cil3wg1rqr0rd" path="res://Assets/Grass/stepped_tall_grass.png" id="4_ekrln"]
+[ext_resource type="Texture2D" uid="uid://gepgncekcsej" path="res://Assets/Grass/tall_grass.png" id="5_l8wp2"]
+[ext_resource type="Texture2D" uid="uid://c1n1e0kb2mrnu" path="res://Assets/levels/buildings.png" id="6_2m7ji"]
+[ext_resource type="Script" uid="uid://b31kj8tobgwag" path="res://Scripts/Character/Player/player.gd" id="7_vinru"]
+[ext_resource type="Texture2D" uid="uid://cu7wjngq3ffvs" path="res://Sprites/beaverSprite.png" id="8_th4y3"]
+[ext_resource type="Script" uid="uid://cwajbq5kbxsgo" path="res://Scripts/Character/Enemy/enemy_spawn.gd" id="9_yujy6"]
+[ext_resource type="PackedScene" uid="uid://ckfhu7y44ngcu" path="res://Scene/inimigo.tscn" id="10_ucnep"]
+[ext_resource type="AudioStream" uid="uid://bbw7v445ekgi7" path="res://Sounds/Soundtrack/Som-musicaCombate.mp3" id="11_gg11b"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dwdjc"]
 load_path = "res://.godot/imported/grass1_tileset.png-9f0cfb888730e1a54739d6a21aa6c0f5.ctex"
@@ -138,7 +139,7 @@ texture = SubResource("CompressedTexture2D_dwdjc")
 1:4/0/terrains_peering_bit/top_right_corner = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oghek"]
-texture = ExtResource("2_525j1")
+texture = ExtResource("1_x4n5j")
 0:0/0 = 0
 0:0/0/probability = 10.0
 1:0/0 = 0
@@ -1717,7 +1718,7 @@ texture = ExtResource("2_525j1")
 49:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwqsq"]
-texture = ExtResource("3_e8yg3")
+texture = ExtResource("2_0mekn")
 use_texture_padding = false
 0:0/animation_speed = 4.0
 0:0/0 = 0
@@ -1808,7 +1809,7 @@ sources/8 = SubResource("TileSetAtlasSource_gwqsq")
 sources/5 = SubResource("TileSetAtlasSource_oghek")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_525j1"]
-texture = ExtResource("2_525j1")
+texture = ExtResource("1_x4n5j")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -4133,7 +4134,7 @@ terrain_set_0/terrain_0/color = Color(0.88235295, 0.16078432, 0.27450982, 1)
 sources/0 = SubResource("TileSetAtlasSource_525j1")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tkreh"]
-texture = ExtResource("2_525j1")
+texture = ExtResource("1_x4n5j")
 52:0/0 = 0
 53:0/0 = 0
 54:0/0 = 0
@@ -4609,18 +4610,18 @@ texture = ExtResource("2_525j1")
 5:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mqebe"]
-texture = ExtResource("3_xtgmq")
+texture = ExtResource("3_p57dp")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kjw1v"]
-texture = ExtResource("4_fi1dd")
+texture = ExtResource("4_ekrln")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gttat"]
-texture = ExtResource("5_oghek")
+texture = ExtResource("5_l8wp2")
 0:0/0 = 0
 1:0/0 = 0
 
@@ -4631,7 +4632,7 @@ sources/2 = SubResource("TileSetAtlasSource_kjw1v")
 sources/3 = SubResource("TileSetAtlasSource_gttat")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_civ0g"]
-texture = ExtResource("1_tkreh")
+texture = ExtResource("6_2m7ji")
 17:0/0 = 0
 51:0/0 = 0
 52:0/0 = 0
@@ -7878,7 +7879,7 @@ texture = ExtResource("1_tkreh")
 27:67/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vl6sd"]
-texture = ExtResource("2_525j1")
+texture = ExtResource("1_x4n5j")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -10638,12 +10639,12 @@ tile_map_data = PackedByteArray("AAAbAPP/AAAHAAYAAAAbAPT/AAAHAAcAAAAbAPX/AAAHAAg
 tile_set = SubResource("TileSet_rih8s")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1152908839 groups=["player"]]
-script = ExtResource("1_dwdjc")
+script = ExtResource("7_vinru")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=512537247]
 texture_filter = 1
 scale = Vector2(0.96, 1)
-texture = ExtResource("8_oghek")
+texture = ExtResource("8_th4y3")
 centered = false
 offset = Vector2(0, -4)
 flip_h = true
@@ -10670,9 +10671,14 @@ parameters/Walk/blend_position = Vector2(0, 0)
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2067244600]
 
 [node name="EnemySpawn" type="Node2D" parent="." unique_id=1125107560]
-script = ExtResource("4_gwqsq")
-enemy_scene = ExtResource("5_nki3b")
+script = ExtResource("9_yujy6")
+enemy_scene = ExtResource("10_ucnep")
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawn" unique_id=844712367]
 wait_time = 2.0
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1209076586]
+stream = ExtResource("11_gg11b")
+volume_db = -20.0
+autoplay = true

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cu7wjngq3ffvs"
-path="res://.godot/imported/beaverSprite.png-b5fd501a41ca79455bdaa752f7db187a.ctex"
+path="res://.godot/imported/beaverSprite.png-101515f01e06bc44f196d27681b6be58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://spites/beaverSprite.png"
-dest_files=["res://.godot/imported/beaverSprite.png-b5fd501a41ca79455bdaa752f7db187a.ctex"]
+source_file="res://Sprites/beaverSprite.png"
+dest_files=["res://.godot/imported/beaverSprite.png-101515f01e06bc44f196d27681b6be58.ctex"]
 
 [params]
 

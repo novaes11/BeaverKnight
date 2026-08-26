@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://daqe3lxlrgblw"]
 
 [ext_resource type="Texture2D" uid="uid://cdid4simnfvit" path="res://Assets/UI/BeaverKnight-BG.png" id="1_06t4h"]
-[ext_resource type="Script" uid="uid://cjxo33g1hep11" path="res://main_menu.gd" id="1_jix8l"]
+[ext_resource type="Script" uid="uid://cjxo33g1hep11" path="res://Scripts/UI/main_menu.gd" id="1_jix8l"]
 [ext_resource type="Texture2D" uid="uid://ba17v3wewfyoe" path="res://Assets/UI/MenuPanel-Border.png" id="2_7vrkn"]
 [ext_resource type="FontFile" uid="uid://crnfpf3jj63td" path="res://Assets/UI/pkmnfl.ttf" id="2_fu7sn"]
+[ext_resource type="AudioStream" uid="uid://qvgtk0qgmxbw" path="res://Sounds/Soundtrack/Som-musicaMenu.mp3" id="5_glbon"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
 content_margin_left = 7.0
@@ -180,6 +181,11 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 9
 text = "VOLTAR
 "
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=453098009]
+stream = ExtResource("5_glbon")
+volume_db = -18.0
+autoplay = true
 
 [connection signal="pressed" from="MenuPanel/Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuPanel/Buttons/OptionsButton" to="." method="_on_options_button_pressed"]

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2y42wvd64cta"
-path="res://.godot/imported/capanga_petroleopng.png-47cbd3bc6032240579d0ab474913cc39.ctex"
+path="res://.godot/imported/capanga_petroleopng.png-d05097ba8876d93b0190cd9b1840313e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://capanga_petroleopng.png"
-dest_files=["res://.godot/imported/capanga_petroleopng.png-47cbd3bc6032240579d0ab474913cc39.ctex"]
+source_file="res://Sprites/capanga_petroleopng.png"
+dest_files=["res://.godot/imported/capanga_petroleopng.png-d05097ba8876d93b0190cd9b1840313e.ctex"]
 
 [params]
 
