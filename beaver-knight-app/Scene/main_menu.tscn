@@ -186,6 +186,7 @@ text = "VOLTAR
 stream = ExtResource("5_glbon")
 volume_db = -18.0
 autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="MenuPanel/Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuPanel/Buttons/OptionsButton" to="." method="_on_options_button_pressed"]

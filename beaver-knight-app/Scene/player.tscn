@@ -1,11 +1,16 @@
 [gd_scene format=3 uid="uid://c37v58kgtjlpr"]
 
 [ext_resource type="Texture2D" uid="uid://c0hnv56xyaeol" path="res://Assets/Player/Male_Spritesheet.png" id="1_4flbx"]
+[ext_resource type="AudioStream" uid="uid://c3mi4t2tw070x" path="res://Sounds/Effects/Som-Dano.mp3" id="2_y8w33"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D" unique_id=1808212248 groups=["player"]]
+
+[node name="Corte_sfx" type="AudioStreamPlayer" parent="." unique_id=1051358838]
+stream = ExtResource("2_y8w33")
+bus = &"Effect"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=470647290]
 texture_filter = 1
