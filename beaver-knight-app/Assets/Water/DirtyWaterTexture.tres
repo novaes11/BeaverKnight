@@ -1,0 +1,28 @@
+[gd_resource type="AnimatedTexture" format=3 uid="uid://bbxn1j8fqbcfv"]
+
+[ext_resource type="Texture2D" uid="uid://cpw5n15jqd0aw" path="res://Assets/Water/dirty_water_tileset1.png" id="1_jtspy"]
+[ext_resource type="Texture2D" uid="uid://bg476ebrvja56" path="res://Assets/Water/dirty_water_tileset2.png" id="2_et0p6"]
+[ext_resource type="Texture2D" uid="uid://ca5c3su5cm2v6" path="res://Assets/Water/dirty_water_tileset3.png" id="3_0lknt"]
+[ext_resource type="Texture2D" uid="uid://ci4cplcy5d23k" path="res://Assets/Water/dirty_water_tileset4.png" id="4_a5p5f"]
+[ext_resource type="Texture2D" uid="uid://bwq7twg4m6tyl" path="res://Assets/Water/dirty_water_tileset5.png" id="5_x7whc"]
+[ext_resource type="Texture2D" uid="uid://dinipxk7jitjm" path="res://Assets/Water/dirty_water_tileset6.png" id="6_vphoe"]
+[ext_resource type="Texture2D" uid="uid://cqjdmdv054qfa" path="res://Assets/Water/dirty_water_tileset7.png" id="7_qakoe"]
+[ext_resource type="Texture2D" uid="uid://bptig6ic0vy3n" path="res://Assets/Water/dirty_water_tileset8.png" id="8_7giyv"]
+
+[resource]
+frames = 8
+frame_0/texture = ExtResource("1_jtspy")
+frame_1/texture = ExtResource("2_et0p6")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("3_0lknt")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("4_a5p5f")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("5_x7whc")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("6_vphoe")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("7_qakoe")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("8_7giyv")
+frame_7/duration = 1.0
