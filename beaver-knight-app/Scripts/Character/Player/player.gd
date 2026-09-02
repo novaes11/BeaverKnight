@@ -16,6 +16,9 @@ const TILE_SIZE = 16
 @onready var anim_tree: AnimationTree = $AnimationTree
 var anim_state: AnimationNodeStateMachinePlayback
 
+# Variaveis Sonoras
+const sfx_corte = preload("res://Sounds/Effects/Som-espada.mp3")
+
 # Enums de Estado e Direção
 enum PlayerState { IDLE, TURNING, WALKING }
 enum FacingDirection { LEFT, RIGHT, UP, DOWN }
@@ -28,6 +31,7 @@ var initial_position = Vector2(0, 0)
 var input_direction = Vector2(0, 0)
 var is_moving = false
 var percent_moved_to_next_tile = 0.0
+
 
 func _ready() -> void:
 	initial_position = position
@@ -125,6 +129,8 @@ func attack_enemy() -> void:
 		FacingDirection.UP: attack_vector = Vector2.UP
 		FacingDirection.DOWN: attack_vector = Vector2.DOWN
 
+	AudioManager.play_sfx(sfx_corte)
+	
 	var target_position = global_position + (attack_vector * TILE_SIZE)
 
 	var enemies = get_tree().get_nodes_in_group("enemies")
