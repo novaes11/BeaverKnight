@@ -10789,4 +10789,3 @@ autostart = true
 stream = ExtResource("11_gg11b")
 volume_db = -20.0
 autoplay = true
-bus = &"Music"
