@@ -25,7 +25,6 @@ func _ready() -> void:
 	# pool de efeitos posicionais
 	for i in range(pool_Tamanho):
 		var pool = AudioStreamPlayer.new()
-		add_child(pool)
 		pool.bus = "Effect"
 		add_child(pool)
 		sfx_2d_players.append(pool)
@@ -50,13 +49,14 @@ func play_sfx(stream: AudioStream, volume_db: float = 0.0) -> void:
 			pool.volume_db = volume_db
 			pool.play()
 
-func play_sfx_2d(stream: AudioStream, volume_db: float = 0.0) -> void:
+func play_sfx_2d(stream: AudioStream, global_posi: Vector2, volume_db: float = 0.0) -> void:
 	if stream == null:
 		return
 	
 	for pool_2d in sfx_2d_players:
 		if ! pool_2d.playing:
 			pool_2d.stream = stream
+			pool_2d.global_position = global_posi
 			pool_2d.volume = volume_db
 			pool_2d.play()
 			return
