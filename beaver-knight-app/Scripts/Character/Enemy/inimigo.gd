@@ -20,6 +20,8 @@ var percent_moved: float = 0.0
 var target_direction: Vector2 = Vector2.ZERO
 var can_attack: bool = true
 
+@export var sfx_morte: AudioStream
+
 func _ready() -> void:
 	anim_tree.active = true
 	initial_position = position
@@ -99,6 +101,10 @@ func take_damage(amount: int) -> void:
 	print("Inimigo recebeu dano! HP restante: ", current_health)
 	
 	if current_health <= 0:
+		var pos = global_position
+		
+		AudioManager.play_sfx_2d(sfx_morte, pos, 5.0)
+		
 		die()
 
 func die() -> void:

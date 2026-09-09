@@ -17,7 +17,10 @@ const TILE_SIZE = 16
 var anim_state: AnimationNodeStateMachinePlayback
 
 # Variaveis Sonoras
-const sfx_corte = preload("res://Sounds/Effects/Som-espada.mp3")
+@export var sfx_dano: AudioStream
+@export var sfx_corte: AudioStream
+@export var sfx_andar: AudioStream
+@export var sfx_respawn: AudioStream
 
 # Enums de Estado e Direção
 enum PlayerState { IDLE, TURNING, WALKING }
@@ -48,6 +51,7 @@ func _ready() -> void:
 	else:
 		print("ERRO: Nó 'AnimationTree' não foi encontrado como filho do Player.")
 
+	
 func _physics_process(delta: float) -> void:
 	if player_state == PlayerState.TURNING:
 		return
@@ -129,7 +133,7 @@ func attack_enemy() -> void:
 		FacingDirection.UP: attack_vector = Vector2.UP
 		FacingDirection.DOWN: attack_vector = Vector2.DOWN
 
-	AudioManager.play_sfx(sfx_corte)
+	AudioManager.play_sfx(sfx_corte, -22.0)
 	
 	var target_position = global_position + (attack_vector * TILE_SIZE)
 
@@ -142,6 +146,7 @@ func attack_enemy() -> void:
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
+	AudioManager.play_sfx(sfx_dano, -10.0)
 	print("Player recebeu dano! Vida restante: ", current_health)
 	
 	if current_health <= 0:
@@ -152,6 +157,7 @@ func die() -> void:
 	respawn()
 
 func respawn() -> void:
+	AudioManager.play_sfx(sfx_respawn, -6.0)
 	is_moving = false
 	percent_moved_to_next_tile = 0.0
 	input_direction = Vector2.ZERO

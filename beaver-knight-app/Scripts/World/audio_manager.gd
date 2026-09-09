@@ -37,7 +37,7 @@ func _ready() -> void:
 
 
 # Funções que controlam os efeitos sonoros
-func play_sfx(stream: AudioStream, volume_db: float = 0.0) -> void:
+func play_sfx(stream: AudioStream, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:
 	#cancela se não foi achado audio
 	if stream == null: 
 		return
@@ -47,9 +47,10 @@ func play_sfx(stream: AudioStream, volume_db: float = 0.0) -> void:
 		if ! pool.playing:
 			pool.stream = stream
 			pool.volume_db = volume_db
+			pool.pitch_scale = pitch_scale
 			pool.play()
 
-func play_sfx_2d(stream: AudioStream, global_posi: Vector2, volume_db: float = 0.0) -> void:
+func play_sfx_2d(stream: AudioStream, global_posi: Vector2, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:
 	if stream == null:
 		return
 	
@@ -58,6 +59,7 @@ func play_sfx_2d(stream: AudioStream, global_posi: Vector2, volume_db: float = 0
 			pool_2d.stream = stream
 			pool_2d.global_position = global_posi
 			pool_2d.volume = volume_db
+			pool_2d.pitch_scale = pitch_scale
 			pool_2d.play()
 			return
 

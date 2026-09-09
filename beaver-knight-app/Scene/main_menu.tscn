@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cjxo33g1hep11" path="res://Scripts/UI/main_menu.gd" id="1_jix8l"]
 [ext_resource type="Texture2D" uid="uid://ba17v3wewfyoe" path="res://Assets/UI/MenuPanel-Border.png" id="2_7vrkn"]
 [ext_resource type="FontFile" uid="uid://crnfpf3jj63td" path="res://Assets/UI/pkmnfl.ttf" id="2_fu7sn"]
+[ext_resource type="AudioStream" uid="uid://xnms5iou1llc" path="res://Sounds/Effects/Som-Botão.ogg" id="2_hptlk"]
 [ext_resource type="AudioStream" uid="uid://qvgtk0qgmxbw" path="res://Sounds/Soundtrack/Som-musicaMenu.mp3" id="5_glbon"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
@@ -82,6 +83,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jix8l")
+sfx_botao = ExtResource("2_hptlk")
 
 [node name="BG" type="TextureRect" parent="." unique_id=924106157]
 layout_mode = 0
