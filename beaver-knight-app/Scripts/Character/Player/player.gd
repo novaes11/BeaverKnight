@@ -57,7 +57,7 @@ func tocar_SFXPasso():
 	if is_moving:
 		#Variação de tom para diminuir a repetição
 		var pitch_var = randf_range(0.9, 1.1)
-		AudioManager.play_sfx(sfx_andar, -25.0, pitch_var)
+		AudioManager.play_sfx(sfx_andar, -36.0, pitch_var)
 	
 func _physics_process(delta: float) -> void:
 	if player_state == PlayerState.TURNING:
@@ -153,7 +153,7 @@ func attack_enemy() -> void:
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
-	AudioManager.play_sfx(sfx_dano, -14.0)
+	AudioManager.play_sfx(sfx_dano, -32.0)
 	print("Player recebeu dano! Vida restante: ", current_health)
 	
 	if current_health <= 0:

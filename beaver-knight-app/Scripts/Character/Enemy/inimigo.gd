@@ -110,6 +110,6 @@ func die() -> void:
 	
 	# Declara uma variavel para localizar a morte do inimigo
 	var death_posi = global_position
-	AudioManager.play_sfx_2d(sfx_morte, death_posi, 2.0)
+	AudioManager.play_sfx_2d(sfx_morte, death_posi, -7.0)
 	
 	queue_free()
