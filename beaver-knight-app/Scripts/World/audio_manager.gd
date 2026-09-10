@@ -24,7 +24,7 @@ func _ready() -> void:
 	
 	# pool de efeitos posicionais
 	for i in range(pool_Tamanho):
-		var pool = AudioStreamPlayer.new()
+		var pool = AudioStreamPlayer2D.new()
 		pool.bus = "Effect"
 		add_child(pool)
 		sfx_2d_players.append(pool)
@@ -49,6 +49,11 @@ func play_sfx(stream: AudioStream, volume_db: float = 0.0, pitch_scale: float = 
 			pool.volume_db = volume_db
 			pool.pitch_scale = pitch_scale
 			pool.play()
+	
+	sfx_players[0].stream = stream
+	sfx_players[0].volume_db = volume_db
+	sfx_players[0].pitch_scale = pitch_scale
+	sfx_players[0].play()
 
 func play_sfx_2d(stream: AudioStream, global_posi: Vector2, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:
 	if stream == null:
@@ -58,10 +63,16 @@ func play_sfx_2d(stream: AudioStream, global_posi: Vector2, volume_db: float = 0
 		if ! pool_2d.playing:
 			pool_2d.stream = stream
 			pool_2d.global_position = global_posi
-			pool_2d.volume = volume_db
+			pool_2d.volume_db = volume_db
 			pool_2d.pitch_scale = pitch_scale
 			pool_2d.play()
 			return
+	#
+	sfx_2d_players[0].stream = stream
+	sfx_2d_players[0].global_position = global_posi
+	sfx_2d_players[0].volume_db = volume_db
+	sfx_2d_players[0].pitch_scale = pitch_scale
+	sfx_2d_players[0].play()
 
 # Função que controla a musica do jogo
 func play_music(stream: AudioStream, volume_db: float = 0.0) -> void:

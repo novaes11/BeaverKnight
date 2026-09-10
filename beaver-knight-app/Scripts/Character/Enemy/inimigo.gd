@@ -101,12 +101,15 @@ func take_damage(amount: int) -> void:
 	print("Inimigo recebeu dano! HP restante: ", current_health)
 	
 	if current_health <= 0:
-		var pos = global_position
-		
-		AudioManager.play_sfx_2d(sfx_morte, pos, 5.0)
+
 		
 		die()
 
 func die() -> void:
 	print("Inimigo derrotado!")
+	
+	# Declara uma variavel para localizar a morte do inimigo
+	var death_posi = global_position
+	AudioManager.play_sfx_2d(sfx_morte, death_posi, 2.0)
+	
 	queue_free()
