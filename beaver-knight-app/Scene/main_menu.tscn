@@ -84,6 +84,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jix8l")
 sfx_botao = ExtResource("2_hptlk")
+musica_menu = ExtResource("5_glbon")
 
 [node name="BG" type="TextureRect" parent="." unique_id=924106157]
 layout_mode = 0
@@ -183,12 +184,6 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 9
 text = "VOLTAR
 "
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=453098009]
-stream = ExtResource("5_glbon")
-volume_db = -18.0
-autoplay = true
-bus = &"Music"
 
 [connection signal="pressed" from="MenuPanel/Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuPanel/Buttons/OptionsButton" to="." method="_on_options_button_pressed"]
