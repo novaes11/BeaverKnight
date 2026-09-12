@@ -16,6 +16,12 @@ const TILE_SIZE = 16
 @onready var anim_tree: AnimationTree = $AnimationTree
 var anim_state: AnimationNodeStateMachinePlayback
 
+# Variaveis Sonoras
+@export var sfx_dano: AudioStream
+@export var sfx_corte: AudioStream
+@export var sfx_andar: AudioStream
+@export var sfx_respawn: AudioStream
+
 # Enums de Estado e Direção
 enum PlayerState { IDLE, TURNING, WALKING }
 enum FacingDirection { LEFT, RIGHT, UP, DOWN }
@@ -28,6 +34,7 @@ var initial_position = Vector2(0, 0)
 var input_direction = Vector2(0, 0)
 var is_moving = false
 var percent_moved_to_next_tile = 0.0
+
 
 func _ready() -> void:
 	initial_position = position
@@ -44,6 +51,14 @@ func _ready() -> void:
 	else:
 		print("ERRO: Nó 'AnimationTree' não foi encontrado como filho do Player.")
 
+#Função chamada pelo animationPlayer para tocar o efeito de passo
+func tocar_SFXPasso():
+	print("Play: Som de andar")
+	if is_moving:
+		#Variação de tom para diminuir a repetição
+		var pitch_var = randf_range(0.9, 1.1)
+		AudioManager.play_sfx(sfx_andar, -36.0, pitch_var)
+	
 func _physics_process(delta: float) -> void:
 	if player_state == PlayerState.TURNING:
 		return
@@ -125,6 +140,8 @@ func attack_enemy() -> void:
 		FacingDirection.UP: attack_vector = Vector2.UP
 		FacingDirection.DOWN: attack_vector = Vector2.DOWN
 
+	AudioManager.play_sfx(sfx_corte, -22.0)
+	
 	var target_position = global_position + (attack_vector * TILE_SIZE)
 
 	var enemies = get_tree().get_nodes_in_group("enemies")
@@ -136,6 +153,7 @@ func attack_enemy() -> void:
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
+	AudioManager.play_sfx(sfx_dano, -32.0)
 	print("Player recebeu dano! Vida restante: ", current_health)
 	
 	if current_health <= 0:
@@ -146,6 +164,7 @@ func die() -> void:
 	respawn()
 
 func respawn() -> void:
+	AudioManager.play_sfx(sfx_respawn, -6.0)
 	is_moving = false
 	percent_moved_to_next_tile = 0.0
 	input_direction = Vector2.ZERO

@@ -1,11 +1,21 @@
 [gd_scene format=3 uid="uid://c37v58kgtjlpr"]
 
 [ext_resource type="Texture2D" uid="uid://c0hnv56xyaeol" path="res://Assets/Player/Male_Spritesheet.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://b31kj8tobgwag" path="res://Scripts/Character/Player/player.gd" id="1_y8w33"]
+[ext_resource type="AudioStream" uid="uid://c3mi4t2tw070x" path="res://Sounds/Effects/Som-Dano.mp3" id="2_ivevv"]
+[ext_resource type="AudioStream" uid="uid://dxuf20n1ldg2x" path="res://Sounds/Effects/sfx_grass_2.wav" id="3_58ae2"]
+[ext_resource type="AudioStream" uid="uid://yg8n435pj4pt" path="res://Sounds/Effects/Som-espada.wav" id="3_r6jsd"]
+[ext_resource type="AudioStream" uid="uid://cxbutvsmyj7l2" path="res://Sounds/Effects/Som-Respawn.mp3" id="5_p6qlh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D" unique_id=1808212248 groups=["player"]]
+script = ExtResource("1_y8w33")
+sfx_dano = ExtResource("2_ivevv")
+sfx_corte = ExtResource("3_r6jsd")
+sfx_andar = ExtResource("3_58ae2")
+sfx_respawn = ExtResource("5_p6qlh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=470647290]
 texture_filter = 1

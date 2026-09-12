@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://clrv2kd5hbnw4"]
 
+[ext_resource type="Script" uid="uid://o7nnigyq22id" path="res://Scripts/World/town.gd" id="1_2m7ji"]
 [ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="1_x4n5j"]
 [ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="2_0mekn"]
 [ext_resource type="Texture2D" uid="uid://cm60rp8uvnoya" path="res://Assets/Grass/grass_step_animation.png" id="3_p57dp"]
@@ -8,10 +9,14 @@
 [ext_resource type="Texture2D" uid="uid://c1n1e0kb2mrnu" path="res://Assets/levels/buildings.png" id="6_2m7ji"]
 [ext_resource type="Script" uid="uid://b31kj8tobgwag" path="res://Scripts/Character/Player/player.gd" id="7_vinru"]
 [ext_resource type="Texture2D" uid="uid://cu7wjngq3ffvs" path="res://Sprites/beaverSprite.png" id="8_th4y3"]
+[ext_resource type="AudioStream" uid="uid://c3mi4t2tw070x" path="res://Sounds/Effects/Som-Dano.mp3" id="9_l8wp2"]
 [ext_resource type="Script" uid="uid://cwajbq5kbxsgo" path="res://Scripts/Character/Enemy/enemy_spawn.gd" id="9_yujy6"]
 [ext_resource type="PackedScene" uid="uid://ckfhu7y44ngcu" path="res://Scene/inimigo.tscn" id="10_ucnep"]
 [ext_resource type="AudioStream" uid="uid://bbw7v445ekgi7" path="res://Sounds/Soundtrack/Som-musicaCombate.mp3" id="11_gg11b"]
+[ext_resource type="AudioStream" uid="uid://dxuf20n1ldg2x" path="res://Sounds/Effects/sfx_grass_2.wav" id="11_vinru"]
+[ext_resource type="AudioStream" uid="uid://cxbutvsmyj7l2" path="res://Sounds/Effects/Som-Respawn.mp3" id="12_2m7ji"]
 [ext_resource type="Texture2D" uid="uid://bbxn1j8fqbcfv" path="res://Assets/Water/DirtyWaterTexture.tres" id="12_oghek"]
+[ext_resource type="AudioStream" uid="uid://yg8n435pj4pt" path="res://Sounds/Effects/Som-espada.wav" id="12_vinru"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_njdcc"]
 texture = ExtResource("12_oghek")
@@ -10504,6 +10509,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 1]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"tocar_SFXPasso"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_xtgmq"]
 resource_name = "WalkLeft"
@@ -10531,6 +10550,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"tocar_SFXPasso"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_fi1dd"]
@@ -10561,6 +10594,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"tocar_SFXPasso"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_oghek"]
 resource_name = "WalkUp"
@@ -10577,6 +10624,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [3, 4, 5, 4]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"tocar_SFXPasso"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mqebe"]
@@ -10717,6 +10778,8 @@ transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_
 [node name="Town" type="Node2D" unique_id=1173611975]
 y_sort_enabled = true
 position = Vector2(96, 96)
+script = ExtResource("1_2m7ji")
+musica_combate = ExtResource("11_gg11b")
 metadata/_edit_group_ = true
 
 [node name="tipo_terreno" type="TileMapLayer" parent="." unique_id=52919505]
@@ -10744,6 +10807,10 @@ tile_set = SubResource("TileSet_rih8s")
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("7_vinru")
+sfx_dano = ExtResource("9_l8wp2")
+sfx_corte = ExtResource("12_vinru")
+sfx_andar = ExtResource("11_vinru")
+sfx_respawn = ExtResource("12_2m7ji")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=512537247]
 y_sort_enabled = true
@@ -10784,8 +10851,3 @@ enemy_scene = ExtResource("10_ucnep")
 [node name="SpawnTimer" type="Timer" parent="EnemySpawn" unique_id=844712367]
 wait_time = 2.0
 autostart = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1209076586]
-stream = ExtResource("11_gg11b")
-volume_db = -20.0
-autoplay = true

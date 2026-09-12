@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://mnj2art8qqrl" path="res://Scripts/Character/Enemy/inimigo.gd" id="1_0b8xr"]
 [ext_resource type="Texture2D" uid="uid://bwxvpu2n584c2" path="res://Assets/Inimigos/ChatGPT Image 23 de ago. de 2026, 17_08_31.png" id="2_0b8xr"]
+[ext_resource type="AudioStream" uid="uid://4niy56jj7hsx" path="res://Sounds/Effects/Som-inimigoMorto.wav" id="2_pvakx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
 size = Vector2(16, 16)
@@ -507,6 +508,7 @@ graph_offset = Vector2(-141.58508, 0)
 
 [node name="Inimigo" type="CharacterBody2D" unique_id=1808212248]
 script = ExtResource("1_0b8xr")
+sfx_morte = ExtResource("2_pvakx")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=470647290]
 texture_filter = 1
