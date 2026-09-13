@@ -203,7 +203,21 @@ func can_move_to(target_pos: Vector2) -> bool:
 		var tile_coords = layer.local_to_map(tile_center)
 		if layer.get_cell_source_id(tile_coords) != -1:
 			return false
-
+	
+	## 2b. Verificação extra via física real — pega tiles "grandões" que
+	## ocupam várias células visualmente mas só têm 1 célula registrada
+	## no grid (como as casas do atlas).
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsPointQueryParameters2D.new()
+	query.position = get_parent().to_global(tile_center)
+	query.collision_mask = 1
+	query.collide_with_bodies = true
+	query.collide_with_areas = false
+	query.exclude = [self.get_rid()]
+	var result = space_state.intersect_point(query, 1)
+	if result.size() > 0:
+		return false
+	
 	## Nenhuma layer bloqueou → tile livre para mover.
 	return true
 
