@@ -10793,7 +10793,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_nki3b"]
 resource_name = "idle_up"
-length = 0.19999999999999998
+length = 0.2
 loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
@@ -11308,7 +11308,6 @@ sfx_respawn = ExtResource("12_2m7ji")
 y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(0.96, 1)
-texture = ExtResource("15_vinru")
 centered = false
 hframes = 13
 vframes = 4

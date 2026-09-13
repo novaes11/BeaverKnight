@@ -8,8 +8,8 @@ var current_health: int
 @export var attack_damage: int = 25
 var respawn_position: Vector2 = Vector2.ZERO
 
-# Configurações de Movimento (Atualizado para movimento livre)
-@export var walk_speed: float = 100.0 # Ajustado para velocidade por pixels ao invés de grid
+# Configurações de Movimento Livre
+@export var walk_speed: float = 100.0
 var direction : Vector2 = Vector2.ZERO
 var can_move : bool = true
 var is_moving : bool = false 
@@ -18,13 +18,13 @@ var is_moving : bool = false
 @onready var anim_tree: AnimationTree = $AnimationTree
 var anim_state: AnimationNodeStateMachinePlayback
 
-# Variaveis Sonoras
+# Variáveis Sonoras
 @export var sfx_dano: AudioStream
 @export var sfx_corte: AudioStream
 @export var sfx_andar: AudioStream
 @export var sfx_respawn: AudioStream
 
-# Enums de Direção (Mantido para a sua lógica de ataque continuar funcionando)
+# Enums de Direção
 enum FacingDirection { LEFT, RIGHT, UP, DOWN }
 var facing_direction = FacingDirection.DOWN
 
@@ -45,11 +45,9 @@ func _ready() -> void:
 	else:
 		print("ERRO: Nó 'AnimationTree' não foi encontrado.")
 
-# Função chamada pelo animationPlayer para tocar o efeito de passo
+# Função chamada pelo AnimationPlayer para tocar o efeito de passo
 func tocar_SFXPasso():
-	print("Play: Som de andar")
 	if is_moving:
-		# Variação de tom para diminuir a repetição
 		var pitch_var = randf_range(0.9, 1.1)
 		AudioManager.play_sfx(sfx_andar, -36.0, pitch_var)
 	
@@ -59,33 +57,24 @@ func _physics_process(_delta: float) -> void:
 		attack_enemy()
 		return
 
-	# 2. Lógica de Movimentação Livre (Tutorial)
+	# 2. Lógica de Movimentação Livre
 	if can_move:
-		# get_vector captura as 4 direções e normaliza para não andar mais rápido na diagonal
 		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
 	
-	# Calcula a velocidade final (direção * velocidade base)
 	velocity = direction * walk_speed
 	
-	# Atualiza a direção das animações na árvore
 	update_blend(direction)
-	
-	# Define se a animação vai ser Idle ou Walk
 	movement_animation()
-	
-	# Aplica o movimento ao CharacterBody2D (substitui a matemática complexa de tiles)
 	move_and_slide()
 
-# --- NOVAS FUNÇÕES DE MOVIMENTAÇÃO ---
+# --- FUNÇÕES DE MOVIMENTAÇÃO E ANIMAÇÃO ---
 
 func update_blend(value: Vector2):
 	if value == Vector2.ZERO:
 		return
 		
-	# Converte a direção do movimento atual para a direção do ataque para não quebrar sua lógica
 	update_facing_direction(value)
 	
-	# Atualiza o AnimationTree (substitua os nomes abaixo caso os seus se chamem diferente)
 	anim_tree.set("parameters/idle/blend_position", value)
 	anim_tree.set("parameters/walk/blend_position", value)
 	anim_tree.set("parameters/attack_armed/blend_position", value)
@@ -96,7 +85,6 @@ func movement_animation():
 		is_moving = false
 		return
 
-	# is_zero_approx confere se a velocidade é quase 0 para trocar pro Idle
 	if is_zero_approx(velocity.length()):
 		is_moving = false
 		if anim_state:
@@ -106,7 +94,6 @@ func movement_animation():
 		if anim_state:
 			anim_state.travel("walk")
 
-# Função auxiliar para manter a sua mecânica de dano apontada para o lado certo
 func update_facing_direction(dir: Vector2):
 	if abs(dir.x) > abs(dir.y):
 		if dir.x > 0:
@@ -119,16 +106,14 @@ func update_facing_direction(dir: Vector2):
 		else:
 			facing_direction = FacingDirection.UP
 
-# Função para destravar o jogador após o ataque
 func set_move(value: bool = true):
 	can_move = value
 
+# --- ATAQUE MELHORADO ---
 
 func attack_enemy() -> void:
-	# Trava a movimentação durante o ataque
 	can_move = false
 	
-	# Dispara a animação
 	if anim_state:
 		anim_state.travel("attack_armed") 
 	
@@ -141,16 +126,32 @@ func attack_enemy() -> void:
 
 	AudioManager.play_sfx(sfx_corte, -22.0)
 	
-	var attack_range = 16.0
-	var target_position = global_position + (attack_vector * attack_range)
-
+	# Configurações de alcance ajustadas
+	var max_attack_distance: float = 28.0   # Alcance máximo do golpe
+	var close_range_threshold: float = 12.0 # Inimigos colados acertam de qualquer ângulo
+	
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
-		if enemy.global_position.distance_to(target_position) < (attack_range / 2.0):
+		var distance_to_enemy = global_position.distance_to(enemy.global_position)
+		
+		# 1. Acerta inimigos extremamente próximos (colados)
+		if distance_to_enemy <= close_range_threshold:
 			if enemy.has_method("take_damage"):
 				enemy.take_damage(attack_damage)
-				print("Player atacou o inimigo!")
+				print("Player acertou inimigo próximo!")
+			continue
 
+		# 2. Acerta inimigos na frente dentro do cone de ataque
+		if distance_to_enemy <= max_attack_distance:
+			var dir_to_enemy = (enemy.global_position - global_position).normalized()
+			var alignment = attack_vector.dot(dir_to_enemy)
+			
+			if alignment > 0.3: # Maior que 0.3 garante um cone de ~140 graus na frente
+				if enemy.has_method("take_damage"):
+					enemy.take_damage(attack_damage)
+					print("Player acertou inimigo na frente!")
+
+# --- DANO E MORTE ---
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
