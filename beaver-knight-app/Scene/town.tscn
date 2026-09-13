@@ -10793,7 +10793,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_nki3b"]
 resource_name = "idle_up"
-length = 0.19999999999999998
+length = 0.2
 loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
@@ -11162,8 +11162,6 @@ animation = &"armed_right"
 animation = &"armed_up"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_aw25b"]
-auto_triangles = false
-triangles = PackedInt32Array(0, 1, 2, 0, 2, 3)
 blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_ucnep")
 blend_point_0/pos = Vector2(-1, 0)
@@ -11191,8 +11189,6 @@ animation = &"idle_up"
 animation = &"idle_right"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_njdcc"]
-auto_triangles = false
-triangles = PackedInt32Array(0, 1, 2, 1, 2, 3)
 blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_aw25b")
 blend_point_0/pos = Vector2(-1, 0)
@@ -11308,7 +11304,7 @@ sfx_respawn = ExtResource("12_2m7ji")
 y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(0.96, 1)
-texture = ExtResource("15_vinru")
+texture = ExtResource("16_th4y3")
 centered = false
 hframes = 13
 vframes = 4
