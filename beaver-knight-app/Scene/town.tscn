@@ -10777,7 +10777,7 @@ transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_
 
 [node name="Town" type="Node2D" unique_id=1173611975]
 y_sort_enabled = true
-position = Vector2(96, 96)
+position = Vector2(-21, -145)
 script = ExtResource("1_2m7ji")
 musica_combate = ExtResource("11_gg11b")
 metadata/_edit_group_ = true

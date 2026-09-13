@@ -16,7 +16,10 @@ const TILE_SIZE = 16
 @onready var anim_tree: AnimationTree = $AnimationTree
 var anim_state: AnimationNodeStateMachinePlayback
 
-# Variaveis Sonoras
+# Referência de Colisão em Grid
+@onready var ray_cast: RayCast2D = $RayCast2D
+
+# Variáveis Sonoras
 @export var sfx_dano: AudioStream
 @export var sfx_corte: AudioStream
 @export var sfx_andar: AudioStream
@@ -30,8 +33,9 @@ var player_state = PlayerState.IDLE
 var facing_direction = FacingDirection.DOWN
 
 # Variáveis de Movimento
-var initial_position = Vector2(0, 0)
-var input_direction = Vector2(0, 0)
+var initial_position = Vector2.ZERO
+var input_direction = Vector2.ZERO
+var move_direction = Vector2.ZERO
 var is_moving = false
 var percent_moved_to_next_tile = 0.0
 
@@ -41,7 +45,11 @@ func _ready() -> void:
 	respawn_position = global_position
 	current_health = max_health
 
-	# Inicialização segura do AnimationTree
+	if not has_node("RayCast2D"):
+		ray_cast = RayCast2D.new()
+		ray_cast.name = "RayCast2D"
+		add_child(ray_cast)
+
 	if has_node("AnimationTree"):
 		anim_tree = $AnimationTree
 		anim_tree.active = true
@@ -51,38 +59,36 @@ func _ready() -> void:
 	else:
 		print("ERRO: Nó 'AnimationTree' não foi encontrado como filho do Player.")
 
-#Função chamada pelo animationPlayer para tocar o efeito de passo
 func tocar_SFXPasso():
-	print("Play: Som de andar")
 	if is_moving:
-		#Variação de tom para diminuir a repetição
 		var pitch_var = randf_range(0.9, 1.1)
 		AudioManager.play_sfx(sfx_andar, -36.0, pitch_var)
 	
 func _physics_process(delta: float) -> void:
+	# Checa o ataque em paralelo em todo frame (não bloqueia o movimento)
+	if Input.is_action_just_pressed("attack"):
+		attack_enemy()
+
 	if player_state == PlayerState.TURNING:
 		return
-	elif is_moving == false:
-		process_player_movement_input()
-	elif input_direction != Vector2.ZERO:
+		
+	if is_moving:
 		if anim_state:
 			anim_state.travel("Walk")
 		move(delta)
 	else:
-		if anim_state:
-			anim_state.travel("Idle")
-		is_moving = false
+		process_player_movement_input()
 
 func process_player_movement_input() -> void:
-	# Checa a tecla de ataque (Letra E mapeada como 'attack')
-	if Input.is_action_just_pressed("attack"):
-		attack_enemy()
-		return
-
-	if input_direction.y == 0:
-		input_direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	if input_direction.x == 0:
-		input_direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+	input_direction = Vector2.ZERO
+	if Input.is_action_pressed("ui_right"):
+		input_direction.x = 1
+	elif Input.is_action_pressed("ui_left"):
+		input_direction.x = -1
+	elif Input.is_action_pressed("ui_down"):
+		input_direction.y = 1
+	elif Input.is_action_pressed("ui_up"):
+		input_direction.y = -1
 	
 	if input_direction != Vector2.ZERO:
 		if anim_tree:
@@ -94,12 +100,22 @@ func process_player_movement_input() -> void:
 			player_state = PlayerState.TURNING
 			if anim_state:
 				anim_state.travel("Turn")
+			get_tree().create_timer(0.15).timeout.connect(finished_turning)
 		else:
-			initial_position = position
-			is_moving = true
+			if can_move(input_direction):
+				move_direction = input_direction
+				initial_position = position
+				is_moving = true
+				player_state = PlayerState.WALKING
+			else:
+				reset_movement_state()
 	else:
-		if anim_state:
-			anim_state.travel("Idle")
+		reset_movement_state()
+
+func can_move(dir: Vector2) -> bool:
+	ray_cast.target_position = dir * TILE_SIZE
+	ray_cast.force_raycast_update()
+	return not ray_cast.is_colliding()
 
 func need_to_turn() -> bool:
 	var new_facing_direction = facing_direction
@@ -116,21 +132,28 @@ func need_to_turn() -> bool:
 		facing_direction = new_facing_direction
 		return true
 	
-	facing_direction = new_facing_direction
 	return false
 
 func finished_turning() -> void:
-	player_state = PlayerState.IDLE
+	if player_state == PlayerState.TURNING:
+		player_state = PlayerState.IDLE
 
 func move(delta: float) -> void:
 	percent_moved_to_next_tile += walk_speed * delta
 	
 	if percent_moved_to_next_tile >= 1.0:
-		position = initial_position + (TILE_SIZE * input_direction)
-		percent_moved_to_next_tile = 0.0
-		is_moving = false
+		position = initial_position + (TILE_SIZE * move_direction)
+		reset_movement_state()
 	else:
-		position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
+		position = initial_position + (TILE_SIZE * move_direction * percent_moved_to_next_tile)
+
+func reset_movement_state() -> void:
+	percent_moved_to_next_tile = 0.0
+	is_moving = false
+	move_direction = Vector2.ZERO
+	player_state = PlayerState.IDLE
+	if anim_state:
+		anim_state.travel("Idle")
 
 func attack_enemy() -> void:
 	var attack_vector = Vector2.ZERO
@@ -142,35 +165,29 @@ func attack_enemy() -> void:
 
 	AudioManager.play_sfx(sfx_corte, -22.0)
 	
+	# Calcula a posição do ataque com base no grid à frente do player
 	var target_position = global_position + (attack_vector * TILE_SIZE)
 
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
-		if enemy.global_position.distance_to(target_position) < (TILE_SIZE / 2.0):
+		if enemy.global_position.distance_to(target_position) < (TILE_SIZE * 0.8):
 			if enemy.has_method("take_damage"):
 				enemy.take_damage(attack_damage)
-				print("Player atacou o inimigo!")
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
 	AudioManager.play_sfx(sfx_dano, -32.0)
-	print("Player recebeu dano! Vida restante: ", current_health)
 	
 	if current_health <= 0:
 		die()
 
 func die() -> void:
-	print("Player morreu! Executando respawn...")
 	respawn()
 
 func respawn() -> void:
 	AudioManager.play_sfx(sfx_respawn, -6.0)
-	is_moving = false
-	percent_moved_to_next_tile = 0.0
+	reset_movement_state()
 	input_direction = Vector2.ZERO
-	player_state = PlayerState.IDLE
-	if anim_state:
-		anim_state.travel("Idle")
 	
 	current_health = max_health
 	global_position = respawn_position
