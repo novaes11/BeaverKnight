@@ -18,7 +18,10 @@ var is_moving : bool = false
 @onready var anim_tree: AnimationTree = $AnimationTree
 var anim_state: AnimationNodeStateMachinePlayback
 
-# Variaveis Sonoras
+# Referência de Colisão em Grid
+@onready var ray_cast: RayCast2D = $RayCast2D
+
+# Variáveis Sonoras
 @export var sfx_dano: AudioStream
 @export var sfx_corte: AudioStream
 @export var sfx_andar: AudioStream
@@ -47,7 +50,6 @@ func _ready() -> void:
 
 # Função chamada pelo animationPlayer para tocar o efeito de passo
 func tocar_SFXPasso():
-	print("Play: Som de andar")
 	if is_moving:
 		# Variação de tom para diminuir a repetição
 		var pitch_var = randf_range(0.9, 1.1)
@@ -149,19 +151,16 @@ func attack_enemy() -> void:
 		if enemy.global_position.distance_to(target_position) < (attack_range / 2.0):
 			if enemy.has_method("take_damage"):
 				enemy.take_damage(attack_damage)
-				print("Player atacou o inimigo!")
 
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
 	AudioManager.play_sfx(sfx_dano, -32.0)
-	print("Player recebeu dano! Vida restante: ", current_health)
 	
 	if current_health <= 0:
 		die()
 
 func die() -> void:
-	print("Player morreu! Executando respawn...")
 	respawn()
 
 func respawn() -> void:
