@@ -18,7 +18,10 @@ var is_moving : bool = false
 @onready var anim_tree: AnimationTree = $AnimationTree
 var anim_state: AnimationNodeStateMachinePlayback
 
-# Variaveis Sonoras
+# Referência de Colisão em Grid
+@onready var ray_cast: RayCast2D = $RayCast2D
+
+# Variáveis Sonoras
 @export var sfx_dano: AudioStream
 @export var sfx_corte: AudioStream
 @export var sfx_andar: AudioStream
@@ -45,38 +48,84 @@ func _ready() -> void:
 	else:
 		print("ERRO: Nó 'AnimationTree' não foi encontrado.")
 
-# Função chamada pelo animationPlayer para tocar o efeito de passo
 func tocar_SFXPasso():
-	print("Play: Som de andar")
 	if is_moving:
-		# Variação de tom para diminuir a repetição
 		var pitch_var = randf_range(0.9, 1.1)
 		AudioManager.play_sfx(sfx_andar, -36.0, pitch_var)
 	
-func _physics_process(_delta: float) -> void:
-	# 1. Checa o botão de ataque
-	if Input.is_action_just_pressed("attack") and can_move:
+func _physics_process(delta: float) -> void:
+	# Checa o ataque em paralelo em todo frame (não bloqueia o movimento)
+	if Input.is_action_just_pressed("attack"):
 		attack_enemy()
+
+	if player_state == PlayerState.TURNING:
 		return
+		
+	if is_moving:
+		if anim_state:
+			anim_state.travel("Walk")
+		move(delta)
+	else:
+		process_player_movement_input()
 
-	# 2. Lógica de Movimentação Livre (Tutorial)
-	if can_move:
-		# get_vector captura as 4 direções e normaliza para não andar mais rápido na diagonal
-		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
+func process_player_movement_input() -> void:
+	input_direction = Vector2.ZERO
+	if Input.is_action_pressed("ui_right"):
+		input_direction.x = 1
+	elif Input.is_action_pressed("ui_left"):
+		input_direction.x = -1
+	elif Input.is_action_pressed("ui_down"):
+		input_direction.y = 1
+	elif Input.is_action_pressed("ui_up"):
+		input_direction.y = -1
 	
-	# Calcula a velocidade final (direção * velocidade base)
-	velocity = direction * walk_speed
-	
-	# Atualiza a direção das animações na árvore
-	update_blend(direction)
-	
-	# Define se a animação vai ser Idle ou Walk
-	movement_animation()
-	
-	# Aplica o movimento ao CharacterBody2D (substitui a matemática complexa de tiles)
-	move_and_slide()
+	if input_direction != Vector2.ZERO:
+		if anim_tree:
+			anim_tree.set("parameters/Idle/blend_position", input_direction)
+			anim_tree.set("parameters/Walk/blend_position", input_direction)
+			anim_tree.set("parameters/Turn/blend_position", input_direction)
+		
+		if need_to_turn():
+			player_state = PlayerState.TURNING
+			if anim_state:
+				anim_state.travel("Turn")
+			get_tree().create_timer(0.15).timeout.connect(finished_turning)
+		else:
+			if can_move(input_direction):
+				move_direction = input_direction
+				initial_position = position
+				is_moving = true
+				player_state = PlayerState.WALKING
+			else:
+				reset_movement_state()
+	else:
+		reset_movement_state()
 
-# --- NOVAS FUNÇÕES DE MOVIMENTAÇÃO ---
+func can_move(dir: Vector2) -> bool:
+	ray_cast.target_position = dir * TILE_SIZE
+	ray_cast.force_raycast_update()
+	return not ray_cast.is_colliding()
+
+func need_to_turn() -> bool:
+	var new_facing_direction = facing_direction
+	if input_direction.x < 0:
+		new_facing_direction = FacingDirection.LEFT
+	elif input_direction.x > 0:
+		new_facing_direction = FacingDirection.RIGHT
+	elif input_direction.y < 0:
+		new_facing_direction = FacingDirection.UP
+	elif input_direction.y > 0:
+		new_facing_direction = FacingDirection.DOWN
+
+	if facing_direction != new_facing_direction:
+		facing_direction = new_facing_direction
+		return true
+	
+	return false
+
+func finished_turning() -> void:
+	if player_state == PlayerState.TURNING:
+		player_state = PlayerState.IDLE
 
 func update_blend(value: Vector2):
 	if value == Vector2.ZERO:
@@ -85,44 +134,19 @@ func update_blend(value: Vector2):
 	# Converte a direção do movimento atual para a direção do ataque para não quebrar sua lógica
 	update_facing_direction(value)
 	
-	# Atualiza o AnimationTree (substitua os nomes abaixo caso os seus se chamem diferente)
-	anim_tree.set("parameters/idle/blend_position", value)
-	anim_tree.set("parameters/walk/blend_position", value)
-	anim_tree.set("parameters/attack_armed/blend_position", value)
-
-func movement_animation():
-	if not can_move:
-		velocity = Vector2.ZERO
-		is_moving = false
-		return
-
-	# is_zero_approx confere se a velocidade é quase 0 para trocar pro Idle
-	if is_zero_approx(velocity.length()):
-		is_moving = false
-		if anim_state:
-			anim_state.travel("idle")
+	if percent_moved_to_next_tile >= 1.0:
+		position = initial_position + (TILE_SIZE * move_direction)
+		reset_movement_state()
 	else:
-		is_moving = true
-		if anim_state:
-			anim_state.travel("walk")
+		position = initial_position + (TILE_SIZE * move_direction * percent_moved_to_next_tile)
 
-# Função auxiliar para manter a sua mecânica de dano apontada para o lado certo
-func update_facing_direction(dir: Vector2):
-	if abs(dir.x) > abs(dir.y):
-		if dir.x > 0:
-			facing_direction = FacingDirection.RIGHT
-		else:
-			facing_direction = FacingDirection.LEFT
-	else:
-		if dir.y > 0:
-			facing_direction = FacingDirection.DOWN
-		else:
-			facing_direction = FacingDirection.UP
-
-# Função para destravar o jogador após o ataque
-func set_move(value: bool = true):
-	can_move = value
-
+func reset_movement_state() -> void:
+	percent_moved_to_next_tile = 0.0
+	is_moving = false
+	move_direction = Vector2.ZERO
+	player_state = PlayerState.IDLE
+	if anim_state:
+		anim_state.travel("Idle")
 
 func attack_enemy() -> void:
 	# Trava a movimentação durante o ataque
@@ -141,37 +165,30 @@ func attack_enemy() -> void:
 
 	AudioManager.play_sfx(sfx_corte, -22.0)
 	
-	var attack_range = 16.0
-	var target_position = global_position + (attack_vector * attack_range)
+	# Calcula a posição do ataque com base no grid à frente do player
+	var target_position = global_position + (attack_vector * TILE_SIZE)
 
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
-		if enemy.global_position.distance_to(target_position) < (attack_range / 2.0):
+		if enemy.global_position.distance_to(target_position) < (TILE_SIZE * 0.8):
 			if enemy.has_method("take_damage"):
 				enemy.take_damage(attack_damage)
-				print("Player atacou o inimigo!")
 
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
 	AudioManager.play_sfx(sfx_dano, -32.0)
-	print("Player recebeu dano! Vida restante: ", current_health)
 	
 	if current_health <= 0:
 		die()
 
 func die() -> void:
-	print("Player morreu! Executando respawn...")
 	respawn()
 
 func respawn() -> void:
 	AudioManager.play_sfx(sfx_respawn, -6.0)
-	is_moving = false
-	direction = Vector2.ZERO
-	can_move = true
-	
-	if anim_state:
-		anim_state.travel("idle")
+	reset_movement_state()
+	input_direction = Vector2.ZERO
 	
 	current_health = max_health
 	global_position = respawn_position
