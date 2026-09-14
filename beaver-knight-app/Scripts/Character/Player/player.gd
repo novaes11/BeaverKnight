@@ -8,9 +8,11 @@ var current_health: int
 @export var attack_damage: int = 25
 var respawn_position: Vector2 = Vector2.ZERO
 
-# Configurações de Movimento
-@export var walk_speed: float = 4.0
-const TILE_SIZE = 16
+# Configurações de Movimento Livre
+@export var walk_speed: float = 100.0
+var direction : Vector2 = Vector2.ZERO
+var can_move : bool = true
+var is_moving : bool = false 
 
 ## IDs de tile source no tipo_terreno que NÃO bloqueiam o movimento.
 ## 5 = source_id do terreno base andável (confirmado pelo debug log).
@@ -34,21 +36,18 @@ var _blocking_layers: Array[TileMapLayer] = []
 @onready var anim_tree: AnimationTree = $AnimationTree
 var anim_state: AnimationNodeStateMachinePlayback
 
-# Enums de Estado e Direção
-enum PlayerState { IDLE, TURNING, WALKING }
-enum FacingDirection { LEFT, RIGHT, UP, DOWN }
+# Variáveis Sonoras
+@export var sfx_dano: AudioStream
+@export var sfx_corte: AudioStream
+@export var sfx_andar: AudioStream
+@export var sfx_respawn: AudioStream
 
-var player_state = PlayerState.IDLE
+# Enums de Direção
+enum FacingDirection { LEFT, RIGHT, UP, DOWN }
 var facing_direction = FacingDirection.DOWN
 
-# Variáveis de Movimento
-var initial_position = Vector2(0, 0)
-var input_direction = Vector2(0, 0)
-var is_moving = false
-var percent_moved_to_next_tile = 0.0
 
 func _ready() -> void:
-	initial_position = position
 	respawn_position = global_position
 	current_health = max_health
 
@@ -71,169 +70,133 @@ func _ready() -> void:
 			# Construções, vegetação e outras layers bloqueiam o movimento
 			_blocking_layers.append(child as TileMapLayer)
 
-	if _terrain_layer == null:
-		print("AVISO: TileMapLayer de terreno ('tipo_terreno') não encontrado.")
-	else:
-		print("OK: _terrain_layer → ", _terrain_layer.name)
-	if _path_layer == null:
-		print("AVISO: TileMapLayer de caminhos ('caminho_terreno') não encontrado.")
-	else:
-		print("OK: _path_layer → ", _path_layer.name)
-	print("OK: _blocking_layers → ", _blocking_layers.map(func(l): return l.name))
-
 	# Inicialização segura do AnimationTree
 	if has_node("AnimationTree"):
 		anim_tree = $AnimationTree
 		anim_tree.active = true
 		anim_state = anim_tree.get("parameters/playback")
+		
 		if anim_state == null:
-			print("AVISO: O Root Node do AnimationTree precisa ser um AnimationNodeStateMachine.")
+			print("AVISO: O Root Node precisa ser um AnimationNodeStateMachine.")
+		else:
+			anim_state.travel("idle") 
 	else:
-		print("ERRO: Nó 'AnimationTree' não foi encontrado como filho do Player.")
+		print("ERRO: Nó 'AnimationTree' não foi encontrado.")
 
-
-func _physics_process(delta: float) -> void:
-	if player_state == PlayerState.TURNING:
-		return
-	elif is_moving == false:
-		process_player_movement_input()
-	elif input_direction != Vector2.ZERO:
-		if anim_state:
-			anim_state.travel("Walk")
-		move(delta)
-	else:
-		if anim_state:
-			anim_state.travel("Idle")
-		is_moving = false
-
-func process_player_movement_input() -> void:
-	# Checa a tecla de ataque (Letra E mapeada como 'attack')
-	if Input.is_action_just_pressed("attack"):
+# Função chamada pelo AnimationPlayer para tocar o efeito de passo sincronizado com os pés
+func tocar_SFXPasso() -> void:
+	if is_moving:
+		var pitch_var = randf_range(0.9, 1.1)
+		AudioManager.play_sfx(sfx_andar, -36.0, pitch_var)
+	
+func _physics_process(_delta: float) -> void:
+	# 1. Checa o botão de ataque (bloqueia o movimento durante o golpe armado)
+	if Input.is_action_just_pressed("attack") and can_move:
 		attack_enemy()
 		return
 
-	if input_direction.y == 0:
-		input_direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	if input_direction.x == 0:
-		input_direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
-	
-	if input_direction != Vector2.ZERO:
-		if anim_tree:
-			anim_tree.set("parameters/Idle/blend_position", input_direction)
-			anim_tree.set("parameters/Walk/blend_position", input_direction)
-			anim_tree.set("parameters/Turn/blend_position", input_direction)
-		
-		if need_to_turn():
-			player_state = PlayerState.TURNING
-			if anim_state:
-				anim_state.travel("Turn")
-		else:
-			## Pré-verificação de colisão por tile:
-			## Antes de autorizar o movimento, calcula onde o player chegaria
-			## no próximo tile (posição atual + direção * tamanho do tile).
-			## Se can_move_to() detectar um colisor nessa posição, o movimento
-			## simplesmente não é iniciado — sem precisar desfazer nenhum passo.
-			var target_pos = position + (TILE_SIZE * input_direction)
-			if can_move_to(target_pos):
-				## Posição salva como ponto de origem da interpolação de movimento.
-				initial_position = position
-				is_moving = true
+	# 2. Lógica de Movimentação Livre Contínua
+	if can_move:
+		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
 	else:
-		if anim_state:
-			anim_state.travel("Idle")
-
-func need_to_turn() -> bool:
-	var new_facing_direction = facing_direction
-	if input_direction.x < 0:
-		new_facing_direction = FacingDirection.LEFT
-	elif input_direction.x > 0:
-		new_facing_direction = FacingDirection.RIGHT
-	elif input_direction.y < 0:
-		new_facing_direction = FacingDirection.UP
-	elif input_direction.y > 0:
-		new_facing_direction = FacingDirection.DOWN
-
-	if facing_direction != new_facing_direction:
-		facing_direction = new_facing_direction
-		return true
+		direction = Vector2.ZERO
 	
-	facing_direction = new_facing_direction
-	return false
+	velocity = direction * walk_speed
+	
+	# 3. Barreira de Terreno (Água / Pontes):
+	# Impede que o movimento contínuo entre em tiles de água desprovidos de ponte no _path_layer.
+	# A checagem nos eixos X e Y independentes permite deslizar suavemente pelas margens.
+	var feet_pos = global_position + Vector2(30, 41)
+	if velocity.x != 0:
+		var test_x = feet_pos + Vector2(sign(velocity.x) * 10.0, 0)
+		if is_terrain_blocked(test_x):
+			velocity.x = 0
+	if velocity.y != 0:
+		var test_y = feet_pos + Vector2(0, sign(velocity.y) * 10.0)
+		if is_terrain_blocked(test_y):
+			velocity.y = 0
+	
+	update_blend(direction)
+	movement_animation()
+	move_and_slide()
 
-func finished_turning() -> void:
-	player_state = PlayerState.IDLE
+# --- FUNÇÕES DE MOVIMENTAÇÃO E ANIMAÇÃO ---
 
-## Verifica se o player pode se mover para um determinado tile.
-##
-## Ordem de checagem (prioridade decrescente):
-##   0. Ponte/caminho (_path_layer): se houver tile aqui, LIBERA imediatamente o
-##      movimento — pontes sobrepõem a água no terreno base.
-##   1. Terreno base (tipo_terreno): bloqueia se source_id não estiver em
-##      WALKABLE_TERRAIN_SOURCES (ex: água = source != 5).
-##   2. Layers bloqueadoras (construções, vegetação, etc.): bloqueia se
-##      qualquer tile estiver presente na posição alvo.
-##
-## @param target_pos Vector2 — canto superior esquerdo do tile de destino.
-## @return bool — true se o tile está livre; false se bloqueado.
-func can_move_to(target_pos: Vector2) -> bool:
-	## Centro do tile alvo (+8px). Evita falsos positivos nas bordas entre tiles.
-	var tile_center = target_pos + Vector2(8, 8)
+func update_blend(value: Vector2):
+	if value == Vector2.ZERO:
+		return
+		
+	update_facing_direction(value)
+	
+	anim_tree.set("parameters/idle/blend_position", value)
+	anim_tree.set("parameters/walk/blend_position", value)
+	anim_tree.set("parameters/attack_armed/blend_position", value)
 
-	## 0. Verifica ponte/caminho — override de maior prioridade.
-	##    Se houver um tile de ponte ou estrada na posição destino, o movimento
-	##    é liberado imediatamente, independente do que houver nas camadas abaixo.
+## Verifica se um determinado ponto no mapa está bloqueado por água ou terreno intransponível.
+## - Pontes no _path_layer liberam passagem imediatamente (sobrepõem a água).
+## - Água no _terrain_layer bloqueia se o source_id for diferente de 5 (terreno andável).
+## - Layers bloqueadoras (vegetação/construções sem colisor nativo) impedem o movimento.
+func is_terrain_blocked(target_world_pos: Vector2) -> bool:
+	# 0. Pontes e caminhos liberam o movimento imediatamente
 	if _path_layer:
-		var tile_coords = _path_layer.local_to_map(tile_center)
+		var tile_coords = _path_layer.local_to_map(_path_layer.to_local(target_world_pos))
 		if _path_layer.get_cell_source_id(tile_coords) != -1:
-			return true  # Ponte detectada → passa mesmo sobre água
+			return false
 
-	## 1. Verifica o terreno base.
-	##    Source IDs em WALKABLE_TERRAIN_SOURCES = andável (ex: 5 = chão base).
-	##    Qualquer outro source_id presente (água, lava, etc.) bloqueia o movimento.
+	# 1. Verifica se o terreno base é andável (ex: água não está em WALKABLE_TERRAIN_SOURCES)
 	if _terrain_layer:
-		var tile_coords = _terrain_layer.local_to_map(tile_center)
+		var tile_coords = _terrain_layer.local_to_map(_terrain_layer.to_local(target_world_pos))
 		var src = _terrain_layer.get_cell_source_id(tile_coords)
 		if src != -1 and src not in WALKABLE_TERRAIN_SOURCES:
-			return false
+			return true
 
-	## 2. Verifica todas as layers bloqueadoras (construções, vegetação, etc.).
-	##    Se qualquer uma tiver um tile na posição alvo, o movimento é bloqueado.
-	##    Essa abordagem detecta tanto o interior quanto as bordas dos edifícios.
+	# 2. Camadas bloqueadoras adicionais
 	for layer in _blocking_layers:
-		var tile_coords = layer.local_to_map(tile_center)
+		var tile_coords = layer.local_to_map(layer.to_local(target_world_pos))
 		if layer.get_cell_source_id(tile_coords) != -1:
-			return false
-	
-	## 2b. Verificação extra via física real — pega tiles "grandões" que
-	## ocupam várias células visualmente mas só têm 1 célula registrada
-	## no grid (como as casas do atlas).
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsPointQueryParameters2D.new()
-	query.position = get_parent().to_global(tile_center)
-	query.collision_mask = 1
-	query.collide_with_bodies = true
-	query.collide_with_areas = false
-	query.exclude = [self.get_rid()]
-	var result = space_state.intersect_point(query, 1)
-	if result.size() > 0:
-		return false
-	
-	## Nenhuma layer bloqueou → tile livre para mover.
-	return true
+			return true
 
+	return false
 
-
-func move(delta: float) -> void:
-	percent_moved_to_next_tile += walk_speed * delta
-	
-	if percent_moved_to_next_tile >= 1.0:
-		position = initial_position + (TILE_SIZE * input_direction)
-		percent_moved_to_next_tile = 0.0
+## Controla a transição entre idle e walk baseada na velocidade efetiva
+func movement_animation():
+	if not can_move:
+		velocity = Vector2.ZERO
 		is_moving = false
+		return
+
+	if is_zero_approx(velocity.length()):
+		is_moving = false
+		if anim_state:
+			anim_state.travel("idle")
 	else:
-		position = initial_position + (TILE_SIZE * input_direction * percent_moved_to_next_tile)
+		is_moving = true
+		if anim_state:
+			anim_state.travel("walk")
+
+func update_facing_direction(dir: Vector2):
+	if abs(dir.x) > abs(dir.y):
+		if dir.x > 0:
+			facing_direction = FacingDirection.RIGHT
+		else:
+			facing_direction = FacingDirection.LEFT
+	else:
+		if dir.y > 0:
+			facing_direction = FacingDirection.DOWN
+		else:
+			facing_direction = FacingDirection.UP
+
+func set_move(value: bool = true):
+	can_move = value
+
+# --- ATAQUE MELHORADO ---
 
 func attack_enemy() -> void:
+	can_move = false
+	
+	if anim_state:
+		anim_state.travel("attack_armed") 
+	
 	var attack_vector = Vector2.ZERO
 	match facing_direction:
 		FacingDirection.LEFT: attack_vector = Vector2.LEFT
@@ -241,17 +204,38 @@ func attack_enemy() -> void:
 		FacingDirection.UP: attack_vector = Vector2.UP
 		FacingDirection.DOWN: attack_vector = Vector2.DOWN
 
-	var target_position = global_position + (attack_vector * TILE_SIZE)
-
+	AudioManager.play_sfx(sfx_corte, -22.0)
+	
+	# Configurações de alcance ajustadas
+	var max_attack_distance: float = 28.0   # Alcance máximo do golpe
+	var close_range_threshold: float = 12.0 # Inimigos colados acertam de qualquer ângulo
+	
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
-		if enemy.global_position.distance_to(target_position) < (TILE_SIZE / 2.0):
+		var distance_to_enemy = global_position.distance_to(enemy.global_position)
+		
+		# 1. Acerta inimigos extremamente próximos (colados)
+		if distance_to_enemy <= close_range_threshold:
 			if enemy.has_method("take_damage"):
 				enemy.take_damage(attack_damage)
-				print("Player atacou o inimigo!")
+				print("Player acertou inimigo próximo!")
+			continue
+
+		# 2. Acerta inimigos na frente dentro do cone de ataque
+		if distance_to_enemy <= max_attack_distance:
+			var dir_to_enemy = (enemy.global_position - global_position).normalized()
+			var alignment = attack_vector.dot(dir_to_enemy)
+			
+			if alignment > 0.3: # Maior que 0.3 garante um cone de ~140 graus na frente
+				if enemy.has_method("take_damage"):
+					enemy.take_damage(attack_damage)
+					print("Player acertou inimigo na frente!")
+
+# --- DANO E MORTE ---
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
+	AudioManager.play_sfx(sfx_dano, -32.0)
 	print("Player recebeu dano! Vida restante: ", current_health)
 	
 	if current_health <= 0:
@@ -262,13 +246,13 @@ func die() -> void:
 	respawn()
 
 func respawn() -> void:
+	AudioManager.play_sfx(sfx_respawn, -6.0)
 	is_moving = false
-	percent_moved_to_next_tile = 0.0
-	input_direction = Vector2.ZERO
-	player_state = PlayerState.IDLE
+	direction = Vector2.ZERO
+	can_move = true
+	
 	if anim_state:
-		anim_state.travel("Idle")
+		anim_state.travel("idle")
 	
 	current_health = max_health
 	global_position = respawn_position
-	initial_position = respawn_position
