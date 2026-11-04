@@ -136,7 +136,7 @@ step = 0.2
 
 [sub_resource type="Animation" id="Animation_um5sh"]
 resource_name = "slime"
-length = 0.39999999999999997
+length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -187,7 +187,8 @@ sfx_morte = ExtResource("2_pvakx")
 [node name="DeathSlime" type="Sprite2D" parent="." unique_id=563241403]
 position = Vector2(8, 8)
 texture = ExtResource("3_pvakx")
-hframes = 4
+hframes = 2
+vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1160831018]
 position = Vector2(8, 8)
