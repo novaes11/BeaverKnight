@@ -36,6 +36,7 @@
                 <a href="#arte">Bestiário & Arte</a>
                 <a href="#galeria">Galeria</a>
                 <a href="#equipe">Equipe & Evidências</a>
+                <a href="#documentos">Documentos</a>
                 <a href="#comunidade">Comunidade</a>
             </nav>
 
@@ -55,6 +56,7 @@
             <a href="#arte">Bestiário & Arte</a>
             <a href="#galeria">Galeria</a>
             <a href="#equipe">Equipe & Evidências</a>
+            <a href="#documentos">Documentos</a>
             <a href="#comunidade">Comunidade</a>
             <a href="https://github.com/novaes11/BeaverKnight" target="_blank" rel="noopener noreferrer">Repositório no
                 GitHub ↗</a>
@@ -127,52 +129,35 @@
                             alt="Tela título oficial do BeaverKnight em Pixel Art" class="pixelated">
                     </div>
 
-                    <!-- Aba 3: Guia de Controles de main_menu.tscn -->
+                    <!-- Aba 3: Controles reais alinhados a HelpPanel de main_menu.tscn para evitar dados fictícios e sobreposição com o vídeo/menu -->
                     <div class="showcase-pane controls-overlay-pane" id="pane-controls" role="tabpanel">
-                        <div class="controls-grid">
-                            <div class="control-item">
-                                <div class="keycap-group">
-                                    <span class="keycap">←</span>
-                                    <span class="keycap">↑</span>
-                                    <span class="keycap">↓</span>
-                                    <span class="keycap">→</span>
-                                </div>
-                                <div>
-                                    <h4>Movimentação Livre</h4>
-                                    <p>Use as setas direcionais (ou D-Pad) para deslocar o Castor pela cidade, pontes e
-                                        margens.</p>
-                                </div>
+                        <div class="controls-panel-box">
+                            <div class="controls-panel-header">
+                                <span class="controls-panel-badge">Scene/main_menu.tscn</span>
+                                <h3>COMO JOGAR</h3>
                             </div>
+                            <div class="controls-grid">
+                                <div class="control-item">
+                                    <div class="keycap-group" aria-label="Setas do teclado">
+                                        <span class="keycap">←</span>
+                                        <span class="keycap">↑</span>
+                                        <span class="keycap">↓</span>
+                                        <span class="keycap">→</span>
+                                    </div>
+                                    <div class="control-text">
+                                        <h4>Movimentação</h4>
+                                        <p>Use as setas do teclado para movimentar o castor.</p>
+                                    </div>
+                                </div>
 
-                            <div class="control-item">
-                                <div class="keycap-group">
-                                    <span class="keycap">Mouse 1</span>
-                                </div>
-                                <div>
-                                    <h4>Ataque Armado (Espada)</h4>
-                                    <p>Clique com o botão esquerdo para desferir um corte em cone de 140° contra inimigos
-                                        de poluição.</p>
-                                </div>
-                            </div>
-
-                            <div class="control-item">
-                                <div class="keycap-group">
-                                    <span class="keycap">Pontes</span>
-                                </div>
-                                <div>
-                                    <h4>Travessia Inteligente</h4>
-                                    <p>A camada <code>caminho_terreno</code> libera passagem sobre rios e bloqueia água
-                                        profunda.</p>
-                                </div>
-                            </div>
-
-                            <div class="control-item">
-                                <div class="keycap-group">
-                                    <span class="keycap">100 HP</span>
-                                </div>
-                                <div>
-                                    <h4>Combate & Respawn</h4>
-                                    <p>Gerencie o posicionamento contra a perseguição dos Slimes e Capangas de Petróleo.</p>
+                                <div class="control-item">
+                                    <div class="keycap-group" aria-label="Botão esquerdo do mouse">
+                                        <span class="keycap keycap-wide">Botão Esquerdo do Mouse</span>
+                                    </div>
+                                    <div class="control-text">
+                                        <h4>Ataque</h4>
+                                        <p>Clique com o botão esquerdo do mouse para atacar os inimigos.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -862,171 +847,73 @@
                         </div>
                     </article>
                 </div>
+            </div>
+        </section>
 
-                <!-- Quadro / Matriz Oficial de Atribuições e Evidências no Repositório -->
-                <div class="evidence-matrix-wrapper">
-                    <div class="matrix-header">
-                        <div>
-                            <h3>📋 Matriz de Atribuições & Evidências Técnicas no Repositório</h3>
-                            <p>Mapeamento consolidado das entregas de engenharia, arte e gestão do projeto BeaverKnight.</p>
+        <!-- Documentos & Materiais para Alunos: disponibiliza manuais e recursos pedagógicos sem duplicar a tabela de evidências -->
+        <section id="documentos" class="documents-section">
+            <div class="center">
+                <div class="section-header">
+                    <span class="section-kicker">Acervo & Documentação</span>
+                    <h2>Documentos do Projeto para Alunos</h2>
+                    <p>Acesse os guias de execução, a documentação técnica do repositório e o espaço dedicado aos
+                        materiais didáticos do BeaverKnight.</p>
+                </div>
+
+                <div class="documents-grid">
+                    <article class="document-card">
+                        <div class="document-top">
+                            <span class="document-icon">📘</span>
+                            <span class="document-badge">Guia Inicial • README.md</span>
                         </div>
-                        <a href="https://github.com/novaes11/BeaverKnight/commits/main" target="_blank"
-                            rel="noopener noreferrer" class="btn-outline">Histórico de Commits ↗</a>
-                    </div>
+                        <h3>Manual de Execução & Como Jogar</h3>
+                        <p>
+                            Passo a passo para importar o projeto na Godot Engine 4.6, iniciar a cena
+                            <code>Scene/main_menu.tscn</code>, consultar os controles oficiais e compreender a
+                            proposta educativa do jogo.
+                        </p>
+                        <div class="document-meta">Arquivo: <code>README.md</code></div>
+                        <div class="document-actions">
+                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/README.md" target="_blank"
+                                rel="noopener noreferrer" class="btn-secondary">Ler Guia Completo ↗</a>
+                        </div>
+                    </article>
 
-                    <div class="table-responsive">
-                        <table class="evidence-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 22%;">Integrante</th>
-                                    <th style="width: 39%;">Atribuições Principais</th>
-                                    <th style="width: 39%;">Evidências no Repositório / Código</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="member-cell">
-                                        <strong>João Vitor Novaes</strong>
-                                        <span>Gestão, Level Design & Pages</span>
-                                    </td>
-                                    <td>
-                                        Gestão de backlog e sprint no Notion; Level Design da cidade; configuração dos
-                                        TileSets de terreno, canos, estruturas de mata e óleo; documentação e Landing
-                                        Page.
-                                    </td>
-                                    <td class="evidence-cell">
-                                        <p>
-                                            Arquitetura de camadas em <code>Scene/town.tscn</code>, mapeamento de
-                                            texturas em <code>Assets/Water</code> (<code>DirtyWaterTexture.tres</code>),
-                                            organização de diretórios e documentações do projeto.
-                                        </p>
-                                        <div class="evidence-chips">
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scene/town.tscn"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Scene/town.tscn</a>
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Assets/Water/DirtyWaterTexture.tres"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Assets/Water/DirtyWaterTexture.tres</a>
-                                            <a href="https://github.com/novaes11/BeaverKnight/tree/main/docs"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">docs/index.html</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                    <article class="document-card">
+                        <div class="document-top">
+                            <span class="document-icon">⚙️</span>
+                            <span class="document-badge">Código & Cenas • Godot 4.6</span>
+                        </div>
+                        <h3>Arquitetura Técnica do Jogo</h3>
+                        <p>
+                            Explore as cenas (<code>town.tscn</code>, <code>main_menu.tscn</code>,
+                            <code>player.tscn</code>, <code>inimigo.tscn</code>) e os scripts em GDScript para estudar
+                            física 2D, TileMapLayers e o controlador de áudio.
+                        </p>
+                        <div class="document-meta">Diretório: <code>beaver-knight-app/</code></div>
+                        <div class="document-actions">
+                            <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Scripts"
+                                target="_blank" rel="noopener noreferrer" class="btn-secondary">Explorar Scripts ↗</a>
+                        </div>
+                    </article>
 
-                                <tr>
-                                    <td class="member-cell">
-                                        <strong>Enzo Schmidt</strong>
-                                        <span>Engenharia Acústica & SFX</span>
-                                    </td>
-                                    <td>
-                                        Engenharia acústica, curadoria de SFX (Pixabay/geradores 8-bit) e
-                                        desenvolvimento do controlador geral de áudio.
-                                    </td>
-                                    <td class="evidence-cell">
-                                        <p>
-                                            <code>Scripts/World/audio_manager.gd</code>, configuração de barramentos em
-                                            <code>Sounds/Bus_DeControle.tres</code> e roteamento de efeitos
-                                            globais/posicionais 2D.
-                                        </p>
-                                        <div class="evidence-chips">
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/World/audio_manager.gd"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Scripts/World/audio_manager.gd</a>
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Sounds/Bus_DeControle.tres"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Sounds/Bus_DeControle.tres</a>
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Sounds/controlador_audio.tscn"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Sounds/controlador_audio.tscn</a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="member-cell">
-                                        <strong>João Camargo</strong>
-                                        <span>UI/UX & Física de Colisões</span>
-                                    </td>
-                                    <td>
-                                        Design de interfaces (UI/UX) do menu principal e estruturação da física base de
-                                        colisões do ambiente.
-                                    </td>
-                                    <td class="evidence-cell">
-                                        <p>
-                                            <code>Scene/main_menu.tscn</code>, <code>Scripts/UI/main_menu.gd</code>,
-                                            parametrização de nós de colisão e delineamento de máscaras nos TileMaps.
-                                        </p>
-                                        <div class="evidence-chips">
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scene/main_menu.tscn"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Scene/main_menu.tscn</a>
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/UI/main_menu.gd"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Scripts/UI/main_menu.gd</a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="member-cell">
-                                        <strong>Rafael Vasconcelos</strong>
-                                        <span>Pixel Art & Animação 2D</span>
-                                    </td>
-                                    <td>
-                                        Ilustração e animação em Pixel Art dos personagens e elementos dinâmicos.
-                                    </td>
-                                    <td class="evidence-cell">
-                                        <p>
-                                            Spritesheets do castor (<code>beaverSprite.png</code>), variações de
-                                            caminhada/ataque, artes do Death Slime, capangas de petróleo e efeitos de
-                                            corte de espada.
-                                        </p>
-                                        <div class="evidence-chips">
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Sprites/beaverSprite.png"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Sprites/beaverSprite.png</a>
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Sprites/capanga_petroleopng.png"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Sprites/capanga_petroleopng.png</a>
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Sprites/custom/slash_128.png"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Sprites/custom/slash_128.png</a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="member-cell">
-                                        <strong>João Tavares e Henrique Cavalari</strong>
-                                        <span>Engenharia de Gameplay & IA</span>
-                                    </td>
-                                    <td>
-                                        Engenharia de gameplay: implementação das físicas de movimentação do jogador,
-                                        lógica de combate e IA dos inimigos.
-                                    </td>
-                                    <td class="evidence-cell">
-                                        <p>
-                                            <code>Scripts/Character/Player/player.gd</code>,
-                                            <code>Scripts/Character/Enemy/inimigo.gd</code>, rotinas de perseguição,
-                                            knockback e protótipo de raycasting em <code>enemy_movement.gd</code>.
-                                        </p>
-                                        <div class="evidence-chips">
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Player/player.gd"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Scripts/Character/Player/player.gd</a>
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/inimigo.gd"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Scripts/Character/Enemy/inimigo.gd</a>
-                                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/enemy_movement.gd"
-                                                target="_blank" rel="noopener noreferrer"
-                                                class="code-chip">Scripts/Character/Enemy/enemy_movement.gd</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <article class="document-card">
+                        <div class="document-top">
+                            <span class="document-icon">📂</span>
+                            <span class="document-badge">Repositório de Arquivos</span>
+                        </div>
+                        <h3>Central de Documentos dos Alunos</h3>
+                        <p>
+                            Espaço reservado na landing page para disponibilizar cartilhas em PDF, roteiros de atividade
+                            em sala de aula, Game Design Document (GDD) e relatórios da extensão universitária na
+                            UniFil.
+                        </p>
+                        <div class="document-meta">Pasta: <code>docs/assets/documents/</code></div>
+                        <div class="document-actions">
+                            <a href="https://github.com/novaes11/BeaverKnight/tree/main/docs/assets/documents"
+                                target="_blank" rel="noopener noreferrer" class="btn-secondary">Acessar Acervo ↗</a>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -1096,6 +983,7 @@
                 <a href="#arte">Bestiário & Pixel Art</a>
                 <a href="#galeria">Galeria do Projeto</a>
                 <a href="#equipe">Equipe & Evidências</a>
+                <a href="#documentos">Documentos para Alunos</a>
                 <a href="#comunidade">Impacto na Comunidade</a>
             </div>
 
