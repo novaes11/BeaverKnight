@@ -4,351 +4,1008 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeaverKinght | Sustentabilidade</title>
+    <title>BeaverKnight | Sustentabilidade & Ação 2D em Pixel Art — Extensão UniFil</title>
+    <meta name="description"
+        content="BeaverKnight é um jogo educativo 2D em Pixel Art desenvolvido na Godot Engine 4.6 como projeto de extensão universitária em Ciência da Computação na UniFil.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Pixelify+Sans:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <header class="navbar">
-        <div class="center">
-            <img src="assets/images/logoUnifil.png" alt="Emblema UniFil Pixel Art"
-                style="height: 60px; border-radius: 15px;">
-            <div class="logo" style="margin-left: 12px;">BeaverKnight</div>
-            <nav>
+    <!-- Popover global para inspeção de evidências técnicas -->
+    <div id="popoverGlobal" class="popover-global" role="tooltip" aria-hidden="true"></div>
+
+    <!-- Navbar -->
+    <header class="navbar" id="topNavbar">
+        <div class="center navbar-inner">
+            <a href="#" class="brand-group">
+                <img src="assets/images/logoUnifil.png" alt="Emblema UniFil" class="brand-logo-img">
+                <div class="brand-text">
+                    <div class="logo">Beaver<span>Knight</span></div>
+                    <span class="brand-sub">Extensão Universitária • UniFil</span>
+                </div>
+            </a>
+
+            <nav class="nav-links" aria-label="Navegação Principal">
                 <a href="#sobre">Sobre o Jogo</a>
-                <a href="#mecanicas">Mecânicas</a>
-                <a href="#equipe">Equipe</a>
+                <a href="#mecanicas">Mecânicas & Física</a>
+                <a href="#arte">Bestiário & Arte</a>
+                <a href="#galeria">Galeria</a>
+                <a href="#equipe">Equipe & Evidências</a>
+                <a href="#documentos">Documentos</a>
                 <a href="#comunidade">Comunidade</a>
             </nav>
-            <button class="btn-primary">Jogar Agora</button>
+
+            <div class="nav-actions">
+                <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app" target="_blank"
+                    rel="noopener noreferrer" class="btn-secondary">Código-Fonte</a>
+                <a href="#equipe" class="btn-primary">Ver Engenharia</a>
+            </div>
+
+            <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Abrir menu de navegação"
+                aria-expanded="false">☰</button>
         </div>
+
+        <nav id="mobileDrawer" class="mobile-drawer" aria-label="Menu Mobile">
+            <a href="#sobre">Sobre o Jogo</a>
+            <a href="#mecanicas">Mecânicas & Física</a>
+            <a href="#arte">Bestiário & Arte</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#equipe">Equipe & Evidências</a>
+            <a href="#documentos">Documentos</a>
+            <a href="#comunidade">Comunidade</a>
+            <a href="https://github.com/novaes11/BeaverKnight" target="_blank" rel="noopener noreferrer">Repositório no
+                GitHub ↗</a>
+        </nav>
     </header>
 
-    <section class="hero center">
-        <div class="hero-content">
-            <h1>Sustentabilidade em 8-bits</h1>
-            <p>Salve o planeta em uma aventura 2D clássica. Aprenda sobre reciclagem, energia limpa e conservação com a
-                nostalgia do Gameboy.</p>
-
-            <form class="hero-form" onsubmit="event.preventDefault(); alert('Email cadastrado para novidades!');">
-                <input type="email" placeholder="Seu email acadêmico" required>
-                <button type="submit" class="btn-primary">Receber Novidades</button>
-            </form>
-
-            <ul class="hero-checks">
-                <li>
-                    <div>✓</div> Jogo educativo 100% gratuito.
-                </li>
-                <li>
-                    <div>✓</div> Projeto de extensão universitária.
-                </li>
-                <li>
-                    <div>✓</div> Funciona direto no navegador.
-                </li>
-            </ul>
-        </div>
-        <div class="hero-image">
-            <div class="placeholder-notebook">
-                <div class="screen">
-                    <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
-                        <source src="assets/video/beaver_knight base design.mp4" type="video/mp4">
-                        Seu navegador não suporta a tag de vídeo.
-                    </video>
-                </div>
-                <div class="base"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="stats center">
-        <div class="stat-box">
-            <h2>3</h2>
-            <p>Fases Educativas</p>
-        </div>
-        <div class="stat-box">
-            <h2>5+</h2>
-            <p>Desafios Ecológicos</p>
-        </div>
-        <div class="stat-box">
-            <h2>8-bit</h2>
-            <p>Trilha Sonora Original</p>
-        </div>
-    </section>
-
-    <section id="sobre" class="about-section">
-        <div class="about-container center">
-            <div class="about-text">
-                <h2>Mais que um jogo, uma ferramenta educacional.</h2>
-                <p>O <strong>BeaverKinght</strong> não nasceu para ser apenas um passatempo. Como um projeto de
-                    extensão, nosso objetivo central é resolver uma falha de comunicação: como ensinar sustentabilidade
-                    e gestão de recursos sem parecer uma palestra entediante?</p>
-                <p>A resposta foi gamificar o aprendizado. Unimos a nostalgia visual da era 8-bits com mecânicas de
-                    causa e consequência. O jogador não apenas lê sobre reciclagem; ele precisa otimizar recursos na
-                    prática para não perder o jogo. Todo o motor de regras e física está sendo construído do zero,
-                    estruturando a lógica principal em C# para garantir robustez e escalabilidade nos sistemas do jogo.
+    <main>
+        <!-- Hero Section -->
+        <section class="hero center">
+            <div class="hero-content">
+                <div class="hero-tag">GODOT ENGINE 4.6 • GDSCRIPT • PIXEL ART 2D</div>
+                <h1>Defenda o Ecossistema em <span class="highlight-eco">8-Bits</span></h1>
+                <p class="hero-lead">
+                    Assuma o papel do <strong>Cavaleiro Castor</strong> em uma aventura top-down 2D contra a poluição
+                    industrial, vazamentos de óleo e contaminação hídrica. Um projeto de extensão universitária que
+                    transforma preservação ambiental em mecânicas reais de ação e causa e consequência.
                 </p>
+
+                <div class="hero-cta-group">
+                    <a href="#equipe" class="btn-primary" id="heroTeamBtn">Atribuições & Evidências</a>
+                    <a href="https://github.com/novaes11/BeaverKnight" target="_blank" rel="noopener noreferrer"
+                        class="btn-secondary" id="heroRepoBtn">Explorar Repositório ↗</a>
+                    <button type="button" class="btn-outline" id="showControlsBtn">Como Jogar</button>
+                </div>
+
+                <ul class="hero-checks">
+                    <li>
+                        <span class="check-badge">✓</span>
+                        <span>Arquitetura em camadas no Godot 4.6 (<code>TileMapLayer</code>, <code>CharacterBody2D</code> e <code>AnimationTree</code>).</span>
+                    </li>
+                    <li>
+                        <span class="check-badge">✓</span>
+                        <span>Projeto de extensão acadêmica — Ciência da Computação (UniFil).</span>
+                    </li>
+                    <li>
+                        <span class="check-badge">✓</span>
+                        <span>Engenharia acústica 8-bit autoral com controlador de áudio global e posicional 2D.</span>
+                    </li>
+                </ul>
             </div>
 
-            <div class="about-specs">
-                <div class="spec-card">
-                    <h3>Ficha Técnica</h3>
-                    <ul class="spec-list">
-                        <li><span>Propósito:</span> Projeto de Extensão (UniFil)</li>
-                        <li><span>Gênero:</span> Educacional / Gerenciamento</li>
-                        <li><span>Linguagem Core:</span> C#</li>
-                        <li><span>Estética Visual:</span> Pixel Art 2D Retro</li>
-                        <li><span>Plataforma:</span> Web Browser</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="features-grid">
-        <div class="center">
-            <h2>Mecânicas Principais</h2>
-            <div class="grid-container">
-                <div class="card teal">
-                    <div class="icon">♻️</div>
-                    <h3>Reciclagem</h3>
-                    <p>Separe resíduos corretamente para ganhar pontos e limpar o cenário.</p>
-                </div>
-                <div class="card purple">
-                    <div class="icon">⚡</div>
-                    <h3>Energia Limpa</h3>
-                    <p>Construa painéis solares e turbinas eólicas.</p>
-                </div>
-                <div class="card blue">
-                    <div class="icon">💧</div>
-                    <h3>Uso da Água</h3>
-                    <p>Conserte vazamentos e otimize a irrigação das plantações.</p>
-                </div>
-                <div class="card pink">
-                    <div class="icon">🌳</div>
-                    <h3>Reflorestamento</h3>
-                    <p>Plante árvores para recuperar áreas desmatadas do mapa.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="comunidade" class="about-section" style="background-image: none; background-color: var(--bg-panel);">
-        <div class="about-container center">
-            <div class="about-text" style="flex: 1; text-align: left;">
-                <h2>Impacto na Comunidade</h2>
-                <p>O <strong>BeaverKnight</strong> foi desenvolvido com um propósito claro: engajar e educar. Mas quem
-                    exatamente se beneficia com o nosso projeto e como ele ajuda a comunidade?</p>
-
-                <h3 style="color: var(--primary-teal); margin-top: 2rem; margin-bottom: 0.5rem; font-size: 1.5rem;">🎯
-                    Nosso Público-Alvo</h3>
-                <p>O projeto é direcionado principalmente a <strong>estudantes</strong> (desde o ensino básico até o
-                    médio), <strong>professores e educadores</strong> que buscam ferramentas didáticas inovadoras. Além
-                    disso, abrange o público em geral apaixonado por jogos retro que tem interesse em práticas de
-                    sustentabilidade.</p>
-
-                <h3 style="color: var(--primary-teal); margin-top: 2rem; margin-bottom: 0.5rem; font-size: 1.5rem;">🌍
-                    Como Contribuímos</h3>
-                <p>Acreditamos que a educação ambiental não precisa ser monótona. O projeto beneficia a comunidade ao
-                    oferecer uma <strong>ferramenta educacional 100% gratuita e acessível</strong> diretamente pelo
-                    navegador. Gamificando o aprendizado, transformamos conceitos essenciais — como reciclagem,
-                    conservação de água e transição para energias limpas — em mecânicas de causa e consequência. Isso
-                    ajuda a conscientizar as novas gerações sobre a gestão de recursos de forma interativa e divertida.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section class="carousel-section">
-        <div class="carousel-header">
-            <h2>Galeria do Projeto</h2>
-            <p>Capturas de tela e evolução do desenvolvimento passo a passo.</p>
-        </div>
-
-        <div class="carousel-container">
-            <div class="carousel-track" id="track">
-
-                <div class="carousel-slide active">
-                    <img src="assets/images/more pictures.jpeg" alt="Gameplay 1">
-                    <div class="slide-overlay">
-                        <h3>Mecânica de Reciclagem</h3>
-                        <p>Interface do inventário e ambiente</p>
-                        <a href="#" class="slide-btn">Saiba mais</a>
+            <!-- Console Interativo de Demonstração -->
+            <div class="hero-showcase">
+                <div class="showcase-topbar">
+                    <div class="showcase-title">
+                        <span>●</span> <span>beaver-knight-app — 320×180px (Viewport 1280×720)</span>
+                    </div>
+                    <div class="showcase-tabs" role="tablist" aria-label="Visualizações do Jogo">
+                        <button type="button" class="showcase-tab active" data-pane="pane-video" role="tab"
+                            aria-selected="true">Gameplay</button>
+                        <button type="button" class="showcase-tab" data-pane="pane-menu" role="tab"
+                            aria-selected="false">Tela Título</button>
+                        <button type="button" class="showcase-tab" data-pane="pane-controls" role="tab"
+                            aria-selected="false">Como Jogar</button>
                     </div>
                 </div>
 
-                <div class="carousel-slide">
-                    <img src="assets/images/more pictures.jpeg" alt="Gameplay 2">
-                    <div class="slide-overlay">
-                        <h3>Fase da Floresta</h3>
-                        <p>Reflorestamento em ação</p>
-                        <a href="#" class="slide-btn">Saiba mais</a>
+                <div class="showcase-viewport">
+                    <!-- Aba 1: Vídeo de Gameplay -->
+                    <div class="showcase-pane active" id="pane-video" role="tabpanel">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/video/beaver_knight base design.mp4" type="video/mp4">
+                            Seu navegador não suporta a reprodução de vídeo.
+                        </video>
+                    </div>
+
+                    <!-- Aba 2: Arte Oficial do Menu Principal -->
+                    <div class="showcase-pane" id="pane-menu" role="tabpanel">
+                        <img src="assets/images/game/BeaverKnight-BG.png"
+                            alt="Tela título oficial do BeaverKnight em Pixel Art" class="pixelated">
+                    </div>
+
+                    <!-- Aba 3: Controles reais alinhados a HelpPanel de main_menu.tscn para evitar dados fictícios e sobreposição com o vídeo/menu -->
+                    <div class="showcase-pane controls-overlay-pane" id="pane-controls" role="tabpanel">
+                        <div class="controls-panel-box">
+                            <div class="controls-panel-header">
+                                <span class="controls-panel-badge">Scene/main_menu.tscn</span>
+                                <h3>COMO JOGAR</h3>
+                            </div>
+                            <div class="controls-grid">
+                                <div class="control-item">
+                                    <div class="keycap-group" aria-label="Setas do teclado">
+                                        <span class="keycap">←</span>
+                                        <span class="keycap">↑</span>
+                                        <span class="keycap">↓</span>
+                                        <span class="keycap">→</span>
+                                    </div>
+                                    <div class="control-text">
+                                        <h4>Movimentação</h4>
+                                        <p>Use as setas do teclado para movimentar o castor.</p>
+                                    </div>
+                                </div>
+
+                                <div class="control-item">
+                                    <div class="keycap-group" aria-label="Botão esquerdo do mouse">
+                                        <span class="keycap keycap-wide">Botão Esquerdo do Mouse</span>
+                                    </div>
+                                    <div class="control-text">
+                                        <h4>Ataque</h4>
+                                        <p>Clique com o botão esquerdo do mouse para atacar os inimigos.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="carousel-slide">
-                    <img src="assets/images/more pictures.jpeg" alt="Gameplay 3">
-                    <div class="slide-overlay">
-                        <h3>Boss Fight: Petroleo</h3>
-                        <p>Desafio final da fase 1</p>
-                        <a href="#" class="slide-btn">Saiba mais</a>
+                <div class="showcase-statusbar">
+                    <span>Cena principal: <code>res://Scene/town.tscn</code></span>
+                    <span>Áudio Autoload: <code>res://Sounds/controlador_audio.tscn</code></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métricas de Engenharia -->
+        <section class="stats center" aria-label="Indicadores Técnicos do Projeto">
+            <div class="stat-box">
+                <span class="stat-label-top">Motor & Linguagem</span>
+                <h2>Godot 4.6</h2>
+                <p>Lógica modular em GDScript com renderização 2D Pixel-Perfect</p>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label-top">Level Design</span>
+                <h2>4 Layers</h2>
+                <p>Terreno base, caminhos/pontes, vegetação e construções em <code>town.tscn</code></p>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label-top">Engenharia Acústica</span>
+                <h2>16 Canais</h2>
+                <p>Pools dedicados de <code>AudioStreamPlayer</code> global e posicional 2D</p>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label-top">Desenvolvimento</span>
+                <h2>6 Devs</h2>
+                <p>Equipe integrada em Gestão, Level Design, Áudio, UI/UX, Pixel Art e Gameplay</p>
+            </div>
+        </section>
+
+        <!-- Sobre o Jogo & Ficha Técnica -->
+        <section id="sobre" class="about-section">
+            <div class="about-container center">
+                <div class="about-text">
+                    <span class="section-kicker">Proposta & Arquitetura</span>
+                    <h2>Mais que um jogo: educação ambiental gamificada com engenharia moderna.</h2>
+                    <p>
+                        O <strong>BeaverKnight</strong> nasceu como um projeto de extensão universitária com uma missão
+                        clara: transformar temas urgentes de sustentabilidade — conservação de recursos hídricos,
+                        combate à contaminação por petróleo, reflorestamento e transição energética — em uma experiência
+                        interativa e memorável.
+                    </p>
+                    <p>
+                        Desenvolvido na <strong>Godot Engine 4.6</strong> utilizando <strong>GDScript</strong>, o jogo
+                        implementa movimentação livre contínua com detecção inteligente de camadas de terreno, sistema
+                        de combate direcional baseado em produto escalar (<em>dot product</em>), inteligência artificial
+                        de perseguição com física de repulsão (<em>knockback</em>) e uma arquitetura acústica 8-bit com
+                        roteamento por barramentos dedicados.
+                    </p>
+
+                    <div class="architecture-pills">
+                        <span class="arch-pill">Scene/town.tscn</span>
+                        <span class="arch-pill">Scripts/Character/Player/player.gd</span>
+                        <span class="arch-pill">Scripts/Character/Enemy/inimigo.gd</span>
+                        <span class="arch-pill">Scripts/World/audio_manager.gd</span>
+                        <span class="arch-pill">Scene/main_menu.tscn</span>
+                        <span class="arch-pill">Assets/Water/DirtyWaterTexture.tres</span>
                     </div>
                 </div>
 
-                <div class="carousel-slide">
-                    <img src="assets/images/more pictures.jpeg" alt="Gameplay 5">
-                    <div class="slide-overlay">
-                        <h3>Painéis Solares</h3>
-                        <p>Sistema de energia da base</p>
-                        <a href="#" class="slide-btn">Saiba mais</a>
+                <div class="about-specs">
+                    <div class="spec-card">
+                        <div class="spec-card-header">
+                            <h3>Ficha Técnica</h3>
+                            <span class="spec-version">v4.6 GL_COMPAT</span>
+                        </div>
+                        <ul class="spec-list">
+                            <li><span>Vínculo Acadêmico:</span> <strong>Projeto de Extensão (UniFil)</strong></li>
+                            <li><span>Gênero:</span> <strong>Action RPG 2D / Educacional Ambiental</strong></li>
+                            <li><span>Engine & Core:</span> <code>Godot 4.6 + GDScript</code></li>
+                            <li><span>Resolução Base:</span> <code>320×180 px (Snap 2D Pixel)</code></li>
+                            <li><span>Física de Mapa:</span> <code>TileMapLayer + Collision Masks</code></li>
+                            <li><span>Animação:</span> <code>AnimationTree (StateMachine)</code></li>
+                            <li><span>Arquitetura de Áudio:</span> <code>Bus_DeControle.tres (Music/Effect)</code></li>
+                        </ul>
                     </div>
                 </div>
-
-                <div class="carousel-slide">
-                    <img src="assets/images/more pictures.jpeg" alt="Gameplay 6">
-                    <div class="slide-overlay">
-                        <h3>Boss Fight: Radiação</h3>
-                        <p>Desafio final da fase 2</p>
-                        <a href="#" class="slide-btn">Saiba mais</a>
-                    </div>
-                </div>
-
-                <div class="carousel-slide">
-                    <img src="assets/images/more pictures.jpeg" alt="Gameplay 7">
-                    <div class="slide-overlay">
-                        <h3>Abertura de Hidreletrica</h3>
-                        <p>Sistema de energia da base</p>
-                        <a href="#" class="slide-btn">Saiba mais</a>
-                    </div>
-                </div>
-
-                <div class="carousel-slide">
-                    <img src="assets/images/more pictures.jpeg" alt="Gameplay 8">
-                    <div class="slide-overlay">
-                        <h3>Percurso hostil</h3>
-                        <p>Sistema de energia da base</p>
-                        <a href="#" class="slide-btn">Saiba mais</a>
-                    </div>
-                </div>
-
             </div>
-        </div>
+        </section>
 
-        <div class="carousel-controls">
-            <button id="prevBtn" class="control-btn">&#8592;</button>
-            <button id="nextBtn" class="control-btn">&#8594;</button>
-        </div>
-    </section>
-
-    <section id="equipe" class="team-section center">
-        <div class="team-header">
-            <h2>Quem somos</h2>
-            <p>Conheça os desenvolvedores por trás da engine e da arte.</p>
-        </div>
-
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="avatar-container">
-                    <img src="assets/team members/foto_novaes.jpeg" alt="Foto de Novaes">
-                    <span class="accent-mark purple"></span>
+        <!-- Mecânicas & Sistemas Implementados -->
+        <section id="mecanicas" class="features-grid">
+            <div class="center">
+                <div class="section-header">
+                    <span class="section-kicker">Sistemas do Jogo</span>
+                    <h2>Mecânicas Ambientais & Engenharia de Gameplay</h2>
+                    <p>Como os pilares de sustentabilidade se conectam diretamente aos sistemas programados no
+                        repositório.</p>
                 </div>
-                <h4 class="team-name">João Vitor Novaes</h4>
-                <span class="team-role">Lead Developer</span>
-                <p class="team-bio">Responsável pela arquitetura do jogo e lógica central em C#, otimizando os ciclos de
-                    renderização 2D.</p>
-                <a href="https://novaes11.github.io/PortifolioWeb/index.html" class="more-link ">Ver perfil</a>
+
+                <div class="grid-container">
+                    <article class="mechanic-card river-blue">
+                        <div>
+                            <div class="mechanic-top">
+                                <div class="mechanic-icon">💧</div>
+                                <span class="mechanic-tag">Hidrografia & Colisão</span>
+                            </div>
+                            <h3>Gestão Hídrica & Travessia</h3>
+                            <p>
+                                Mapeamento de texturas animadas entre águas limpas e poluídas, com verificação em tempo
+                                real de <code>source_id</code> no terreno base e liberação dinâmica de passagem sobre
+                                pontes em <code>caminho_terreno</code>.
+                            </p>
+                        </div>
+                        <div class="mechanic-code-ref">
+                            <span>DirtyWaterTexture.tres</span>
+                            <span>player.gd</span>
+                        </div>
+                    </article>
+
+                    <article class="mechanic-card oil-combat">
+                        <div>
+                            <div class="mechanic-top">
+                                <div class="mechanic-icon">⚔️</div>
+                                <span class="mechanic-tag">Combate & IA</span>
+                            </div>
+                            <h3>Defesa contra Poluição</h3>
+                            <p>
+                                Combate corpo-a-corpo com detecção de proximidade imediata (<code>12px</code>) e cone
+                                frontal de 140° (<code>28px</code>) contra Slimes tóxicos e Capangas de Petróleo dotados
+                                de IA de perseguição e <em>knockback</em>.
+                            </p>
+                        </div>
+                        <div class="mechanic-code-ref">
+                            <span>inimigo.gd</span>
+                            <span>enemy_movement.gd</span>
+                        </div>
+                    </article>
+
+                    <article class="mechanic-card eco-green">
+                        <div>
+                            <div class="mechanic-top">
+                                <div class="mechanic-icon">🌲</div>
+                                <span class="mechanic-tag">Level Design 2D</span>
+                            </div>
+                            <h3>Arquitetura de Camadas</h3>
+                            <p>
+                                Cenário urbano e florestal estruturado em camadas independentes para terreno, estradas,
+                                vegetação, encanamentos e estruturas industriais, integrando máscaras físicas de colisão
+                                nos TileMaps.
+                            </p>
+                        </div>
+                        <div class="mechanic-code-ref">
+                            <span>Scene/town.tscn</span>
+                            <span>TileMapLayer</span>
+                        </div>
+                    </article>
+
+                    <article class="mechanic-card beaver-wood">
+                        <div>
+                            <div class="mechanic-top">
+                                <div class="mechanic-icon">🔊</div>
+                                <span class="mechanic-tag">Áudio 8-Bit & UI</span>
+                            </div>
+                            <h3>Imersão Acústica & HUD</h3>
+                            <p>
+                                Controlador global com 8 canais de SFX globais e 8 posicionais 2D, passos sincronizados
+                                à animação com variação de <em>pitch</em> e menu principal temático em moldura de
+                                folhagem.
+                            </p>
+                        </div>
+                        <div class="mechanic-code-ref">
+                            <span>audio_manager.gd</span>
+                            <span>main_menu.gd</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bestiário, Sprites & Direção de Arte -->
+        <section id="arte" class="art-showcase-section">
+            <div class="center">
+                <div class="section-header">
+                    <span class="section-kicker">Direção de Arte & Assets</span>
+                    <h2>Personagens, Inimigos & Recursos Visuais</h2>
+                    <p>Spritesheets originais, animações dinâmicas e TileSets configurados no repositório do projeto.</p>
+                </div>
+
+                <div class="sprite-grid">
+                    <article class="sprite-card">
+                        <div class="sprite-stage">
+                            <span class="sprite-badge">Protagonista</span>
+                            <img src="assets/images/game/beaverSprite.png" alt="Spritesheet do Cavaleiro Castor"
+                                class="pixelated">
+                        </div>
+                        <div class="sprite-info">
+                            <h3>Cavaleiro Castor</h3>
+                            <p>Spritesheet direcional com variações de caminhada e repouso, integrado à árvore de
+                                estados <code>AnimationTree</code> e efeitos de corte de espada.</p>
+                            <div class="sprite-meta">Sprites/beaverSprite.png • custom/slash_128.png</div>
+                        </div>
+                    </article>
+
+                    <article class="sprite-card">
+                        <div class="sprite-stage">
+                            <span class="sprite-badge">Ameaça de Petróleo</span>
+                            <img src="assets/images/game/capanga_petroleopng.png"
+                                alt="Spritesheet do Capanga de Petróleo" class="pixelated">
+                        </div>
+                        <div class="sprite-info">
+                            <h3>Capanga de Petróleo</h3>
+                            <p>Inimigo temático representando os derramamentos de óleo, com quadros de surgimento do
+                                solo, deslocamento viscoso e investida de curto alcance.</p>
+                            <div class="sprite-meta">Sprites/capanga_petroleopng.png</div>
+                        </div>
+                    </article>
+
+                    <article class="sprite-card">
+                        <div class="sprite-stage">
+                            <span class="sprite-badge">Inimigo Ativo</span>
+                            <img src="assets/images/game/DeathSlime.gif" alt="Animação do Death Slime"
+                                class="pixelated" style="width: 96px; height: 96px;">
+                        </div>
+                        <div class="sprite-info">
+                            <h3>Death Slime (Lodo Tóxico)</h3>
+                            <p>Criatura hostil gerada pelo <code>enemy_spawn.gd</code> em grade de 16px, equipada com IA
+                                de perseguição contínua e som posicional 2D ao ser derrotada.</p>
+                            <div class="sprite-meta">Scene/inimigo.tscn • Scripts/Character/Enemy/inimigo.gd</div>
+                        </div>
+                    </article>
+
+                    <article class="sprite-card">
+                        <div class="sprite-stage">
+                            <span class="sprite-badge">Assets/Water</span>
+                            <div class="water-comparison-stage">
+                                <div class="water-sample">
+                                    <img src="assets/images/game/water_tileset1.png" alt="Tile de Água Limpa"
+                                        class="pixelated">
+                                    <span>WaterTexture</span>
+                                </div>
+                                <div class="water-sample">
+                                    <img src="assets/images/game/dirty_water_tileset1.png" alt="Tile de Água Poluída"
+                                        class="pixelated">
+                                    <span>DirtyWater</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sprite-info">
+                            <h3>Hidrografia Dinâmica</h3>
+                            <p>Texturas animadas em 8 quadros (<code>AnimatedTexture</code>) contrastando rios
+                                cristalinos e zonas afetadas por rejeitos industriais.</p>
+                            <div class="sprite-meta">Assets/Water/DirtyWaterTexture.tres</div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeria do Projeto -->
+        <section id="galeria" class="carousel-section">
+            <div class="center">
+                <div class="section-header">
+                    <span class="section-kicker">Bastidores & Artefatos</span>
+                    <h2>Galeria de Desenvolvimento</h2>
+                    <p>Explore as interfaces, folhas de sprites, variações de terreno e cenas construídas para o
+                        BeaverKnight.</p>
+                </div>
             </div>
 
-            <div class="team-card">
-                <div class="avatar-container">
-                    <img src="assets/team members/foto_henrique.jpg" alt="Foto de Henrique">
-                    <span class="accent-mark teal"></span>
-                </div>
-                <h4 class="team-name">Henrique Cavalari</h4>
-                <span class="team-role">Game Designer / Artista 2D</span>
-                <p class="team-bio">Gerenciou a criação de assets 2D, paleta de cores 8-bits e level design das 3 fases
-                    principais.</p>
-                <a href="https://justtryingtodohomework.github.io/MeuCurriculo" target="_blank" class="more-link">Ver
-                    perfil</a>
-            </div>
+            <div class="carousel-container">
+                <div class="carousel-track" id="track">
+                    <article class="carousel-slide active">
+                        <div class="slide-media">
+                            <img src="assets/images/game/BeaverKnight-BG.png"
+                                alt="Arte do Menu Principal BeaverKnight">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">UI/UX • Scene/main_menu.tscn</span>
+                            <h3>Interface do Menu Principal</h3>
+                            <p>Cenário ilustrado em Pixel Art com o Cavaleiro Castor, cachoeira, turbinas eólicas e
+                                painéis solares em contraste com a poluição fabril.</p>
+                        </div>
+                    </article>
 
-            <div class="team-card">
-                <div class="avatar-container">
-                    <img src="assets/team members/foto_tavares.jpg" alt="Foto de Tavares">
-                    <span class="accent-mark blue"></span>
-                </div>
-                <h4 class="team-name">João Vitor Szczypior </h4>
-                <span class="team-role">Programador de Gameplay</span>
-                <p class="team-bio">Implementou os sistemas de colisão, física de movimentação e a lógica de coleta de
-                    resíduos.</p>
-                <a href="https://joaoszczypiorzz.github.io/Curriculo/" target="_blank" class="more-link">Ver perfil</a>
-            </div>
+                    <article class="carousel-slide">
+                        <div class="slide-media">
+                            <img src="assets/images/more pictures.jpeg" alt="Conceito visual da vila e jornada">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">Level Design • Scene/town.tscn</span>
+                            <h3>Arquitetura da Cidade & Floresta</h3>
+                            <p>Composição das camadas de terreno, caminhos, pontes e edificações para exploração livre
+                                do jogador.</p>
+                        </div>
+                    </article>
 
-            <div class="team-card">
-                <div class="avatar-container">
-                    <img src="assets/team members/foto_rafael.jpeg" alt="Foto do Membro 4">
-                    <span class="accent-mark pink"></span>
-                </div>
-                <h4 class="team-name">Rafael Vasconcelos</h4>
-                <span class="team-role">UX/UI Developer</span>
-                <p class="team-bio">Desenvolveu a interface de usuário, painéis de inventário e os menus de navegação do
-                    jogo.</p>
-                <a href="#link-para-o-perfil" class="more-link">Ver perfil</a>
-            </div>
+                    <article class="carousel-slide">
+                        <div class="slide-media">
+                            <img src="assets/images/game/slash_128.png" alt="Spritesheet de ataque armado com espada"
+                                class="contain-pixel">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">Pixel Art • Sprites/custom/slash_128.png</span>
+                            <h3>Animação de Corte de Espada</h3>
+                            <p>Quadros de animação em 4 direções sincronizados com o estado <code>attack_armed</code> e
+                                o efeito sonoro <code>Som-espada.wav</code>.</p>
+                        </div>
+                    </article>
 
-            <div class="team-card">
-                <div class="avatar-container">
-                    <img src="assets/team members/foto_camargo.jpeg" alt="Foto de João Camargo">
-                    <span class="accent-mark purple"></span>
-                </div>
-                <h4 class="team-name">João Vitor Ribeiro De Morais Camargo</h4>
-                <span class="team-role">Desenvolvedor de Gameplay</span>
-                <p class="team-bio">Auxiliou no desenvolvimento das mecânicas do jogo, estruturação do projeto e na
-                    implementação de funcionalidades.</p>
-                <a href="https://jcamargo26.github.io/CurriculoJoao/" class="more-link">Ver perfil</a>
-            </div>
+                    <article class="carousel-slide">
+                        <div class="slide-media">
+                            <img src="assets/images/game/testeTileSet.jpeg" alt="Folha de TileSets de Ambientação Suja">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">TileSets • Assets/Tilesets</span>
+                            <h3>Variações de Solo & Ambientação</h3>
+                            <p>Folha de terrenos, trilhas de terra e detalhes ambientais usados na pintura das camadas
+                                do mapa.</p>
+                        </div>
+                    </article>
 
-            <div class="team-card">
-                <div class="avatar-container">
-                    <img src="assets/team members/foto_enzo.jpg" alt="Foto do Enzo">
-                    <span class="accent-mark teal"></span>
-                </div>
-                <h4 class="team-name">Enzo Schmidt Pastore</h4>
-                <span class="team-role">QA & Testes</span>
-                <p class="team-bio">Realizou os testes de bugs, balanceamento da dificuldade e documentação técnica do
-                    projeto.</p>
-                <a href="https://enzoschmidt-1.github.io/Curriculo/" class="more-link">Ver perfil</a>
-            </div>
-        </div>
-    </section>
+                    <article class="carousel-slide">
+                        <div class="slide-media">
+                            <img src="assets/images/game/capanga_petroleopng.png"
+                                alt="Spritesheet completo dos Capangas de Petróleo" class="contain-pixel">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">Inimigos • Sprites/capanga_petroleopng.png</span>
+                            <h3>Anatomia dos Capangas de Petróleo</h3>
+                            <p>Sequência completa de quadros em Pixel Art ilustrando a formação, locomoção e ataque das
+                                criaturas de óleo.</p>
+                        </div>
+                    </article>
 
+                    <article class="carousel-slide">
+                        <div class="slide-media">
+                            <img src="assets/images/game/environment.png" alt="Atlas de vegetação, relevo e pontes"
+                                class="contain-pixel">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">Mundo • Assets/levels/environment.png</span>
+                            <h3>Atlas de Ecossistema & Pontes</h3>
+                            <p>Conjunto modular de árvores, encostas, cercas e pontes que compõem as camadas
+                                <code>vegetação_layer</code> e <code>caminho_terreno</code>.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="carousel-controls">
+                    <button id="prevBtn" class="control-btn" aria-label="Slide anterior">&#8592;</button>
+                    <div id="carouselDots" class="carousel-dots" aria-label="Indicadores de slide"></div>
+                    <button id="nextBtn" class="control-btn" aria-label="Próximo slide">&#8594;</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equipe & Evidências no Repositório / Código -->
+        <section id="equipe" class="team-section">
+            <div class="center">
+                <div class="section-header">
+                    <span class="section-kicker">Engenharia & Autoria</span>
+                    <h2>Equipe de Desenvolvimento & Evidências no Código</h2>
+                    <p>
+                        Conheça as atribuições técnicas de cada integrante durante o desenvolvimento do projeto/jogo e
+                        as respectivas evidências auditáveis diretamente no repositório.
+                    </p>
+                </div>
+
+                <!-- Filtros Interativos por Frente de Trabalho -->
+                <div class="team-filters" role="toolbar" aria-label="Filtrar integrantes por especialidade">
+                    <button type="button" class="filter-btn active" data-filter="all">Todos os Integrantes (6)</button>
+                    <button type="button" class="filter-btn" data-filter="level-mgmt">Gestão, Level Design & Pages</button>
+                    <button type="button" class="filter-btn" data-filter="audio">Engenharia Acústica & SFX</button>
+                    <button type="button" class="filter-btn" data-filter="ui-physics">UI/UX & Física de Colisão</button>
+                    <button type="button" class="filter-btn" data-filter="pixel-art">Pixel Art & Animação</button>
+                    <button type="button" class="filter-btn" data-filter="gameplay-ai">Engenharia de Gameplay & IA</button>
+                </div>
+
+                <!-- Cards Individuais dos Integrantes -->
+                <div class="team-grid" id="teamGrid">
+                    <!-- 1. João Vitor Novaes -->
+                    <article class="team-card" data-category="level-mgmt">
+                        <div>
+                            <div class="team-card-top">
+                                <div class="avatar-container">
+                                    <img src="assets/team members/foto_novaes.jpeg" alt="Foto de João Vitor Novaes">
+                                    <span class="role-dot eco" title="Gestão, Level Design & Pages"></span>
+                                </div>
+                                <div class="team-identity">
+                                    <h3 class="team-name">João Vitor Novaes</h3>
+                                    <span class="team-role">Gestão Ágil, Level Design & Web</span>
+                                    <span class="team-unit-badge">Arquitetura de Cena & Documentação</span>
+                                </div>
+                            </div>
+
+                            <div class="team-section-label">Atribuições Principais</div>
+                            <p class="team-bio">
+                                Gestão de backlog e sprint no Notion; Level Design da cidade; configuração dos TileSets
+                                de terreno, canos, estruturas de mata e óleo; documentação e Landing Page.
+                            </p>
+
+                            <div class="evidence-box">
+                                <div class="team-section-label">Evidências no Repositório / Código</div>
+                                <p>
+                                    Arquitetura de camadas em <code>Scene/town.tscn</code>, mapeamento de texturas em
+                                    <code>Assets/Water</code> (<code>DirtyWaterTexture.tres</code>), organização de
+                                    diretórios e documentações do projeto.
+                                </p>
+                                <div class="evidence-chips">
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scene/town.tscn"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Scene/town.tscn"
+                                        data-code-desc="Cena principal com arquitetura multi-layer (tipo_terreno, caminho_terreno, vegetação_layer e construções_layer).">Scene/town.tscn</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Assets/Water/DirtyWaterTexture.tres"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Assets/Water/DirtyWaterTexture.tres"
+                                        data-code-desc="Recurso AnimatedTexture de 8 frames mapeando a água contaminada nos TileSets do mapa.">DirtyWaterTexture.tres</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/docs/index.html"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="docs/ & README.md"
+                                        data-code-desc="Landing Page oficial no GitHub Pages, organização de diretórios e documentação técnica.">docs/index.html</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-card-footer">
+                            <span class="brand-sub">Notion • Godot TileSets</span>
+                            <a href="https://novaes11.github.io/PortifolioWeb/index.html" target="_blank"
+                                rel="noopener noreferrer" class="more-link">Ver portfólio →</a>
+                        </div>
+                    </article>
+
+                    <!-- 2. Enzo Schmidt -->
+                    <article class="team-card" data-category="audio">
+                        <div>
+                            <div class="team-card-top">
+                                <div class="avatar-container">
+                                    <img src="assets/team members/foto_enzo.jpg" alt="Foto de Enzo Schmidt Pastore">
+                                    <span class="role-dot cyan" title="Engenharia Acústica & Áudio"></span>
+                                </div>
+                                <div class="team-identity">
+                                    <h3 class="team-name">Enzo Schmidt</h3>
+                                    <span class="team-role">Engenharia Acústica & Áudio</span>
+                                    <span class="team-unit-badge">Controlador Global & SFX 8-Bit</span>
+                                </div>
+                            </div>
+
+                            <div class="team-section-label">Atribuições Principais</div>
+                            <p class="team-bio">
+                                Engenharia acústica, curadoria de SFX (Pixabay/geradores 8-bit) e desenvolvimento do
+                                controlador geral de áudio.
+                            </p>
+
+                            <div class="evidence-box">
+                                <div class="team-section-label">Evidências no Repositório / Código</div>
+                                <p>
+                                    <code>Scripts/World/audio_manager.gd</code>, configuração de barramentos em
+                                    <code>Sounds/Bus_DeControle.tres</code> e roteamento de efeitos
+                                    globais/posicionais 2D.
+                                </p>
+                                <div class="evidence-chips">
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/World/audio_manager.gd"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Scripts/World/audio_manager.gd"
+                                        data-code-desc="Singleton Autoload com pools de 8 canais AudioStreamPlayer e 8 canais AudioStreamPlayer2D posicionais.">audio_manager.gd</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Sounds/Bus_DeControle.tres"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Sounds/Bus_DeControle.tres"
+                                        data-code-desc="AudioBusLayout customizado separando os barramentos Master, Music e Effect.">Bus_DeControle.tres</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Sounds"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Sounds/Effects & Soundtrack"
+                                        data-code-desc="Acervo de efeitos 8-bit (espada, passos, dano, morte, respawn) e trilhas de menu e combate.">Sounds/Effects</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-card-footer">
+                            <span class="brand-sub">AudioStream2D • Buses</span>
+                            <a href="https://enzoschmidt-1.github.io/Curriculo/" target="_blank"
+                                rel="noopener noreferrer" class="more-link">Ver portfólio →</a>
+                        </div>
+                    </article>
+
+                    <!-- 3. João Camargo -->
+                    <article class="team-card" data-category="ui-physics">
+                        <div>
+                            <div class="team-card-top">
+                                <div class="avatar-container">
+                                    <img src="assets/team members/foto_camargo.jpeg" alt="Foto de João Camargo">
+                                    <span class="role-dot amber" title="UI/UX & Física de Colisões"></span>
+                                </div>
+                                <div class="team-identity">
+                                    <h3 class="team-name">João Camargo</h3>
+                                    <span class="team-role">UI/UX Design & Física de Colisão</span>
+                                    <span class="team-unit-badge">Interfaces & Máscaras de TileMap</span>
+                                </div>
+                            </div>
+
+                            <div class="team-section-label">Atribuições Principais</div>
+                            <p class="team-bio">
+                                Design de interfaces (UI/UX) do menu principal e estruturação da física base de
+                                colisões do ambiente.
+                            </p>
+
+                            <div class="evidence-box">
+                                <div class="team-section-label">Evidências no Repositório / Código</div>
+                                <p>
+                                    <code>Scene/main_menu.tscn</code>, <code>Scripts/UI/main_menu.gd</code>,
+                                    parametrização de nós de colisão e delineamento de máscaras nos TileMaps.
+                                </p>
+                                <div class="evidence-chips">
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scene/main_menu.tscn"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Scene/main_menu.tscn"
+                                        data-code-desc="Estrutura de UI do Menu Principal, LeafFrame, StyleBoxFlat customizados e modal Como Jogar.">Scene/main_menu.tscn</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/UI/main_menu.gd"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Scripts/UI/main_menu.gd"
+                                        data-code-desc="Controle de fluxo entre tela inicial, painel de instruções, foco de botões e gatilhos sonoros.">main_menu.gd</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scene/town.tscn"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Colisões & TileMaps"
+                                        data-code-desc="Parametrização de CollisionShape2D e polígonos de colisão física nas camadas do ambiente.">TileMap Collisions</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-card-footer">
+                            <span class="brand-sub">Control UI • Physics2D</span>
+                            <a href="https://jcamargo26.github.io/CurriculoJoao/" target="_blank"
+                                rel="noopener noreferrer" class="more-link">Ver portfólio →</a>
+                        </div>
+                    </article>
+
+                    <!-- 4. Rafael Vasconcelos -->
+                    <article class="team-card" data-category="pixel-art">
+                        <div>
+                            <div class="team-card-top">
+                                <div class="avatar-container">
+                                    <img src="assets/team members/foto_rafael.jpeg" alt="Foto de Rafael Vasconcelos">
+                                    <span class="role-dot orange" title="Ilustração & Animação Pixel Art"></span>
+                                </div>
+                                <div class="team-identity">
+                                    <h3 class="team-name">Rafael Vasconcelos</h3>
+                                    <span class="team-role">Pixel Artist & Animador 2D</span>
+                                    <span class="team-unit-badge">Personagens, Inimigos & VFX</span>
+                                </div>
+                            </div>
+
+                            <div class="team-section-label">Atribuições Principais</div>
+                            <p class="team-bio">
+                                Ilustração e animação em Pixel Art dos personagens e elementos dinâmicos.
+                            </p>
+
+                            <div class="evidence-box">
+                                <div class="team-section-label">Evidências no Repositório / Código</div>
+                                <p>
+                                    Spritesheets do castor (<code>beaverSprite.png</code>), variações de
+                                    caminhada/ataque, artes do Death Slime, capangas de petróleo e efeitos de corte de
+                                    espada.
+                                </p>
+                                <div class="evidence-chips">
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Sprites/beaverSprite.png"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Sprites/beaverSprite.png"
+                                        data-code-desc="Spritesheet original em Pixel Art do Cavaleiro Castor com poses direcionais.">beaverSprite.png</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Sprites/capanga_petroleopng.png"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Sprites/capanga_petroleopng.png"
+                                        data-code-desc="Spritesheet completo de surgimento, caminhada e ataque dos capangas de petróleo.">capanga_petroleopng.png</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Sprites/custom"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Sprites/custom/slash_128.png"
+                                        data-code-desc="Animações customizadas de corte de espada (slash, halfslash, backslash) e Death Slime.">slash_128.png</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-card-footer">
+                            <span class="brand-sub">Aseprite • Spritesheets</span>
+                            <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Sprites"
+                                target="_blank" rel="noopener noreferrer" class="more-link">Ver artes no repo →</a>
+                        </div>
+                    </article>
+
+                    <!-- 5. João Tavares -->
+                    <article class="team-card" data-category="gameplay-ai">
+                        <div>
+                            <div class="team-card-top">
+                                <div class="avatar-container">
+                                    <img src="assets/team members/foto_tavares.jpg"
+                                        alt="Foto de João Vitor Szczypior Tavares">
+                                    <span class="role-dot eco" title="Engenharia de Gameplay & IA"></span>
+                                </div>
+                                <div class="team-identity">
+                                    <h3 class="team-name">João Tavares</h3>
+                                    <span class="team-role">Engenharia de Gameplay & IA</span>
+                                    <span class="team-unit-badge">Dupla Técnica com Henrique Cavalari</span>
+                                </div>
+                            </div>
+
+                            <div class="team-section-label">Atribuições Principais</div>
+                            <p class="team-bio">
+                                Engenharia de gameplay: implementação das físicas de movimentação do jogador, lógica de
+                                combate e IA dos inimigos.
+                            </p>
+
+                            <div class="evidence-box">
+                                <div class="team-section-label">Evidências no Repositório / Código</div>
+                                <p>
+                                    <code>Scripts/Character/Player/player.gd</code>,
+                                    <code>Scripts/Character/Enemy/inimigo.gd</code>, rotinas de perseguição, knockback
+                                    e protótipo de raycasting em <code>enemy_movement.gd</code>.
+                                </p>
+                                <div class="evidence-chips">
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Player/player.gd"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Scripts/Character/Player/player.gd"
+                                        data-code-desc="Movimentação livre contínua, validação de terreno/pontes por TileMapLayer e ataque direcional em cone.">player.gd</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/inimigo.gd"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Scripts/Character/Enemy/inimigo.gd"
+                                        data-code-desc="IA de perseguição ao jogador, alcance de golpe com cooldown e física de dissipação de knockback.">inimigo.gd</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/enemy_movement.gd"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Scripts/Character/Enemy/enemy_movement.gd"
+                                        data-code-desc="Protótipo de locomoção em grade 16px com detecção de obstáculos via RayCast2D.">enemy_movement.gd</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-card-footer">
+                            <span class="brand-sub">GDScript • CharacterBody2D</span>
+                            <a href="https://joaoszczypiorzz.github.io/Curriculo/" target="_blank"
+                                rel="noopener noreferrer" class="more-link">Ver portfólio →</a>
+                        </div>
+                    </article>
+
+                    <!-- 6. Henrique Cavalari -->
+                    <article class="team-card" data-category="gameplay-ai">
+                        <div>
+                            <div class="team-card-top">
+                                <div class="avatar-container">
+                                    <img src="assets/team members/foto_henrique.jpg" alt="Foto de Henrique Cavalari">
+                                    <span class="role-dot eco" title="Engenharia de Gameplay & IA"></span>
+                                </div>
+                                <div class="team-identity">
+                                    <h3 class="team-name">Henrique Cavalari</h3>
+                                    <span class="team-role">Engenharia de Gameplay & IA</span>
+                                    <span class="team-unit-badge">Dupla Técnica com João Tavares</span>
+                                </div>
+                            </div>
+
+                            <div class="team-section-label">Atribuições Principais</div>
+                            <p class="team-bio">
+                                Engenharia de gameplay: implementação das físicas de movimentação do jogador, lógica de
+                                combate e IA dos inimigos.
+                            </p>
+
+                            <div class="evidence-box">
+                                <div class="team-section-label">Evidências no Repositório / Código</div>
+                                <p>
+                                    <code>Scripts/Character/Player/player.gd</code>,
+                                    <code>Scripts/Character/Enemy/inimigo.gd</code>, rotinas de perseguição, knockback
+                                    e protótipo de raycasting em <code>enemy_movement.gd</code>.
+                                </p>
+                                <div class="evidence-chips">
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Player/player.gd"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Scripts/Character/Player/player.gd"
+                                        data-code-desc="Integração da AnimationTree (idle, walk, attack_armed), sistema de vida, dano e respawn do jogador.">player.gd</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/inimigo.gd"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="Scripts/Character/Enemy/inimigo.gd"
+                                        data-code-desc="Máquina de comportamento do inimigo, cálculo vetorial de perseguição e aplicação de dano.">inimigo.gd</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/enemy_spawn.gd"
+                                        target="_blank" rel="noopener noreferrer" class="code-chip"
+                                        data-code-title="enemy_movement.gd & enemy_spawn.gd"
+                                        data-code-desc="Algoritmo de raycasting direcional e instanciação controlada de inimigos alinhada ao grid.">enemy_movement.gd</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-card-footer">
+                            <span class="brand-sub">GDScript • RayCast2D & AI</span>
+                            <a href="https://justtryingtodohomework.github.io/MeuCurriculo" target="_blank"
+                                rel="noopener noreferrer" class="more-link">Ver portfólio →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentos & Materiais para Alunos: disponibiliza manuais e recursos pedagógicos sem duplicar a tabela de evidências -->
+        <section id="documentos" class="documents-section">
+            <div class="center">
+                <div class="section-header">
+                    <span class="section-kicker">Acervo & Documentação</span>
+                    <h2>Documentos do Projeto para Alunos</h2>
+                    <p>Acesse os guias de execução, a documentação técnica do repositório e o espaço dedicado aos
+                        materiais didáticos do BeaverKnight.</p>
+                </div>
+
+                <div class="documents-grid">
+                    <article class="document-card">
+                        <div class="document-top">
+                            <span class="document-icon">📘</span>
+                            <span class="document-badge">Guia Inicial • README.md</span>
+                        </div>
+                        <h3>Manual de Execução & Como Jogar</h3>
+                        <p>
+                            Passo a passo para importar o projeto na Godot Engine 4.6, iniciar a cena
+                            <code>Scene/main_menu.tscn</code>, consultar os controles oficiais e compreender a
+                            proposta educativa do jogo.
+                        </p>
+                        <div class="document-meta">Arquivo: <code>README.md</code></div>
+                        <div class="document-actions">
+                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/README.md" target="_blank"
+                                rel="noopener noreferrer" class="btn-secondary">Ler Guia Completo ↗</a>
+                        </div>
+                    </article>
+
+                    <article class="document-card">
+                        <div class="document-top">
+                            <span class="document-icon">⚙️</span>
+                            <span class="document-badge">Código & Cenas • Godot 4.6</span>
+                        </div>
+                        <h3>Arquitetura Técnica do Jogo</h3>
+                        <p>
+                            Explore as cenas (<code>town.tscn</code>, <code>main_menu.tscn</code>,
+                            <code>player.tscn</code>, <code>inimigo.tscn</code>) e os scripts em GDScript para estudar
+                            física 2D, TileMapLayers e o controlador de áudio.
+                        </p>
+                        <div class="document-meta">Diretório: <code>beaver-knight-app/</code></div>
+                        <div class="document-actions">
+                            <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Scripts"
+                                target="_blank" rel="noopener noreferrer" class="btn-secondary">Explorar Scripts ↗</a>
+                        </div>
+                    </article>
+
+                    <article class="document-card">
+                        <div class="document-top">
+                            <span class="document-icon">📂</span>
+                            <span class="document-badge">Repositório de Arquivos</span>
+                        </div>
+                        <h3>Central de Documentos dos Alunos</h3>
+                        <p>
+                            Espaço reservado na landing page para disponibilizar cartilhas em PDF, roteiros de atividade
+                            em sala de aula, Game Design Document (GDD) e relatórios da extensão universitária na
+                            UniFil.
+                        </p>
+                        <div class="document-meta">Pasta: <code>docs/assets/documents/</code></div>
+                        <div class="document-actions">
+                            <a href="https://github.com/novaes11/BeaverKnight/tree/main/docs/assets/documents"
+                                target="_blank" rel="noopener noreferrer" class="btn-secondary">Acessar Acervo ↗</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impacto na Comunidade & Extensão -->
+        <section id="comunidade" class="community-section">
+            <div class="center">
+                <div class="section-header">
+                    <span class="section-kicker">Extensão Universitária</span>
+                    <h2>Impacto Educacional & Comunidade</h2>
+                    <p>Como o BeaverKnight conecta o desenvolvimento de software acadêmico à conscientização ambiental.</p>
+                </div>
+
+                <div class="community-grid">
+                    <article class="community-card">
+                        <h3>🎯 Público-Alvo</h3>
+                        <p>
+                            Direcionado a <strong>estudantes do ensino fundamental e médio</strong>, além de
+                            <strong>professores e educadores</strong> que buscam ferramentas lúdicas para abordar
+                            preservação ambiental, recursos hídricos e sustentabilidade em sala de aula.
+                        </p>
+                    </article>
+
+                    <article class="community-card">
+                        <h3>🌍 Aprendizado Ativo</h3>
+                        <p>
+                            Em vez de apresentar conceitos de forma passiva, o jogo coloca o estudante no centro da
+                            defesa do ecossistema: rios poluídos por óleo, áreas desmatadas e ameaças industriais
+                            tornam-se desafios tangíveis superados pela ação direta do jogador.
+                        </p>
+                    </article>
+
+                    <article class="community-card">
+                        <h3>🔓 Código Aberto & Acessível</h3>
+                        <p>
+                            Desenvolvido integralmente como software livre educacional no curso de Ciência da
+                            Computação da <strong>UniFil</strong>, permitindo que outros estudantes estudem a
+                            arquitetura em Godot 4.6 e expandam novas fases ecológicas.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-container center">
             <div class="footer-brand">
-                <div class="logo">BeaverKnight</div>
-                <p>Projeto de extensão universitária do curso de Ciência da Computação da UniFil. Desenvolvido para
-                    promover a sustentabilidade através de mecânicas 8-bits.</p>
+                <div class="brand-group">
+                    <img src="assets/images/logoUnifil.png" alt="Logo UniFil" class="brand-logo-img">
+                    <div class="brand-text">
+                        <div class="logo">Beaver<span>Knight</span></div>
+                        <span class="brand-sub">Ciência da Computação • UniFil</span>
+                    </div>
+                </div>
+                <p>
+                    Projeto de extensão universitária focado na conscientização ambiental através da estética Pixel Art
+                    8-bits/16-bits e engenharia de jogos em Godot 4.6.
+                </p>
             </div>
 
             <div class="footer-links">
-                <h4>Projeto</h4>
-                <a href="#sobre">Sobre o Jogo</a>
-                <a href="#mecanicas">Mecânicas</a>
-                <a href="#equipe">Equipe</a>
-                <a href="#comunidade">Comunidade</a>
+                <h4>Navegação</h4>
+                <a href="#sobre">Sobre o Jogo & Ficha Técnica</a>
+                <a href="#mecanicas">Mecânicas & Sistemas</a>
+                <a href="#arte">Bestiário & Pixel Art</a>
+                <a href="#galeria">Galeria do Projeto</a>
+                <a href="#equipe">Equipe & Evidências</a>
+                <a href="#documentos">Documentos para Alunos</a>
+                <a href="#comunidade">Impacto na Comunidade</a>
             </div>
 
             <div class="footer-social">
-                <h4>Desenvolvimento</h4>
-                <a href="https://github.com/novaes11/BeaverKnight" target="_blank">Repositório no GitHub</a>
-                <a href="#">Documentação Técnica</a>
-                <a href="mailto:seuemail@institucional.br">Contato da Equipe</a>
+                <h4>Repositório & Código</h4>
+                <a href="https://github.com/novaes11/BeaverKnight" target="_blank" rel="noopener noreferrer">Repositório
+                    Principal (GitHub) ↗</a>
+                <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Scene" target="_blank"
+                    rel="noopener noreferrer">Cenas Godot (Scene/) ↗</a>
+                <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Scripts" target="_blank"
+                    rel="noopener noreferrer">Scripts GDScript (Scripts/) ↗</a>
+                <a href="https://github.com/novaes11/BeaverKnight/pulls" target="_blank" rel="noopener noreferrer">Pull
+                    Requests & Entregas ↗</a>
             </div>
         </div>
 
-        <div class="footer-bottom">
-            <p>&copy; 2026 Equipe BeaverKnight. Distribuído para fins educacionais em colaboração com a Unifil</p>
+        <div class="footer-bottom center">
+            <p>&copy; 2026 Equipe BeaverKnight — Projeto de Extensão Universitária em colaboração com a UniFil.</p>
+            <span>Desenvolvido com Godot Engine 4.6 & GitHub Pages</span>
         </div>
     </footer>
+
     <script src="assets/scripts/carrossel.js"></script>
     <script src="assets/scripts/popover.js"></script>
 </body>

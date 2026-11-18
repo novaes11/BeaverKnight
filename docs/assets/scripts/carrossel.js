@@ -1,94 +1,97 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const track = document.getElementById('track');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    
-    // Trava de segurança contra cliques múltiplos
-    let isAnimating = false; 
+    const track = document.getElementById("track");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const dotsContainer = document.getElementById("carouselDots");
 
-    const updateActiveSlide = () => {
-        const slides = Array.from(track.children);
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const slides = Array.from(track.children);
+    let currentIndex = 0;
+
+    // Cria os indicadores (dots)
+    if (dotsContainer) {
+        slides.forEach((_, idx) => {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = `carousel-dot${idx === 0 ? " active" : ""}`;
+            dot.setAttribute("aria-label", `Ir para o slide ${idx + 1}`);
+            dot.addEventListener("click", () => scrollToSlide(idx));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    const updateActiveUI = (index) => {
+        currentIndex = index;
+        slides.forEach((slide, idx) => {
+            slide.classList.toggle("active", idx === currentIndex);
+        });
+        if (dotsContainer) {
+            const dots = Array.from(dotsContainer.children);
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle("active", idx === currentIndex);
+            });
+        }
+    };
+
+    const scrollToSlide = (index) => {
+        const boundedIndex = (index + slides.length) % slides.length;
+        const targetSlide = slides[boundedIndex];
+        if (!targetSlide) return;
+
+        const trackRect = track.getBoundingClientRect();
+        const slideRect = targetSlide.getBoundingClientRect();
+        const offset = (slideRect.left - trackRect.left) + track.scrollLeft - (trackRect.width / 2) + (slideRect.width / 2);
+
+        track.scrollTo({
+            left: Math.max(0, offset),
+            behavior: "smooth"
+        });
+
+        updateActiveUI(boundedIndex);
+    };
+
+    // Detecta o slide mais próximo do centro durante scroll manual/swipe
+    const detectCenteredSlide = () => {
         const trackCenter = track.getBoundingClientRect().left + (track.offsetWidth / 2);
-        
-        let closestSlide = slides[0];
-        let closestDistance = Infinity;
+        let closestIndex = 0;
+        let minDistance = Infinity;
 
-        slides.forEach(slide => {
-            const slideRect = slide.getBoundingClientRect();
-            const slideCenter = slideRect.left + (slideRect.width / 2);
+        slides.forEach((slide, idx) => {
+            const rect = slide.getBoundingClientRect();
+            const slideCenter = rect.left + (rect.width / 2);
             const distance = Math.abs(trackCenter - slideCenter);
-
-            if (distance < closestDistance) {
-                closestDistance = distance;
-                closestSlide = slide;
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestIndex = idx;
             }
         });
 
-        slides.forEach(s => s.classList.remove('active'));
-        closestSlide.classList.add('active');
+        updateActiveUI(closestIndex);
     };
 
-    // Atualiza via swipe no mobile
-    track.addEventListener('scroll', () => {
-        if (!isAnimating) window.requestAnimationFrame(updateActiveSlide);
+    let scrollTimeout;
+    track.addEventListener("scroll", () => {
+        window.clearTimeout(scrollTimeout);
+        scrollTimeout = window.setTimeout(detectCenteredSlide, 60);
     });
 
-    nextBtn.addEventListener('click', () => {
-        if (isAnimating) return; // Se a animação tá rolando, ignora o clique
-        isAnimating = true;
-
-        const slideWidth = track.firstElementChild.offsetWidth;
-        const gap = parseFloat(getComputedStyle(track).gap) || 0; 
-
-        // 1. Rola suavemente para o próximo elemento
-        track.scrollBy({ left: slideWidth + gap, behavior: 'smooth' });
-
-        // 2. Espera o scroll nativo terminar (aprox 400ms) para fazer a mágica no DOM
-        setTimeout(() => {
-            track.style.scrollBehavior = 'auto'; // Remove a suavidade temporariamente
-            
-            // Tira o primeiro elemento e joga no final
-            track.appendChild(track.firstElementChild); 
-            
-            // Puxa o scroll para trás invisivelmente para compensar o buraco do elemento removido
-            track.scrollLeft -= (slideWidth + gap); 
-            
-            void track.offsetWidth; // Força o navegador a renderizar o cálculo (Reflow)
-            
-            track.style.scrollBehavior = 'smooth'; // Devolve a suavidade
-            updateActiveSlide();
-            isAnimating = false; // Libera o botão para o próximo clique
-        }, 400); 
+    prevBtn.addEventListener("click", () => {
+        scrollToSlide(currentIndex - 1);
     });
 
-    prevBtn.addEventListener('click', () => {
-        if (isAnimating) return;
-        isAnimating = true;
-
-        const slideWidth = track.firstElementChild.offsetWidth;
-        const gap = parseFloat(getComputedStyle(track).gap) || 0;
-
-        // 1. Remove a suavidade e prepara o DOM ANTES de rolar
-        track.style.scrollBehavior = 'auto';
-        
-        // Tira o último elemento e joga no começo
-        track.prepend(track.lastElementChild); 
-        
-        // Empurra o scroll pra frente invisivelmente para você não ver a inserção
-        track.scrollLeft += (slideWidth + gap); 
-        
-        void track.offsetWidth; // Força o Reflow
-
-        // 2. Devolve a suavidade e rola para trás visualmente
-        track.style.scrollBehavior = 'smooth';
-        track.scrollBy({ left: -(slideWidth + gap), behavior: 'smooth' });
-
-        setTimeout(() => {
-            updateActiveSlide();
-            isAnimating = false;
-        }, 400);
+    nextBtn.addEventListener("click", () => {
+        scrollToSlide(currentIndex + 1);
     });
 
-    // Inicia o estado central corretamente
-    updateActiveSlide();
+    // Permite clicar em um slide lateral para centralizá-lo
+    slides.forEach((slide, idx) => {
+        slide.addEventListener("click", () => {
+            if (idx !== currentIndex) {
+                scrollToSlide(idx);
+            }
+        });
+    });
+
+    updateActiveUI(0);
 });
