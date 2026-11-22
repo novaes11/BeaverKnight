@@ -39,7 +39,7 @@ python -m http.server 8000 --directory docs         # Landing Page
 ## Cuidados ao editar
 
 - `.tscn` são gerados pelo editor e grandes (`town.tscn` ~11 mil linhas de TileMap): prefira editar `.gd`; em cenas, só mudanças pequenas e pontuais.
-- Não commitar mudanças incidentais do editor em `project.godot` (ex.: `config/features` 4.6 → 4.7).
+- A versão oficial é a Godot 4.7. Não commitar mudanças incidentais do editor em `project.godot`.
 - A caminhabilidade fica em `RegrasTerreno`, compartilhada por Player e inimigos, e classifica as `TileMapLayer` pelo **nome** (`tipo`, `caminh`, demais bloqueiam). Renomear/adicionar camadas muda a colisão; decoração baixa nova precisa entrar em `DECORACAO_VEGETACAO`.
 - Toda mudança no jogo exige exportar de novo para `docs/jogo/`. Cenas e scripts novos precisam entrar em `export_files` (`export_presets.cfg`). Exporte sempre com a Godot padrão, não a .NET.
 - Scripts de teste via `-s` compilam antes dos autoloads: não podem citar classes que usam `AudioManager` (ex.: `BossPetroleo`).

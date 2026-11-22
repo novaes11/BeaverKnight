@@ -1705,3 +1705,41 @@ body {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* Cards não podem esticar a página com nomes longos de arquivos */
+.grid-container > *,
+.sprite-grid > *,
+.team-grid > *,
+.documents-grid > * {
+    min-width: 0;
+}
+
+.mechanic-code-ref {
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+}
+
+.sprite-meta {
+    overflow-wrap: anywhere;
+}
+
+@media (min-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Entre tablet e desktop largo, os links vão para o menu e o botão Jogar Agora continua visível */
+@media (min-width: 1024px) and (max-width: 1359px) {
+    .nav-links {
+        display: none;
+    }
+
+    .nav-actions {
+        margin-left: auto;
+    }
+
+    .mobile-menu-btn {
+        display: inline-flex;
+    }
+}

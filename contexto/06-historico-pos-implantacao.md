@@ -20,6 +20,9 @@ Ao concluir uma implementação, adicionar uma linha **no topo** da tabela:
 
 | Data | Tipo | Resumo | Pendência | Detalhes | Commit |
 | :--- | :--- | :--- | :-: | :--- | :--- |
+| 2026-11-22 | chore | Godot 4.7 oficial, Landing Page e README atualizados para o jogo atual e remoção de arquivos sem uso | L01, L02, L04, L06, L11 | [implementação](implementacoes/2026-11-22-pendencias-finais.md) | `497b8ed`, `83166f9`, `cb2d571`, `2c414ba` |
+| 2026-11-22 | chore | Merge do PR #23 na `main` e publicação do jogo no GitHub Pages | F09 | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `e843871` |
+| 2026-11-22 | chore | Documentação do modelo de gameplay e da build Web | — | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `0b4d285` |
 | 2026-11-22 | chore | Exportação Web sem threads, build em `docs/jogo/` e botão Jogar Agora | F09, L03, L09 | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `1a1a246`, `a6eade3` |
 | 2026-11-22 | feat | Boss de Petróleo com sprites, ataques, fúria e balanceamento | F08 | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `c920ce7` |
 | 2026-11-22 | feat | Partida em etapas, combate, HUD, telas e ciclo rejogável | F02, F03, F05, F06 | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `0c90e4f`, `edb9dd7` |

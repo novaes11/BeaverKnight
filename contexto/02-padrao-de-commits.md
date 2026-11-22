@@ -52,7 +52,7 @@ Baseados na organização do projeto:
 
 | Escopo | Área |
 | :--- | :--- |
-| `player` | `Scripts/Character/Player/`, `Scene/player.tscn` |
+| `player` | `Scripts/Character/Player/`, nó `Player` em `Scene/town.tscn` |
 | `enemy` | `Scripts/Character/Enemy/`, `Scene/inimigo.tscn` |
 | `spawn` | `enemy_spawn.gd` / nó `EnemySpawn` |
 | `audio` | `Scripts/World/audio_manager.gd`, `Sounds/` |

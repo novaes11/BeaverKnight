@@ -9,17 +9,15 @@ BeaverKnight/
 ├── docs/                     # Landing Page (GitHub Pages) e build Web em docs/jogo/
 ├── ferramentas/sprites/      # Scripts Node.js que geram sprites (ex.: gerar_beaver_knight.js)
 ├── ferramentas/testes/       # Testes headless da Godot (ex.: teste_player_headless.gd)
-├── src/movimentação.cs       # Arquivo C# legado, não usado pelo jogo
 ├── TODO.md                   # Conteúdo atual sem relevância (ver pendências)
 └── beaver-knight-app/        # Projeto Godot
     ├── project.godot         # Configuração (resolução, input map, autoload)
-    ├── Scene/                # main_menu.tscn, town.tscn, player.tscn, inimigo.tscn
+    ├── Scene/                # main_menu, tela_historia, town, hud, tela_fim, inimigo, boss_petroleo, projetil_petroleo
     ├── Scripts/
     │   ├── Character/Player/player.gd
     │   ├── Character/Enemy/inimigo.gd          # IA usada pelo inimigo
     │   ├── Character/Enemy/enemy_spawn.gd      # Gerencia as zonas
     │   ├── Character/Enemy/zona_spawn.gd       # Zona de combate
-    │   ├── Character/Enemy/enemy_movement.gd   # Protótipo NÃO usado por nenhuma cena
     │   ├── UI/main_menu.gd
     │   └── World/audio_manager.gd, town.gd, regras_terreno.gd, terreno_colisao.gd,
     │             mapa_navegacao.gd, passagem_caverna.gd
@@ -38,7 +36,7 @@ main_menu.tscn (main_menu.gd)
    └── botão Iniciar → get_tree().change_scene_to_file("res://Scene/town.tscn")
 town.tscn (town.gd)
    ├── TileMapLayers: tipo_terreno, caminho_terreno, vegetação_layer, construções_layer
-   ├── Player (CharacterBody2D, grupo "player") + Camera2D  ← embutido na cena, não instancia player.tscn
+   ├── Player (CharacterBody2D, grupo "player") + Camera2D  ← embutido na cena
    └── EnemySpawn (enemy_spawn.gd) + SpawnTimer → instancia inimigo.tscn
 ```
 

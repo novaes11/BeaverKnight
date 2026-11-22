@@ -12,7 +12,7 @@ Landing Page oficial: https://novaes11.github.io/BeaverKnight/
 
 | Item | Valor |
 | :--- | :--- |
-| Engine | Godot 4.x (README cita 4.6; o editor local já marcou `4.7` em `project.godot`) |
+| Engine | Godot 4.7 (padrão, não .NET) |
 | Linguagem | GDScript |
 | Renderizador | GL Compatibility |
 | Resolução | 320×180 nativa, ampliada para 1280×720 (`stretch/mode = viewport`) |

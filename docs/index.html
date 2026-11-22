@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BeaverKnight | Sustentabilidade & Ação 2D em Pixel Art — Extensão UniFil</title>
     <meta name="description"
-        content="BeaverKnight é um jogo educativo 2D em Pixel Art desenvolvido na Godot Engine 4.6 como projeto de extensão universitária em Ciência da Computação na UniFil.">
+        content="Jogue no navegador: BeaverKnight é um jogo educativo 2D em Pixel Art feito na Godot Engine 4.7. Limpe a cidade da poluição, derrote o Boss de Petróleo e mantenha o equilíbrio ecológico. Projeto de extensão da UniFil.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -68,12 +68,12 @@
         <!-- Hero Section -->
         <section class="hero center">
             <div class="hero-content">
-                <div class="hero-tag">GODOT ENGINE 4.6 • GDSCRIPT • PIXEL ART 2D</div>
+                <div class="hero-tag">GODOT ENGINE 4.7 • GDSCRIPT • PIXEL ART 2D</div>
                 <h1>Defenda o Ecossistema em <span class="highlight-eco">8-Bits</span></h1>
                 <p class="hero-lead">
-                    Assuma o papel do <strong>Cavaleiro Castor</strong> em uma aventura top-down 2D contra a poluição
-                    industrial, vazamentos de óleo e contaminação hídrica. Um projeto de extensão universitária que
-                    transforma preservação ambiental em mecânicas reais de ação e causa e consequência.
+                    Assuma o papel do <strong>Cavaleiro Castor</strong> e limpe a região tomada pela poluição: derrote
+                    os slimes da praia e da refinaria, enfrente o <strong>Boss de Petróleo</strong> e mantenha o
+                    equilíbrio ecológico. Um projeto de extensão universitária que você joga direto no navegador.
                 </p>
 
                 <div class="hero-cta-group">
@@ -87,7 +87,7 @@
                 <ul class="hero-checks">
                     <li>
                         <span class="check-badge">✓</span>
-                        <span>Arquitetura em camadas no Godot 4.6 (<code>TileMapLayer</code>, <code>CharacterBody2D</code> e <code>AnimationTree</code>).</span>
+                        <span>Arquitetura em camadas no Godot 4.7 (<code>TileMapLayer</code>, <code>CharacterBody2D</code> e <code>AnimationTree</code>).</span>
                     </li>
                     <li>
                         <span class="check-badge">✓</span>
@@ -95,7 +95,7 @@
                     </li>
                     <li>
                         <span class="check-badge">✓</span>
-                        <span>Engenharia acústica 8-bit autoral com controlador de áudio global e posicional 2D.</span>
+                        <span>Partidas curtas e rejogáveis, com objetivos, boss final e melhor tempo salvo no navegador.</span>
                     </li>
                 </ul>
             </div>
@@ -117,12 +117,10 @@
                 </div>
 
                 <div class="showcase-viewport">
-                    <!-- Aba 1: Vídeo de Gameplay -->
+                    <!-- Aba 1: Captura real do jogo -->
                     <div class="showcase-pane active" id="pane-video" role="tabpanel">
-                        <video autoplay loop muted playsinline>
-                            <source src="assets/video/beaver_knight base design.mp4" type="video/mp4">
-                            Seu navegador não suporta a reprodução de vídeo.
-                        </video>
+                        <img src="assets/images/game/gameplay_praia.png"
+                            alt="Cavaleiro Castor enfrentando slimes na praia, com HUD de vida e objetivo" class="pixelated">
                     </div>
 
                     <!-- Aba 2: Arte Oficial do Menu Principal -->
@@ -131,7 +129,7 @@
                             alt="Tela título oficial do BeaverKnight em Pixel Art" class="pixelated">
                     </div>
 
-                    <!-- Aba 3: Controles reais alinhados a HelpPanel de main_menu.tscn para evitar dados fictícios e sobreposição com o vídeo/menu -->
+                    <!-- Aba 3: Objetivo e controles reais, alinhados ao HelpPanel de main_menu.tscn -->
                     <div class="showcase-pane controls-overlay-pane" id="pane-controls" role="tabpanel">
                         <div class="controls-panel-box">
                             <div class="controls-panel-header">
@@ -148,7 +146,7 @@
                                     </div>
                                     <div class="control-text">
                                         <h4>Movimentação</h4>
-                                        <p>Use as setas do teclado para movimentar o castor.</p>
+                                        <p>Use as setas do teclado para andar pelo mapa.</p>
                                     </div>
                                 </div>
 
@@ -158,7 +156,7 @@
                                     </div>
                                     <div class="control-text">
                                         <h4>Ataque</h4>
-                                        <p>Clique com o botão esquerdo do mouse para atacar os inimigos.</p>
+                                        <p>Clique para golpear. Limpe a praia, a refinaria e vença o boss.</p>
                                     </div>
                                 </div>
                             </div>
@@ -167,8 +165,8 @@
                 </div>
 
                 <div class="showcase-statusbar">
-                    <span>Cena principal: <code>res://Scene/town.tscn</code></span>
-                    <span>Áudio Autoload: <code>res://Sounds/controlador_audio.tscn</code></span>
+                    <span>Cena inicial: <code>res://Scene/main_menu.tscn</code></span>
+                    <span>Build: <code>HTML5 / Web</code></span>
                 </div>
             </div>
         </section>
@@ -177,13 +175,13 @@
         <section class="stats center" aria-label="Indicadores Técnicos do Projeto">
             <div class="stat-box">
                 <span class="stat-label-top">Motor & Linguagem</span>
-                <h2>Godot 4.6</h2>
+                <h2>Godot 4.7</h2>
                 <p>Lógica modular em GDScript com renderização 2D Pixel-Perfect</p>
             </div>
             <div class="stat-box">
-                <span class="stat-label-top">Level Design</span>
-                <h2>4 Layers</h2>
-                <p>Terreno base, caminhos/pontes, vegetação e construções em <code>town.tscn</code></p>
+                <span class="stat-label-top">Partida</span>
+                <h2>3 Etapas</h2>
+                <p>Praia, refinaria e Boss de Petróleo, com 16 slimes até o chefe final</p>
             </div>
             <div class="stat-box">
                 <span class="stat-label-top">Engenharia Acústica</span>
@@ -205,25 +203,29 @@
                     <h2>Mais que um jogo: educação ambiental gamificada com engenharia moderna.</h2>
                     <p>
                         O <strong>BeaverKnight</strong> nasceu como um projeto de extensão universitária com uma missão
-                        clara: transformar temas urgentes de sustentabilidade — conservação de recursos hídricos,
-                        combate à contaminação por petróleo, reflorestamento e transição energética — em uma experiência
-                        interativa e memorável.
+                        clara: transformar temas urgentes de sustentabilidade — conservação da água, contaminação por
+                        petróleo e equilíbrio ecológico — em uma experiência interativa e memorável.
                     </p>
                     <p>
-                        Desenvolvido na <strong>Godot Engine 4.6</strong> utilizando <strong>GDScript</strong>, o jogo
-                        implementa movimentação livre contínua com detecção inteligente de camadas de terreno, sistema
-                        de combate direcional baseado em produto escalar (<em>dot product</em>), inteligência artificial
-                        de perseguição com física de repulsão (<em>knockback</em>) e uma arquitetura acústica 8-bit com
-                        roteamento por barramentos dedicados.
+                        O jogador parte da cidade, sobe a escada até a <strong>praia</strong>, atravessa a caverna até a
+                        <strong>refinaria</strong> e enfrenta o <strong>Boss de Petróleo</strong> no pátio da fábrica. Ao
+                        vencer ou perder, pode começar outra partida na hora.
+                    </p>
+                    <p>
+                        Desenvolvido na <strong>Godot Engine 4.7</strong> com <strong>GDScript</strong>, o jogo combina
+                        movimentação livre com regras de terreno, combate direcional, inimigos com navegação
+                        <strong>A*</strong> e estados de IA, spawn por zonas, HUD completo e exportação para
+                        <strong>HTML5</strong>.
                     </p>
 
                     <div class="architecture-pills">
                         <span class="arch-pill">Scene/town.tscn</span>
                         <span class="arch-pill">Scripts/Character/Player/player.gd</span>
                         <span class="arch-pill">Scripts/Character/Enemy/inimigo.gd</span>
+                        <span class="arch-pill">Scripts/Character/Enemy/boss_petroleo.gd</span>
+                        <span class="arch-pill">Scripts/World/partida.gd</span>
+                        <span class="arch-pill">Scripts/World/mapa_navegacao.gd</span>
                         <span class="arch-pill">Scripts/World/audio_manager.gd</span>
-                        <span class="arch-pill">Scene/main_menu.tscn</span>
-                        <span class="arch-pill">Assets/Water/DirtyWaterTexture.tres</span>
                     </div>
                 </div>
 
@@ -231,14 +233,16 @@
                     <div class="spec-card">
                         <div class="spec-card-header">
                             <h3>Ficha Técnica</h3>
-                            <span class="spec-version">v4.6 GL_COMPAT</span>
+                            <span class="spec-version">v4.7 GL_COMPAT</span>
                         </div>
                         <ul class="spec-list">
                             <li><span>Vínculo Acadêmico:</span> <strong>Projeto de Extensão (UniFil)</strong></li>
-                            <li><span>Gênero:</span> <strong>Action RPG 2D / Educacional Ambiental</strong></li>
-                            <li><span>Engine & Core:</span> <code>Godot 4.6 + GDScript</code></li>
+                            <li><span>Gênero:</span> <strong>Ação Top-Down 2D / Educacional Ambiental</strong></li>
+                            <li><span>Engine & Core:</span> <code>Godot 4.7 + GDScript</code></li>
                             <li><span>Resolução Base:</span> <code>320×180 px (Snap 2D Pixel)</code></li>
-                            <li><span>Física de Mapa:</span> <code>TileMapLayer + Collision Masks</code></li>
+                            <li><span>Plataforma:</span> <code>HTML5 / Web (GitHub Pages)</code></li>
+                            <li><span>Duração:</span> <strong>Partidas de 5 a 8 minutos</strong></li>
+                            <li><span>Mapa & IA:</span> <code>TileMapLayer + AStarGrid2D</code></li>
                             <li><span>Animação:</span> <code>AnimationTree (StateMachine)</code></li>
                             <li><span>Arquitetura de Áudio:</span> <code>Bus_DeControle.tres (Music/Effect)</code></li>
                         </ul>
@@ -266,14 +270,13 @@
                             </div>
                             <h3>Gestão Hídrica & Travessia</h3>
                             <p>
-                                Mapeamento de texturas animadas entre águas limpas e poluídas, com verificação em tempo
-                                real de <code>source_id</code> no terreno base e liberação dinâmica de passagem sobre
-                                pontes em <code>caminho_terreno</code>.
+                                Rios limpos e petróleo bloqueiam o caminho, enquanto escadas e pontes liberam a travessia.
+                                As mesmas regras de terreno valem para o jogador e para a navegação dos inimigos.
                             </p>
                         </div>
                         <div class="mechanic-code-ref">
-                            <span>DirtyWaterTexture.tres</span>
-                            <span>player.gd</span>
+                            <span>regras_terreno.gd</span>
+                            <span>terreno_colisao.gd</span>
                         </div>
                     </article>
 
@@ -285,14 +288,13 @@
                             </div>
                             <h3>Defesa contra Poluição</h3>
                             <p>
-                                Combate corpo-a-corpo com detecção de proximidade imediata (<code>12px</code>) e cone
-                                frontal de 140° (<code>28px</code>) contra Slimes tóxicos e Capangas de Petróleo dotados
-                                de IA de perseguição e <em>knockback</em>.
+                                Golpe de espada em cone frontal com <em>knockback</em> contra slimes tóxicos que patrulham,
+                                contornam obstáculos com A*, avisam antes de atacar e desistem quando o jogador foge.
                             </p>
                         </div>
                         <div class="mechanic-code-ref">
                             <span>inimigo.gd</span>
-                            <span>enemy_movement.gd</span>
+                            <span>mapa_navegacao.gd</span>
                         </div>
                     </article>
 
@@ -304,14 +306,13 @@
                             </div>
                             <h3>Arquitetura de Camadas</h3>
                             <p>
-                                Cenário urbano e florestal estruturado em camadas independentes para terreno, estradas,
-                                vegetação, encanamentos e estruturas industriais, integrando máscaras físicas de colisão
-                                nos TileMaps.
+                                Da cidade segura à praia e à refinaria, o mapa é montado em camadas de terreno, caminhos,
+                                vegetação e construções, com limites jogáveis e passagem pela caverna.
                             </p>
                         </div>
                         <div class="mechanic-code-ref">
                             <span>Scene/town.tscn</span>
-                            <span>TileMapLayer</span>
+                            <span>passagem_caverna.gd</span>
                         </div>
                     </article>
 
@@ -323,14 +324,49 @@
                             </div>
                             <h3>Imersão Acústica & HUD</h3>
                             <p>
-                                Controlador global com 8 canais de SFX globais e 8 posicionais 2D, passos sincronizados
-                                à animação com variação de <em>pitch</em> e menu principal temático em moldura de
-                                folhagem.
+                                Barra de vida, objetivo atual, vida sobre os inimigos e barra do boss, com áudio em 8 canais
+                                globais e 8 posicionais 2D e telas que explicam a missão.
                             </p>
                         </div>
                         <div class="mechanic-code-ref">
+                            <span>hud.gd</span>
                             <span>audio_manager.gd</span>
-                            <span>main_menu.gd</span>
+                        </div>
+                    </article>
+
+                    <article class="mechanic-card oil-combat">
+                        <div>
+                            <div class="mechanic-top">
+                                <div class="mechanic-icon">🛢️</div>
+                                <span class="mechanic-tag">Chefe Final</span>
+                            </div>
+                            <h3>Boss de Petróleo</h3>
+                            <p>
+                                Uma gosma gigante com pancada em área e cuspe de petróleo, sempre com aviso visual. Abaixo
+                                de 50% da vida entra em fúria, fica mais rápido e devolve parte da vida ao jogador.
+                            </p>
+                        </div>
+                        <div class="mechanic-code-ref">
+                            <span>boss_petroleo.gd</span>
+                            <span>projetil_petroleo.gd</span>
+                        </div>
+                    </article>
+
+                    <article class="mechanic-card eco-green">
+                        <div>
+                            <div class="mechanic-top">
+                                <div class="mechanic-icon">🔁</div>
+                                <span class="mechanic-tag">Ciclo de Jogo</span>
+                            </div>
+                            <h3>Partidas Rejogáveis</h3>
+                            <p>
+                                Cada partida tem objetivos em etapas e termina em vitória ou derrota, com tempo, inimigos
+                                derrotados, melhor tempo e a opção de jogar novamente.
+                            </p>
+                        </div>
+                        <div class="mechanic-code-ref">
+                            <span>partida.gd</span>
+                            <span>tela_fim.gd</span>
                         </div>
                     </article>
                 </div>
@@ -350,41 +386,41 @@
                     <article class="sprite-card">
                         <div class="sprite-stage">
                             <span class="sprite-badge">Protagonista</span>
-                            <img src="assets/images/game/beaverSprite.png" alt="Spritesheet do Cavaleiro Castor"
+                            <img src="assets/images/game/beaver_knight_poses.png" alt="Poses do Cavaleiro Castor de frente, de costas e de perfil"
                                 class="pixelated">
                         </div>
                         <div class="sprite-info">
                             <h3>Cavaleiro Castor</h3>
-                            <p>Spritesheet direcional com variações de caminhada e repouso, integrado à árvore de
-                                estados <code>AnimationTree</code> e efeitos de corte de espada.</p>
-                            <div class="sprite-meta">Sprites/beaverSprite.png • custom/slash_128.png</div>
+                            <p>Protagonista em estilo GBA, com espada em todos os quadros e animações de repouso,
+                                caminhada e ataque integradas à <code>AnimationTree</code>.</p>
+                            <div class="sprite-meta">Sprites/beaver_knight/beaver_knight_sheet.png</div>
                         </div>
                     </article>
 
                     <article class="sprite-card">
                         <div class="sprite-stage">
-                            <span class="sprite-badge">Ameaça de Petróleo</span>
-                            <img src="assets/images/game/capanga_petroleopng.png"
-                                alt="Spritesheet do Capanga de Petróleo" class="pixelated">
+                            <span class="sprite-badge">Chefe Final</span>
+                            <img src="assets/images/game/boss_petroleo.png"
+                                alt="Boss de Petróleo, uma gosma preta gigante de olhos vermelhos" class="pixelated">
                         </div>
                         <div class="sprite-info">
-                            <h3>Capanga de Petróleo</h3>
-                            <p>Inimigo temático representando os derramamentos de óleo, com quadros de surgimento do
-                                solo, deslocamento viscoso e investida de curto alcance.</p>
-                            <div class="sprite-meta">Sprites/capanga_petroleopng.png</div>
+                            <h3>Boss de Petróleo</h3>
+                            <p>A poluição em forma de gosma gigante, com olhos vermelhos, canos e barris presos ao corpo.
+                                Ataca com pancadas em área e cuspe de petróleo.</p>
+                            <div class="sprite-meta">Sprites/boss/boss_petroleo_sheet.png</div>
                         </div>
                     </article>
 
                     <article class="sprite-card">
                         <div class="sprite-stage">
-                            <span class="sprite-badge">Inimigo Ativo</span>
+                            <span class="sprite-badge">Inimigo Comum</span>
                             <img src="assets/images/game/DeathSlime.gif" alt="Animação do Death Slime"
                                 class="pixelated" style="width: 96px; height: 96px;">
                         </div>
                         <div class="sprite-info">
                             <h3>Death Slime (Lodo Tóxico)</h3>
-                            <p>Criatura hostil gerada pelo <code>enemy_spawn.gd</code> em grade de 16px, equipada com IA
-                                de perseguição contínua e som posicional 2D ao ser derrotada.</p>
+                            <p>Criatura hostil que surge por zonas na praia e na refinaria, com barra de vida, patrulha,
+                                perseguição por A* e ataque com aviso.</p>
                             <div class="sprite-meta">Scene/inimigo.tscn • Scripts/Character/Enemy/inimigo.gd</div>
                         </div>
                     </article>
@@ -422,7 +458,7 @@
                 <div class="section-header">
                     <span class="section-kicker">Bastidores & Artefatos</span>
                     <h2>Galeria de Desenvolvimento</h2>
-                    <p>Explore as interfaces, folhas de sprites, variações de terreno e cenas construídas para o
+                    <p>Veja as áreas do jogo, a luta contra o boss, as interfaces e as folhas de sprites do
                         BeaverKnight.</p>
                 </div>
             </div>
@@ -444,51 +480,80 @@
 
                     <article class="carousel-slide">
                         <div class="slide-media">
-                            <img src="assets/images/more pictures.jpeg" alt="Conceito visual da vila e jornada">
+                            <img src="assets/images/game/gameplay_cidade.png" alt="Cavaleiro Castor na estrada da cidade" class="pixelated">
                         </div>
                         <div class="slide-body">
-                            <span class="slide-tag">Level Design • Scene/town.tscn</span>
-                            <h3>Arquitetura da Cidade & Floresta</h3>
-                            <p>Composição das camadas de terreno, caminhos, pontes e edificações para exploração livre
-                                do jogador.</p>
+                            <span class="slide-tag">Área Segura • Scene/town.tscn</span>
+                            <h3>A Cidade</h3>
+                            <p>Ponto de partida da aventura e área sem inimigos. O caminho ao norte leva à escada sobre o rio.</p>
                         </div>
                     </article>
 
                     <article class="carousel-slide">
                         <div class="slide-media">
-                            <img src="assets/images/game/slash_128.png" alt="Spritesheet de ataque armado com espada"
+                            <img src="assets/images/game/gameplay_praia.png" alt="Combate contra slimes na praia" class="pixelated">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">Etapa 1 • Praia</span>
+                            <h3>Limpe a Praia</h3>
+                            <p>Derrote 6 slimes para abrir a caverna e seguir em direção à refinaria.</p>
+                        </div>
+                    </article>
+
+                    <article class="carousel-slide">
+                        <div class="slide-media">
+                            <img src="assets/images/game/gameplay_refinaria.png" alt="Combate na refinaria, perto dos tanques de petróleo" class="pixelated">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">Etapa 2 • Refinaria</span>
+                            <h3>Limpe a Refinaria</h3>
+                            <p>Enfrente mais 10 slimes entre tanques, canos e rios de petróleo.</p>
+                        </div>
+                    </article>
+
+                    <article class="carousel-slide">
+                        <div class="slide-media">
+                            <img src="assets/images/game/gameplay_boss.png" alt="Luta contra o Boss de Petróleo, com aviso vermelho da pancada no chão" class="pixelated">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">Etapa 3 • Chefe Final</span>
+                            <h3>Boss de Petróleo</h3>
+                            <p>Fique atento ao círculo vermelho, desvie das gotas e revide depois de cada ataque.</p>
+                        </div>
+                    </article>
+
+                    <article class="carousel-slide">
+                        <div class="slide-media">
+                            <img src="assets/images/game/tela_vitoria.png" alt="Tela de vitória com tempo, inimigos e botão de jogar novamente" class="pixelated">
+                        </div>
+                        <div class="slide-body">
+                            <span class="slide-tag">Rejogável • Scene/tela_fim.tscn</span>
+                            <h3>Vitória & Nova Partida</h3>
+                            <p>A tela final mostra suas estatísticas e permite jogar novamente para bater o melhor tempo.</p>
+                        </div>
+                    </article>
+
+                    <article class="carousel-slide">
+                        <div class="slide-media">
+                            <img src="assets/images/game/beaver_knight_ataque.png" alt="Quadros de ataque do Cavaleiro Castor com a espada"
                                 class="contain-pixel">
                         </div>
                         <div class="slide-body">
-                            <span class="slide-tag">Pixel Art • Sprites/custom/slash_128.png</span>
-                            <h3>Animação de Corte de Espada</h3>
-                            <p>Quadros de animação em 4 direções sincronizados com o estado <code>attack_armed</code> e
-                                o efeito sonoro <code>Som-espada.wav</code>.</p>
+                            <span class="slide-tag">Pixel Art • Sprites/beaver_knight/beaver_knight_sheet.png</span>
+                            <h3>Animação de Ataque do Castor</h3>
+                            <p>Preparação, impacto, recuperação e guarda, sincronizadas com o estado
+                                <code>attack_armed</code> e o som da espada.</p>
                         </div>
                     </article>
 
                     <article class="carousel-slide">
                         <div class="slide-media">
-                            <img src="assets/images/game/testeTileSet.jpeg" alt="Folha de TileSets de Ambientação Suja">
+                            <img src="assets/images/game/boss_petroleo_sheet.png" alt="Folha de animações do Boss de Petróleo" class="contain-pixel">
                         </div>
                         <div class="slide-body">
-                            <span class="slide-tag">TileSets • Assets/Tilesets</span>
-                            <h3>Variações de Solo & Ambientação</h3>
-                            <p>Folha de terrenos, trilhas de terra e detalhes ambientais usados na pintura das camadas
-                                do mapa.</p>
-                        </div>
-                    </article>
-
-                    <article class="carousel-slide">
-                        <div class="slide-media">
-                            <img src="assets/images/game/capanga_petroleopng.png"
-                                alt="Spritesheet completo dos Capangas de Petróleo" class="contain-pixel">
-                        </div>
-                        <div class="slide-body">
-                            <span class="slide-tag">Inimigos • Sprites/capanga_petroleopng.png</span>
-                            <h3>Anatomia dos Capangas de Petróleo</h3>
-                            <p>Sequência completa de quadros em Pixel Art ilustrando a formação, locomoção e ataque das
-                                criaturas de óleo.</p>
+                            <span class="slide-tag">Pixel Art • Sprites/boss/boss_petroleo_sheet.png</span>
+                            <h3>Animações do Boss</h3>
+                            <p>Quadros de parado, andar, pancada, cuspe, dano e derretimento do chefe final.</p>
                         </div>
                     </article>
 
@@ -716,23 +781,23 @@
                             <div class="evidence-box">
                                 <div class="team-section-label">Evidências no Repositório / Código</div>
                                 <p>
-                                    Spritesheets do castor (<code>beaverSprite.png</code>), variações de
-                                    caminhada/ataque, artes do Death Slime, capangas de petróleo e efeitos de corte de
-                                    espada.
+                                    Primeira versão dos spritesheets do castor (<code>beaverSprite.png</code>), variações
+                                    de caminhada/ataque, artes do Death Slime, arte dos capangas de petróleo, base visual do boss, e efeitos
+                                    de corte de espada.
                                 </p>
                                 <div class="evidence-chips">
                                     <a href="https://github.com/novaes11/BeaverKnight/blob/ebea2a28508d026be2eb4d672f07302900603c26/beaver-knight-app/Sprites/beaverSprite.png"
                                         target="_blank" rel="noopener noreferrer" class="code-chip"
                                         data-code-title="Sprites/beaverSprite.png"
-                                        data-code-desc="Spritesheet original em Pixel Art do Cavaleiro Castor com poses direcionais.">beaverSprite.png</a>
+                                        data-code-desc="Versão histórica do spritesheet do Cavaleiro Castor com poses direcionais.">beaverSprite.png</a>
                                     <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Sprites/capanga_petroleopng.png"
                                         target="_blank" rel="noopener noreferrer" class="code-chip"
                                         data-code-title="Sprites/capanga_petroleopng.png"
-                                        data-code-desc="Spritesheet completo de surgimento, caminhada e ataque dos capangas de petróleo.">capanga_petroleopng.png</a>
+                                        data-code-desc="Arte conceitual dos capangas de petróleo, que serviu de base visual para o Boss de Petróleo.">capanga_petroleopng.png</a>
                                     <a href="https://github.com/novaes11/BeaverKnight/tree/ebea2a28508d026be2eb4d672f07302900603c26/beaver-knight-app/Sprites/custom"
                                         target="_blank" rel="noopener noreferrer" class="code-chip"
                                         data-code-title="Sprites/custom/slash_128.png"
-                                        data-code-desc="Animações customizadas de corte de espada (slash, halfslash, backslash) e Death Slime.">slash_128.png</a>
+                                        data-code-desc="Versão histórica das animações de corte de espada (slash, halfslash, backslash).">slash_128.png</a>
                                 </div>
                             </div>
                         </div>
@@ -771,7 +836,7 @@
                                 <p>
                                     <code>Scripts/Character/Player/player.gd</code>,
                                     <code>Scripts/Character/Enemy/inimigo.gd</code>, rotinas de perseguição, knockback
-                                    e protótipo de raycasting em <code>enemy_movement.gd</code>.
+                                    e o primeiro protótipo de raycasting (<code>enemy_movement.gd</code>, versão histórica).
                                 </p>
                                 <div class="evidence-chips">
                                     <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Player/player.gd"
@@ -781,11 +846,11 @@
                                     <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/inimigo.gd"
                                         target="_blank" rel="noopener noreferrer" class="code-chip"
                                         data-code-title="Scripts/Character/Enemy/inimigo.gd"
-                                        data-code-desc="IA de perseguição ao jogador, alcance de golpe com cooldown e física de dissipação de knockback.">inimigo.gd</a>
-                                    <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/enemy_movement.gd"
+                                        data-code-desc="Estados de patrulha, perseguição, ataque com aviso e retorno, com knockback.">inimigo.gd</a>
+                                    <a href="https://github.com/novaes11/BeaverKnight/blob/ebea2a28508d026be2eb4d672f07302900603c26/beaver-knight-app/Scripts/Character/Enemy/enemy_movement.gd"
                                         target="_blank" rel="noopener noreferrer" class="code-chip"
                                         data-code-title="Scripts/Character/Enemy/enemy_movement.gd"
-                                        data-code-desc="Protótipo de locomoção em grade 16px com detecção de obstáculos via RayCast2D.">enemy_movement.gd</a>
+                                        data-code-desc="Versão histórica: protótipo de locomoção em grade 16px com RayCast2D.">enemy_movement.gd</a>
                                 </div>
                             </div>
                         </div>
@@ -823,27 +888,27 @@
                                 <p>
                                     <code>Scripts/Character/Player/player.gd</code>,
                                     <code>Scripts/Character/Enemy/inimigo.gd</code>, rotinas de perseguição, knockback
-                                    e protótipo de raycasting em <code>enemy_movement.gd</code>.
+                                    e o primeiro protótipo de raycasting (<code>enemy_movement.gd</code>, versão histórica).
                                 </p>
                                 <div class="evidence-chips">
                                     <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Player/player.gd"
                                         target="_blank" rel="noopener noreferrer" class="code-chip"
                                         data-code-title="Scripts/Character/Player/player.gd"
-                                        data-code-desc="Integração da AnimationTree (idle, walk, attack_armed), sistema de vida, dano e respawn do jogador.">player.gd</a>
+                                        data-code-desc="Integração da AnimationTree (idle, walk, attack_armed), vida, dano e invencibilidade do jogador.">player.gd</a>
                                     <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/inimigo.gd"
                                         target="_blank" rel="noopener noreferrer" class="code-chip"
                                         data-code-title="Scripts/Character/Enemy/inimigo.gd"
-                                        data-code-desc="Máquina de comportamento do inimigo, cálculo vetorial de perseguição e aplicação de dano.">inimigo.gd</a>
+                                        data-code-desc="Máquina de estados do inimigo, perseguição por A* e aplicação de dano.">inimigo.gd</a>
                                     <a href="https://github.com/novaes11/BeaverKnight/blob/main/beaver-knight-app/Scripts/Character/Enemy/enemy_spawn.gd"
                                         target="_blank" rel="noopener noreferrer" class="code-chip"
-                                        data-code-title="enemy_movement.gd & enemy_spawn.gd"
-                                        data-code-desc="Algoritmo de raycasting direcional e instanciação controlada de inimigos alinhada ao grid.">enemy_movement.gd</a>
+                                        data-code-title="Scripts/Character/Enemy/enemy_spawn.gd"
+                                        data-code-desc="Geração de inimigos por zonas de combate, em pontos livres e fora da tela.">enemy_spawn.gd</a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="team-card-footer">
-                            <span class="brand-sub">GDScript • RayCast2D & AI</span>
+                            <span class="brand-sub">GDScript • A* & IA</span>
                             <a href="https://justtryingtodohomework.github.io/MeuCurriculo" target="_blank"
                                 rel="noopener noreferrer" class="more-link">Ver portfólio →</a>
                         </div>
@@ -870,9 +935,8 @@
                         </div>
                         <h3>Manual de Execução & Como Jogar</h3>
                         <p>
-                            Passo a passo para importar o projeto na Godot Engine 4.6, iniciar a cena
-                            <code>Scene/main_menu.tscn</code>, consultar os controles oficiais e compreender a
-                            proposta educativa do jogo.
+                            Como jogar no navegador, importar o projeto na Godot Engine 4.7, consultar os controles e
+                            compreender o objetivo e a proposta educativa do jogo.
                         </p>
                         <div class="document-meta">Arquivo: <code>README.md</code></div>
                         <div class="document-actions">
@@ -884,13 +948,13 @@
                     <article class="document-card">
                         <div class="document-top">
                             <span class="document-icon">⚙️</span>
-                            <span class="document-badge">Código & Cenas • Godot 4.6</span>
+                            <span class="document-badge">Código & Cenas • Godot 4.7</span>
                         </div>
                         <h3>Arquitetura Técnica do Jogo</h3>
                         <p>
                             Explore as cenas (<code>town.tscn</code>, <code>main_menu.tscn</code>,
-                            <code>player.tscn</code>, <code>inimigo.tscn</code>) e os scripts em GDScript para estudar
-                            física 2D, TileMapLayers e o controlador de áudio.
+                            <code>boss_petroleo.tscn</code>, <code>inimigo.tscn</code>) e os scripts em GDScript para estudar
+                            física 2D, TileMapLayers, IA, o ciclo de partida e o controlador de áudio.
                         </p>
                         <div class="document-meta">Diretório: <code>beaver-knight-app/</code></div>
                         <div class="document-actions">
@@ -943,8 +1007,8 @@
                         <h3>🌍 Aprendizado Ativo</h3>
                         <p>
                             Em vez de apresentar conceitos de forma passiva, o jogo coloca o estudante no centro da
-                            defesa do ecossistema: rios poluídos por óleo, áreas desmatadas e ameaças industriais
-                            tornam-se desafios tangíveis superados pela ação direta do jogador.
+                            defesa do ecossistema: rios de petróleo, uma refinaria poluidora e o Boss de Petróleo tornam-se
+                            desafios tangíveis superados pela ação direta do jogador.
                         </p>
                     </article>
 
@@ -953,7 +1017,7 @@
                         <p>
                             Desenvolvido integralmente como software livre educacional no curso de Ciência da
                             Computação da <strong>UniFil</strong>, permitindo que outros estudantes estudem a
-                            arquitetura em Godot 4.6 e expandam novas fases ecológicas.
+                            arquitetura em Godot 4.7 e expandam novas fases ecológicas.
                         </p>
                     </article>
                 </div>
@@ -974,7 +1038,7 @@
                 </div>
                 <p>
                     Projeto de extensão universitária focado na conscientização ambiental através da estética Pixel Art
-                    8-bits/16-bits e engenharia de jogos em Godot 4.6.
+                    8-bits/16-bits e engenharia de jogos em Godot 4.7.
                 </p>
             </div>
 
@@ -1004,7 +1068,7 @@
 
         <div class="footer-bottom center">
             <p>&copy; 2026 Equipe BeaverKnight — Projeto de Extensão Universitária em colaboração com a UniFil.</p>
-            <span>Desenvolvido com Godot Engine 4.6 & GitHub Pages</span>
+            <span>Desenvolvido com Godot Engine 4.7 & GitHub Pages</span>
         </div>
     </footer>
 

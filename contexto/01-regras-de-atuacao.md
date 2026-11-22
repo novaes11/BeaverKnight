@@ -32,7 +32,7 @@ Nenhum código é alterado sem passar por este fluxo:
 ### Passo 4 — Implementar
 - Implementar **somente** o que está no plano aprovado. Se surgir algo fora do escopo, parar e avisar o usuário (propor um novo plano ou um ajuste).
 - Preferir alterar scripts `.gd`. Arquivos `.tscn` são gerados pelo editor da Godot e muito grandes (`town.tscn` tem ~11 mil linhas de dados de TileMap): editar apenas trechos pequenos e pontuais, e avisar o usuário quando uma mudança for melhor feita pelo editor.
-- Não commitar mudanças incidentais do editor em `project.godot` (ex.: troca de versão em `config/features`).
+- Não commitar mudanças incidentais do editor em `project.godot` (a versão oficial é a Godot 4.7).
 
 ### Passo 5 — Documentar
 Após implementar, no mesmo trabalho:
