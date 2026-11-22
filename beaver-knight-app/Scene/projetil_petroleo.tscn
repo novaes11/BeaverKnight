@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/projetil_petroleo.gd" id="1_script"]
+
+[node name="ProjetilPetroleo" type="Node2D"]
+script = ExtResource("1_script")

@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/boss_petroleo.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Sprites/boss/boss_petroleo_sheet.png" id="2_folha"]
+[ext_resource type="AudioStream" path="res://Sounds/Effects/Som-inimigoMorto.wav" id="3_impacto"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boss"]
+size = Vector2(56, 20)
+
+[node name="BossPetroleo" type="CharacterBody2D"]
+z_index = 2
+collision_layer = 4
+script = ExtResource("1_script")
+sfx_impacto = ExtResource("3_impacto")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_folha")
+offset = Vector2(0, -42)
+hframes = 6
+vframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_boss")
