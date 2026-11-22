@@ -26,6 +26,11 @@ var _regras: RegrasTerreno
 ## Trava o controle durante transições (ex.: passagem da caverna).
 var travado: bool = false
 
+## Força do empurrão aplicado ao inimigo atingido.
+@export var forca_knockback: float = 190.0
+## O golpe sai do corpo do castor, um pouco acima da origem nos pés.
+const AJUSTE_ATAQUE := Vector2(0, -8)
+
 # Referências de Animação
 @onready var anim_tree: AnimationTree = $AnimationTree
 var anim_state: AnimationNodeStateMachinePlayback
@@ -175,7 +180,7 @@ func attack_enemy() -> void:
 	var max_attack_distance: float = 28.0   # Alcance máximo do golpe
 	var close_range_threshold: float = 12.0 # Inimigos colados acertam de qualquer ângulo
 	
-	var origem_golpe := global_position
+	var origem_golpe := global_position + AJUSTE_ATAQUE
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
 		var distance_to_enemy = origem_golpe.distance_to(enemy.global_position)
@@ -193,7 +198,9 @@ func attack_enemy() -> void:
 			if alignment > 0.3: # Maior que 0.3 garante um cone de ~140 graus na frente
 				_acertar_inimigo(enemy, origem_golpe)
 
-func _acertar_inimigo(enemy: Node2D, _origem_golpe: Vector2) -> void:
+func _acertar_inimigo(enemy: Node2D, origem_golpe: Vector2) -> void:
+	if enemy.has_method("apply_knockback"):
+		enemy.apply_knockback(origem_golpe.direction_to(enemy.global_position) * forca_knockback)
 	if enemy.has_method("take_damage"):
 		enemy.take_damage(attack_damage)
 

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b0sb7bg5xvxud" path="res://Basic Asset Pack/Basic Asset Pack/Basic Monster Animations/Death Slime/DeathSlime.png" id="3_pvakx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(16, 16)
+size = Vector2(12, 12)
 
 [sub_resource type="Animation" id="Animation_dwdjc"]
 resource_name = "IdleDown"
@@ -181,17 +181,16 @@ states/slime/position = Vector2(529, 68)
 transitions = ["Start", "slime", SubResource("AnimationNodeStateMachineTransition_sn54i")]
 
 [node name="Inimigo" type="CharacterBody2D" unique_id=1808212248]
+collision_layer = 4
 script = ExtResource("1_0b8xr")
 sfx_morte = ExtResource("2_pvakx")
 
 [node name="DeathSlime" type="Sprite2D" parent="." unique_id=563241403]
-position = Vector2(8, 8)
 texture = ExtResource("3_pvakx")
 hframes = 2
 vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1160831018]
-position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1788631847]
@@ -202,5 +201,3 @@ speed_scale = 0.7
 active = false
 tree_root = SubResource("AnimationNodeStateMachine_yujy6")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1956616551]
