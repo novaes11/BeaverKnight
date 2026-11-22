@@ -46,6 +46,8 @@ var _indice_caminho := 0
 var _tempo_caminho := 0.0
 var _tempo_estado := 0.0
 var _destino_patrulha: Variant = null
+var _barra: BarraVida
+var _morto := false
 
 # Referências de Animação
 @onready var anim_tree: AnimationTree = $AnimationTree
@@ -76,6 +78,15 @@ func _ready() -> void:
 	else:
 		push_warning("Nó 'AnimationTree' não foi encontrado no Inimigo.")
 
+	_barra = BarraVida.new()
+	_barra.position = Vector2(0, -13)
+	add_child(_barra)
+	_barra.definir(current_health, max_health)
+
+	# Surge crescendo, para o nascimento não parecer um corte seco.
+	sprite.scale = Vector2(0.2, 0.2)
+	create_tween().tween_property(sprite, "scale", Vector2.ONE, 0.25)
+
 	find_player()
 
 
@@ -84,6 +95,8 @@ func find_player() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if _morto:
+		return
 	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_resistance * delta)
 	if player == null:
 		find_player()
@@ -152,7 +165,7 @@ func _avisar(delta: float) -> void:
 	sprite.modulate = Color.WHITE
 	if player and player.has_method("take_damage") \
 			and global_position.distance_to(_posicao_alvo()) <= attack_range + 6.0:
-		player.take_damage(attack_damage)
+		player.take_damage(attack_damage, global_position)
 	_mudar_estado(Estado.RECUPERACAO)
 
 
@@ -167,15 +180,20 @@ func _retornar(delta: float) -> Vector2:
 		_mudar_estado(Estado.PERSEGUICAO)
 		return Vector2.ZERO
 	if global_position.distance_to(_origem) <= 10.0:
-		current_health = max_health
+		_recuperar_vida()
 		_mudar_estado(Estado.PATRULHA)
 		return Vector2.ZERO
 	var movimento := _seguir_caminho(_origem, move_speed * 0.8, delta)
 	if movimento == Vector2.ZERO:
-		current_health = max_health
+		_recuperar_vida()
 		_origem = global_position
 		_mudar_estado(Estado.PATRULHA)
 	return movimento
+
+
+func _recuperar_vida() -> void:
+	current_health = max_health
+	_barra.definir(current_health, max_health)
 
 
 func _mudar_estado(novo: Estado) -> void:
@@ -305,7 +323,10 @@ func apply_knockback(force: Vector2) -> void:
 
 
 func take_damage(amount: int) -> void:
-	current_health -= amount
+	if _morto:
+		return
+	current_health = maxi(current_health - amount, 0)
+	_barra.definir(current_health, max_health)
 	if current_health <= 0:
 		die()
 		return
@@ -317,5 +338,20 @@ func take_damage(amount: int) -> void:
 
 
 func die() -> void:
-	AudioManager.play_sfx_2d(sfx_morte, global_position, -7.0)
-	queue_free()
+	_morto = true
+	remove_from_group("enemies")
+	velocity = Vector2.ZERO
+	$CollisionShape2D.set_deferred("disabled", true)
+	_barra.hide()
+	AudioManager.play_sfx_2d(sfx_morte, global_position, 4.0)
+
+	var partida := get_tree().get_first_node_in_group(Partida.GRUPO) as Partida
+	if partida:
+		partida.registrar_derrota()
+
+	sprite.modulate = COR_DANO
+	var tween := create_tween()
+	tween.set_parallel()
+	tween.tween_property(sprite, "scale", Vector2(1.5, 0.15), 0.25)
+	tween.tween_property(sprite, "modulate:a", 0.0, 0.25)
+	tween.chain().tween_callback(queue_free)

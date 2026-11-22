@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/zona_spawn.gd" id="32_zona"]
 [ext_resource type="Script" path="res://Scripts/World/passagem_caverna.gd" id="33_passagem"]
 [ext_resource type="Texture2D" path="res://Assets/levels/entrada_tunel.png" id="34_tunel"]
+[ext_resource type="Script" path="res://Scripts/World/partida.gd" id="35_partida"]
 [ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="1_x4n5j"]
 [ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="2_0mekn"]
 [ext_resource type="Texture2D" uid="uid://cm60rp8uvnoya" path="res://Assets/Grass/grass_step_animation.png" id="3_p57dp"]
@@ -10395,9 +10396,12 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.42),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.08, 0.42),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"aplicar_golpe"
+}, {
 "args": [true],
 "method": &"set_move"
 }]
@@ -10438,9 +10442,12 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.42),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.08, 0.42),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"aplicar_golpe"
+}, {
 "args": [true],
 "method": &"set_move"
 }]
@@ -10481,9 +10488,12 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.42),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.08, 0.42),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"aplicar_golpe"
+}, {
 "args": [true],
 "method": &"set_move"
 }]
@@ -10524,9 +10534,12 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.42),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.08, 0.42),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"aplicar_golpe"
+}, {
 "args": [true],
 "method": &"set_move"
 }]
@@ -11123,16 +11136,22 @@ autostart = true
 [node name="ZonaPraia" type="Node" parent="EnemySpawn"]
 script = ExtResource("32_zona")
 area = Rect2(-123, -434, 475, 130)
+etapa = 0
+total_inimigos = 6
 max_inimigos = 3
 
 [node name="ZonaRefinariaOeste" type="Node" parent="EnemySpawn"]
 script = ExtResource("32_zona")
 area = Rect2(-253, -874, 365, 370)
+etapa = 1
+total_inimigos = 5
 max_inimigos = 4
 
 [node name="ZonaRefinariaLeste" type="Node" parent="EnemySpawn"]
 script = ExtResource("32_zona")
 area = Rect2(112, -894, 515, 430)
+etapa = 1
+total_inimigos = 5
 max_inimigos = 5
 
 [node name="MapaNavegacao" type="Node2D" parent="."]
@@ -11165,6 +11184,7 @@ texture = ExtResource("34_tunel")
 position = Vector2(-13, -462)
 script = ExtResource("33_passagem")
 destino = NodePath("../ChegadaRefinaria")
+requer_etapa = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Passagens/CavernaPraia"]
 shape = SubResource("RectangleShape2D_cavPraia")
@@ -11182,3 +11202,6 @@ position = Vector2(-13, -552)
 
 [node name="ChegadaPraia" type="Marker2D" parent="Passagens"]
 position = Vector2(-13, -416)
+
+[node name="Partida" type="Node" parent="."]
+script = ExtResource("35_partida")

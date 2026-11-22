@@ -15,6 +15,7 @@ const TILE_SIZE: int = 16
 
 var _nav: MapaNavegacao
 var _player: Node2D
+var _partida: Partida
 
 
 func _ready() -> void:
@@ -29,6 +30,8 @@ func _on_spawn_timer_timeout() -> void:
 		_nav = get_tree().get_first_node_in_group(MapaNavegacao.GRUPO) as MapaNavegacao
 	if _player == null:
 		_player = get_tree().get_first_node_in_group("player") as Node2D
+	if _partida == null:
+		_partida = get_tree().get_first_node_in_group(Partida.GRUPO) as Partida
 	if _nav == null or _player == null or not _nav.pronto:
 		return
 
@@ -37,15 +40,19 @@ func _on_spawn_timer_timeout() -> void:
 		if zona == null:
 			continue
 		zona.atualizar(spawn_timer.wait_time)
+		if _partida and zona.etapa != _partida.etapa:
+			continue
 		if zona.pode_nascer() and zona.area.grow(margem_ativacao).has_point(_player.global_position):
 			_tentar_nascer(zona)
 
 
 func _tentar_nascer(zona: ZonaSpawn) -> void:
 	var alvo := _player.global_position + Vector2(0, -4)
-	for _tentativa in tentativas_por_ciclo:
+	for tentativa in tentativas_por_ciclo:
 		var ponto := _sortear_ponto(zona.area)
-		if ponto.distance_to(alvo) < distancia_minima:
+		# Na segunda metade aceita um ponto um pouco mais perto, para a zona nunca ficar sem nascer.
+		var minimo := distancia_minima if tentativa < tentativas_por_ciclo / 2 else distancia_minima * 0.8
+		if ponto.distance_to(alvo) < minimo:
 			continue
 		if not _nav.ponto_livre(ponto) or not _nav.conectados(ponto, alvo):
 			continue

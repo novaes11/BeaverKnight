@@ -4,6 +4,8 @@ extends Area2D
 
 @export var destino: NodePath
 @export var duracao_fade: float = 0.2
+## Etapa mínima da partida para a passagem abrir (ver Partida.Etapa).
+@export var requer_etapa: int = 0
 
 static var _em_transicao := false
 
@@ -18,6 +20,10 @@ func _ready() -> void:
 
 func _on_body_entered(corpo: Node2D) -> void:
 	if _em_transicao or not corpo.is_in_group("player"):
+		return
+	var partida := get_tree().get_first_node_in_group(Partida.GRUPO) as Partida
+	if partida and partida.etapa < requer_etapa:
+		partida.avisar("LIMPE A PRAIA PARA ABRIR A CAVERNA!")
 		return
 	var marcador := get_node_or_null(destino) as Node2D
 	if marcador == null:
