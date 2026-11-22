@@ -40,6 +40,12 @@ python -m http.server 8000 --directory docs
 
 Acessar `http://localhost:8000`.
 
+**Build Web:** ver `contexto/implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md`. O jogo publicado fica em `docs/jogo/`.
+
+## Objetivo do jogo
+
+Derrotar os slimes da praia e da refinaria e vencer o Boss de Petróleo para limpar a cidade e manter o equilíbrio ecológico. Ao vencer ou perder, o jogador pode iniciar outra partida.
+
 ## Controles
 
 | Comando | Ação |

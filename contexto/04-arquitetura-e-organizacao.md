@@ -6,7 +6,7 @@
 BeaverKnight/
 ├── CLAUDE.md                 # Instruções de entrada do Claude (aponta para contexto/)
 ├── contexto/                 # Esta pasta: contexto, planos e implementações (para o Claude)
-├── docs/                     # Landing Page (GitHub Pages) — NÃO é documentação técnica
+├── docs/                     # Landing Page (GitHub Pages) e build Web em docs/jogo/
 ├── ferramentas/sprites/      # Scripts Node.js que geram sprites (ex.: gerar_beaver_knight.js)
 ├── ferramentas/testes/       # Testes headless da Godot (ex.: teste_player_headless.gd)
 ├── src/movimentação.cs       # Arquivo C# legado, não usado pelo jogo
@@ -87,6 +87,17 @@ Comunicação por **grupos** e **métodos por convenção**:
 
 ### Spawner
 `enemy_spawn.gd` (nó `EnemySpawn`) percorre os filhos `ZonaSpawn` a cada 0,5 s. Só nasce em ponto livre, conectado ao jogador, a pelo menos 190 px e em zona próxima. A cidade não tem zona.
+
+### Partida
+`Partida` (`Scripts/World/partida.gd`, grupo `partida`) controla as etapas `PRAIA → REFINARIA → BOSS → FIM`, a contagem, o tempo e o recorde. Cada `ZonaSpawn` tem `etapa` e `total_inimigos`. A caverna usa `requer_etapa`. No fim, o jogo pausa e mostra `tela_fim.tscn`; rejogar recarrega a cena.
+
+Fluxo de telas: `main_menu.tscn → tela_historia.tscn → town.tscn`. O `hud.tscn` é instanciado na cidade.
+
+### Boss
+`BossPetroleo` (`boss_petroleo.gd`) usa uma folha 6×6 de 96 px animada por código. Estados: `SURGINDO`, `ESPERANDO`, `ANDANDO`, `PANCADA`, `CUSPE`, `RECUPERANDO`, `MORRENDO`. Anda só dentro de `arena` e expõe `ponto_mais_proximo()` para o golpe considerar o corpo grande.
+
+### Exportação Web
+Preset em `beaver-knight-app/export_presets.cfg`, sem threads, com lista explícita em `export_files` (**cenas e scripts novos precisam entrar nela**). A build fica em `docs/jogo/`. Texturas não podem ficar embutidas apontando para `.godot/imported`, senão ficam fora da build.
 
 ### Animação
 - `AnimationTree` com `AnimationNodeStateMachine`; os scripts definem `parameters/<estado>/blend_position` e chamam `playback.travel()`.

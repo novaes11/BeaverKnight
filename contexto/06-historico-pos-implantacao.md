@@ -20,6 +20,10 @@ Ao concluir uma implementação, adicionar uma linha **no topo** da tabela:
 
 | Data | Tipo | Resumo | Pendência | Detalhes | Commit |
 | :--- | :--- | :--- | :-: | :--- | :--- |
+| 2026-11-22 | chore | Exportação Web sem threads, build em `docs/jogo/` e botão Jogar Agora | F09, L03, L09 | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `1a1a246`, `a6eade3` |
+| 2026-11-22 | feat | Boss de Petróleo com sprites, ataques, fúria e balanceamento | F08 | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `c920ce7` |
+| 2026-11-22 | feat | Partida em etapas, combate, HUD, telas e ciclo rejogável | F02, F03, F05, F06 | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `0c90e4f`, `edb9dd7` |
+| 2026-11-22 | fix | Áudio duplicado, barramentos, volumes e travamento ao morrer atacando | B01, B02, B06, L05 | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `32bc19f`, `0c90e4f` |
 | 2026-11-22 | feat | Navegação A*, estados de IA e spawn por zonas de combate | B04, B13, F01 | [implementação](implementacoes/2026-11-22-colisoes-mapa-ia-spawn.md) | `06bf45e`, `27a82f3` |
 | 2026-11-22 | fix | Escada, ponte, limites do mapa, paredes invisíveis, tanques sólidos e caverna com fade até a refinaria | B03, B08, B11, B12 | [implementação](implementacoes/2026-11-22-colisoes-mapa-ia-spawn.md) | `818876e`, `f31cf54` |
 | 2026-11-22 | fix | Links do README e da Landing Page para os sprites removidos passam a apontar para o commit original `ebea2a2` | L08 | [implementação](implementacoes/2026-11-22-remove-sprites-antigos-castor.md) | `2fa1026` |
