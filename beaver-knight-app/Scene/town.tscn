@@ -10921,8 +10921,6 @@ animation = &"armed_right"
 animation = &"armed_up"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_aw25b"]
-auto_triangles = false
-triangles = PackedInt32Array(0, 1, 2, 0, 2, 3)
 blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_ucnep")
 blend_point_0/pos = Vector2(-1, 0)
@@ -10950,8 +10948,6 @@ animation = &"idle_up"
 animation = &"idle_right"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_njdcc"]
-auto_triangles = false
-triangles = PackedInt32Array(0, 1, 2, 1, 2, 3)
 blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_aw25b")
 blend_point_0/pos = Vector2(-1, 0)
@@ -10979,8 +10975,6 @@ animation = &"walk_right"
 animation = &"walk_up"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_tsyqs"]
-auto_triangles = false
-triangles = PackedInt32Array(0, 1, 2, 0, 2, 3)
 blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_xtqsa")
 blend_point_0/pos = Vector2(-1, 0)
