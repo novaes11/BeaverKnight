@@ -24,10 +24,7 @@
 
 | ID | Tipo | Descrição | Status |
 | :-: | :-: | :--- | :--- |
-| L01 | 🧹 | `enemy_movement.gd` é um protótipo não referenciado por nenhuma cena. Decidir: remover ou integrar. | A validar |
-| L02 | 🧹 | `src/movimentação.cs` é legado em C# e não faz parte do jogo. | A validar |
-| L04 | 🧹 | `Scene/player.tscn` existe, mas `town.tscn` tem o Player embutido; duas fontes de verdade do Player. É a única cena que usa `Assets/Player/Male_Spritesheet.png`. | A validar |
-| L06 | 🧹 | `project.godot` com mudança local `4.6 → 4.7` em `config/features` (feita pelo editor). Definir a versão oficial da equipe. | A validar |
+| L10 | 🧹 | `Assets/Player/Male_Spritesheet.png` ficou sem uso depois da remoção de `player.tscn`. | A validar |
 
 ## Itens adicionados pelo usuário
 
@@ -44,6 +41,11 @@ _(O usuário pode listar aqui bugs e funcionalidades que conhece e que não apar
 | F07 | Novo sprite sheet integrado nas animações do Player | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
 | B05 | Offset dos pés fixo `(30, 41)` → `pe_offset` / `distancia_sonda` exportados, origem nos pés | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
 | B07 | Som de passo não era chamado → `tocar_SFXPasso` nas `walk_*` | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
+| L11 | Landing Page e README atualizados para o jogo atual, com capturas reais e Boss de Petróleo | [limpeza final](implementacoes/2026-11-22-pendencias-finais.md) |
+| L06 | Godot 4.7 adotada como versão oficial | [limpeza final](implementacoes/2026-11-22-pendencias-finais.md) |
+| L04 | `Scene/player.tscn` removida | [limpeza final](implementacoes/2026-11-22-pendencias-finais.md) |
+| L02 | `src/movimentação.cs` removido | [limpeza final](implementacoes/2026-11-22-pendencias-finais.md) |
+| L01 | `enemy_movement.gd` removido | [limpeza final](implementacoes/2026-11-22-pendencias-finais.md) |
 | F09 | Exportação HTML5/Web em `docs/jogo/` com Jogar Agora na Landing Page | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) |
 | F08 | Boss de Petróleo com pancada, cuspe, fúria e condição de vitória | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) |
 | F06 | Objetivos em etapas e ciclo de partidas rejogável | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) |
