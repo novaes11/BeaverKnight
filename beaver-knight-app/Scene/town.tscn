@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://o7nnigyq22id" path="res://Scripts/World/town.gd" id="1_2m7ji"]
 [ext_resource type="Script" path="res://Scripts/World/terreno_colisao.gd" id="30_terreno"]
 [ext_resource type="Script" path="res://Scripts/World/mapa_navegacao.gd" id="31_nav"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/zona_spawn.gd" id="32_zona"]
 [ext_resource type="Script" path="res://Scripts/World/passagem_caverna.gd" id="33_passagem"]
 [ext_resource type="Texture2D" path="res://Assets/levels/entrada_tunel.png" id="34_tunel"]
 [ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="1_x4n5j"]
@@ -11116,8 +11117,23 @@ script = ExtResource("9_yujy6")
 enemy_scene = ExtResource("10_ucnep")
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawn" unique_id=844712367]
-wait_time = 2.0
+wait_time = 0.5
 autostart = true
+
+[node name="ZonaPraia" type="Node" parent="EnemySpawn"]
+script = ExtResource("32_zona")
+area = Rect2(-123, -434, 475, 130)
+max_inimigos = 3
+
+[node name="ZonaRefinariaOeste" type="Node" parent="EnemySpawn"]
+script = ExtResource("32_zona")
+area = Rect2(-253, -874, 365, 370)
+max_inimigos = 4
+
+[node name="ZonaRefinariaLeste" type="Node" parent="EnemySpawn"]
+script = ExtResource("32_zona")
+area = Rect2(112, -894, 515, 430)
+max_inimigos = 5
 
 [node name="MapaNavegacao" type="Node2D" parent="."]
 script = ExtResource("31_nav")

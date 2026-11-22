@@ -1,49 +1,64 @@
 extends Node2D
+## Gerencia as zonas de combate (nós `ZonaSpawn` filhos). Só nasce inimigo em ponto caminhável,
+## conectado ao jogador e fora da tela, e só nas zonas próximas ao jogador.
 
 @export var enemy_scene: PackedScene
-
-# Coordenadas ajustadas para a área de terra/grama central da imagem
-@export var spawn_area_min: Vector2 = Vector2(-250, -700)
-@export var spawn_area_max: Vector2 = Vector2(600, -400)
-
-# Limite máximo de inimigos simultâneos na cena
-@export var max_enemies: int = 5 
+## Fora da tela: meia diagonal do viewport 320x180 é ~184 px.
+@export var distancia_minima: float = 190.0
+## Distância do jogador até a zona para ela ficar ativa.
+@export var margem_ativacao: float = 96.0
+@export var tentativas_por_ciclo: int = 16
 
 const TILE_SIZE: int = 16
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
+var _nav: MapaNavegacao
+var _player: Node2D
+
+
 func _ready() -> void:
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 
-func _on_spawn_timer_timeout() -> void:
-	spawn_enemy()
 
-func spawn_enemy() -> void:
+func _on_spawn_timer_timeout() -> void:
 	if enemy_scene == null:
 		push_warning("Nenhuma cena de inimigo foi atribuída ao Spawner!")
 		return
-	
-	# 1. Conta quantos inimigos do grupo "enemies" já existem na cena
-	var current_enemies_count = get_tree().get_nodes_in_group("enemies").size()
-	
-	# 2. Se já atingiu ou passou do limite, interrompe a criação
-	if current_enemies_count >= max_enemies:
+	if _nav == null:
+		_nav = get_tree().get_first_node_in_group(MapaNavegacao.GRUPO) as MapaNavegacao
+	if _player == null:
+		_player = get_tree().get_first_node_in_group("player") as Node2D
+	if _nav == null or _player == null or not _nav.pronto:
 		return
-	
-	# 3. Sorteia e alinha a posição à grade de 16px
-	var raw_x = randf_range(spawn_area_min.x, spawn_area_max.x)
-	var raw_y = randf_range(spawn_area_min.y, spawn_area_max.y)
-	
-	var aligned_x = snapped(raw_x, TILE_SIZE)
-	var aligned_y = snapped(raw_y, TILE_SIZE)
-	
-	# 4. Instancia o inimigo e define a posição antes de adicionar à cena
-	var enemy = enemy_scene.instantiate() as Node2D
-	enemy.global_position = Vector2(aligned_x, aligned_y)
-	
-	# 5. Garante que o novo inimigo faça parte do grupo "enemies"
-	enemy.add_to_group("enemies")
-	
-	# 6. Adiciona o inimigo na cena principal
-	get_tree().current_scene.add_child(enemy)
+
+	for filho in get_children():
+		var zona := filho as ZonaSpawn
+		if zona == null:
+			continue
+		zona.atualizar(spawn_timer.wait_time)
+		if zona.pode_nascer() and zona.area.grow(margem_ativacao).has_point(_player.global_position):
+			_tentar_nascer(zona)
+
+
+func _tentar_nascer(zona: ZonaSpawn) -> void:
+	var alvo := _player.global_position + Vector2(0, -4)
+	for _tentativa in tentativas_por_ciclo:
+		var ponto := _sortear_ponto(zona.area)
+		if ponto.distance_to(alvo) < distancia_minima:
+			continue
+		if not _nav.ponto_livre(ponto) or not _nav.conectados(ponto, alvo):
+			continue
+		var inimigo := enemy_scene.instantiate() as Node2D
+		inimigo.configurar(ponto, zona.area)
+		get_tree().current_scene.add_child(inimigo)
+		inimigo.global_position = ponto
+		zona.registrar(inimigo)
+		return
+
+
+func _sortear_ponto(area: Rect2) -> Vector2:
+	var x := randf_range(area.position.x, area.end.x)
+	var y := randf_range(area.position.y, area.end.y)
+	# Centro do tile de 16 px.
+	return (Vector2(x, y) / TILE_SIZE).floor() * TILE_SIZE + Vector2.ONE * TILE_SIZE * 0.5
