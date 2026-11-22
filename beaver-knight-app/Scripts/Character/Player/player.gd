@@ -12,7 +12,13 @@ var respawn_position: Vector2 = Vector2.ZERO
 @export var walk_speed: float = 100.0
 var direction : Vector2 = Vector2.ZERO
 var can_move : bool = true
-var is_moving : bool = false 
+var is_moving : bool = false
+
+## Ponto dos pés relativo à origem do Player (a origem já fica nos pés do sprite).
+## É daqui que a colisão com água/caminhos/obstáculos do mapa é testada.
+@export var pe_offset: Vector2 = Vector2(0, -2)
+## Distância à frente dos pés usada para testar se o próximo tile bloqueia o movimento.
+@export var distancia_sonda: float = 8.0
 
 ## IDs de tile source no tipo_terreno que NÃO bloqueiam o movimento.
 ## 5 = source_id do terreno base andável (confirmado pelo debug log).
@@ -106,13 +112,13 @@ func _physics_process(_delta: float) -> void:
 	# 3. Barreira de Terreno (Água / Pontes):
 	# Impede que o movimento contínuo entre em tiles de água desprovidos de ponte no _path_layer.
 	# A checagem nos eixos X e Y independentes permite deslizar suavemente pelas margens.
-	var feet_pos = global_position + Vector2(30, 41)
+	var feet_pos = global_position + pe_offset
 	if velocity.x != 0:
-		var test_x = feet_pos + Vector2(sign(velocity.x) * 10.0, 0)
+		var test_x = feet_pos + Vector2(sign(velocity.x) * distancia_sonda, 0)
 		if is_terrain_blocked(test_x):
 			velocity.x = 0
 	if velocity.y != 0:
-		var test_y = feet_pos + Vector2(0, sign(velocity.y) * 10.0)
+		var test_y = feet_pos + Vector2(0, sign(velocity.y) * distancia_sonda)
 		if is_terrain_blocked(test_y):
 			velocity.y = 0
 	
