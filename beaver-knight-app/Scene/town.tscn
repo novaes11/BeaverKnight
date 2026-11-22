@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Scripts/World/passagem_caverna.gd" id="33_passagem"]
 [ext_resource type="Texture2D" path="res://Assets/levels/entrada_tunel.png" id="34_tunel"]
 [ext_resource type="Script" path="res://Scripts/World/partida.gd" id="35_partida"]
+[ext_resource type="PackedScene" path="res://Scene/tela_fim.tscn" id="36_telafim"]
+[ext_resource type="PackedScene" path="res://Scene/hud.tscn" id="37_hud"]
 [ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="1_x4n5j"]
 [ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="2_0mekn"]
 [ext_resource type="Texture2D" uid="uid://cm60rp8uvnoya" path="res://Assets/Grass/grass_step_animation.png" id="3_p57dp"]
@@ -11205,3 +11207,6 @@ position = Vector2(-13, -416)
 
 [node name="Partida" type="Node" parent="."]
 script = ExtResource("35_partida")
+tela_fim_scene = ExtResource("36_telafim")
+
+[node name="HUD" parent="." instance=ExtResource("37_hud")]
