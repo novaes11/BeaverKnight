@@ -20,23 +20,11 @@ var is_moving : bool = false
 ## Distância à frente dos pés usada para testar se o próximo tile bloqueia o movimento.
 @export var distancia_sonda: float = 8.0
 
-## IDs de tile source no tipo_terreno que NÃO bloqueiam o movimento.
-## 5 = source_id do terreno base andável (confirmado pelo debug log).
-## Qualquer outro source_id no tipo_terreno será tratado como bloqueador (ex: água).
-const WALKABLE_TERRAIN_SOURCES: Array[int] = [5]
+## Regras compartilhadas de terreno (ver RegrasTerreno).
+var _regras: RegrasTerreno
 
-## Layer de terreno base — verificada separadamente com lógica de source_id.
-var _terrain_layer: TileMapLayer
-
-## Layer de caminhos e pontes (caminho_terreno).
-## Tiles presentes aqui LIBERAM o movimento mesmo sobre água ou outro bloqueador,
-## pois representam pontes, estradas e superfícies andáveis artificiais.
-var _path_layer: TileMapLayer
-
-## Todas as outras TileMapLayers bloqueadoras (construções, vegetação, etc.).
-## Qualquer tile presente nessas layers bloqueia o movimento do player.
-## Populado em _ready() iterando pelos filhos da cena raiz.
-var _blocking_layers: Array[TileMapLayer] = []
+## Trava o controle durante transições (ex.: passagem da caverna).
+var travado: bool = false
 
 # Referências de Animação
 @onready var anim_tree: AnimationTree = $AnimationTree
@@ -57,24 +45,7 @@ func _ready() -> void:
 	respawn_position = global_position
 	current_health = max_health
 
-	# Descobre os TileMapLayers da cena raiz e os categoriza:
-	# - "tipo"   → terreno base (chão/água), tratado com lógica de source_id
-	# - "caminh" → caminhos e pontes, liberam passagem mesmo sobre água
-	# - demais   → bloqueadores (construções, vegetação, etc.)
-	# Usa comparação ASCII parcial para evitar falhas de encoding
-	# com nomes contendo caracteres especiais (ç, ã, õ, etc.).
-	for child in get_parent().get_children():
-		if not (child is TileMapLayer):
-			continue
-		var hint = child.name.to_lower()
-		if "tipo" in hint:
-			_terrain_layer = child as TileMapLayer
-		elif "caminh" in hint:
-			# Pontes e estradas ficam nessa layer — liberam passagem sobre água
-			_path_layer = child as TileMapLayer
-		else:
-			# Construções, vegetação e outras layers bloqueiam o movimento
-			_blocking_layers.append(child as TileMapLayer)
+	_regras = RegrasTerreno.de_cena(get_parent())
 
 	# Inicialização segura do AnimationTree
 	if has_node("AnimationTree"):
@@ -96,6 +67,13 @@ func tocar_SFXPasso() -> void:
 		AudioManager.play_sfx(sfx_andar, -36.0, pitch_var)
 	
 func _physics_process(_delta: float) -> void:
+	if travado:
+		velocity = Vector2.ZERO
+		is_moving = false
+		if anim_state:
+			anim_state.travel("idle")
+		return
+
 	# 1. Checa o botão de ataque (bloqueia o movimento durante o golpe armado)
 	if Input.is_action_just_pressed("attack") and can_move:
 		attack_enemy()
@@ -138,31 +116,9 @@ func update_blend(value: Vector2):
 	anim_tree.set("parameters/walk/blend_position", value)
 	anim_tree.set("parameters/attack_armed/blend_position", value)
 
-## Verifica se um determinado ponto no mapa está bloqueado por água ou terreno intransponível.
-## - Pontes no _path_layer liberam passagem imediatamente (sobrepõem a água).
-## - Água no _terrain_layer bloqueia se o source_id for diferente de 5 (terreno andável).
-## - Layers bloqueadoras (vegetação/construções sem colisor nativo) impedem o movimento.
+## Verifica se um ponto do mapa bloqueia o movimento (regras em RegrasTerreno).
 func is_terrain_blocked(target_world_pos: Vector2) -> bool:
-	# 0. Pontes e caminhos liberam o movimento imediatamente
-	if _path_layer:
-		var tile_coords = _path_layer.local_to_map(_path_layer.to_local(target_world_pos))
-		if _path_layer.get_cell_source_id(tile_coords) != -1:
-			return false
-
-	# 1. Verifica se o terreno base é andável (ex: água não está em WALKABLE_TERRAIN_SOURCES)
-	if _terrain_layer:
-		var tile_coords = _terrain_layer.local_to_map(_terrain_layer.to_local(target_world_pos))
-		var src = _terrain_layer.get_cell_source_id(tile_coords)
-		if src != -1 and src not in WALKABLE_TERRAIN_SOURCES:
-			return true
-
-	# 2. Camadas bloqueadoras adicionais
-	for layer in _blocking_layers:
-		var tile_coords = layer.local_to_map(layer.to_local(target_world_pos))
-		if layer.get_cell_source_id(tile_coords) != -1:
-			return true
-
-	return false
+	return _regras.bloqueado(target_world_pos)
 
 ## Controla a transição entre idle e walk baseada na velocidade efetiva
 func movement_animation():
@@ -195,6 +151,9 @@ func update_facing_direction(dir: Vector2):
 func set_move(value: bool = true):
 	can_move = value
 
+func set_travado(valor: bool) -> void:
+	travado = valor
+
 # --- ATAQUE MELHORADO ---
 
 func attack_enemy() -> void:
@@ -216,26 +175,27 @@ func attack_enemy() -> void:
 	var max_attack_distance: float = 28.0   # Alcance máximo do golpe
 	var close_range_threshold: float = 12.0 # Inimigos colados acertam de qualquer ângulo
 	
+	var origem_golpe := global_position
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
-		var distance_to_enemy = global_position.distance_to(enemy.global_position)
+		var distance_to_enemy = origem_golpe.distance_to(enemy.global_position)
 		
 		# 1. Acerta inimigos extremamente próximos (colados)
 		if distance_to_enemy <= close_range_threshold:
-			if enemy.has_method("take_damage"):
-				enemy.take_damage(attack_damage)
-				print("Player acertou inimigo próximo!")
+			_acertar_inimigo(enemy, origem_golpe)
 			continue
 
 		# 2. Acerta inimigos na frente dentro do cone de ataque
 		if distance_to_enemy <= max_attack_distance:
-			var dir_to_enemy = (enemy.global_position - global_position).normalized()
+			var dir_to_enemy = (enemy.global_position - origem_golpe).normalized()
 			var alignment = attack_vector.dot(dir_to_enemy)
 			
 			if alignment > 0.3: # Maior que 0.3 garante um cone de ~140 graus na frente
-				if enemy.has_method("take_damage"):
-					enemy.take_damage(attack_damage)
-					print("Player acertou inimigo na frente!")
+				_acertar_inimigo(enemy, origem_golpe)
+
+func _acertar_inimigo(enemy: Node2D, _origem_golpe: Vector2) -> void:
+	if enemy.has_method("take_damage"):
+		enemy.take_damage(attack_damage)
 
 # --- DANO E MORTE ---
 
@@ -256,6 +216,7 @@ func respawn() -> void:
 	is_moving = false
 	direction = Vector2.ZERO
 	can_move = true
+	travado = false
 	
 	if anim_state:
 		anim_state.travel("idle")
