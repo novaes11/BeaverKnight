@@ -23,7 +23,7 @@ BeaverKnight/
     │   └── World/audio_manager.gd, town.gd
     ├── Assets/               # TileSets, água, grama, fontes, UI
     ├── Sounds/               # Effects/, Soundtrack/, Bus_DeControle.tres
-    ├── Sprites/              # Spritesheets do castor, inimigos, cortes de espada
+    ├── Sprites/              # beaver_knight/ (folha do castor) e capanga de petróleo
     └── Basic Asset Pack/     # Pacote de terceiros (monstros .aseprite/.gif)
 ```
 

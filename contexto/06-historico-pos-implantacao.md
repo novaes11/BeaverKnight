@@ -20,8 +20,9 @@ Ao concluir uma implementação, adicionar uma linha **no topo** da tabela:
 
 | Data | Tipo | Resumo | Pendência | Detalhes | Commit |
 | :--- | :--- | :--- | :-: | :--- | :--- |
+| 2026-11-22 | chore | Remoção dos sprites antigos do castor sem uso (44 arquivos) | L07 | [implementação](implementacoes/2026-11-22-remove-sprites-antigos-castor.md) | `34ba106` |
 | 2026-11-22 | fix | BlendSpace2D do Player sem triângulos fixos: fim dos 6 erros `blend_points_used = 0` ao carregar a cidade | B10 | [implementação](implementacoes/2026-11-22-corrige-blendspace-player.md) | `3ec039a` |
 | 2026-11-22 | fix | Inimigo só viaja para estados existentes da AnimationTree: fim dos erros `walk is not found` / `states.has(travel)` | B09 | [implementação](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) | `6ec1c82` |
 | 2026-11-22 | feat | Player usa o novo sprite sheet (origem nos pés, colisão 14×8, som de passo, teste headless). Some o erro de hframes/vframes | F07, B05, B07 | [implementação](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) | `c73dac6` |
 | 2026-11-22 | feat | Novo sprite sheet do BeaverKnight estilo GBA (idle, walk e attack em 3 direções) + script gerador. Ainda não integrado ao jogo | — | [implementação](implementacoes/2026-11-22-sprite-sheet-beaver-knight.md) | `40fee7d` |
-| 2026-11-22 | chore | Criação da pasta `contexto/` com regras de atuação, padrão de commits, visão geral, arquitetura, pendências e modelos | — | — | |
+| 2026-11-22 | chore | Criação da pasta `contexto/` com regras de atuação, padrão de commits, visão geral, arquitetura, pendências e modelos | — | — | `62aa001` |
