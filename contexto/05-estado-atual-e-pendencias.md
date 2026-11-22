@@ -41,7 +41,6 @@
 | L04 | 🧹 | `Scene/player.tscn` existe, mas `town.tscn` tem o Player embutido; duas fontes de verdade do Player. É a única cena que usa `Assets/Player/Male_Spritesheet.png`. | A validar |
 | L05 | 🧹 | Diversos `print()` de debug em `player.gd` e `inimigo.gd`. | A validar |
 | L06 | 🧹 | `project.godot` com mudança local `4.6 → 4.7` em `config/features` (feita pelo editor). Definir a versão oficial da equipe. | A validar |
-| L08 | 🧹 | `README.md` e links para o GitHub em `docs/index.html` ainda citam `beaverSprite.png` e `custom/slash_128.png`, removidos do jogo. | Confirmado |
 
 ## Itens adicionados pelo usuário
 
@@ -58,6 +57,7 @@ _(O usuário pode listar aqui bugs e funcionalidades que conhece e que não apar
 | F07 | Novo sprite sheet integrado nas animações do Player | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
 | B05 | Offset dos pés fixo `(30, 41)` → `pe_offset` / `distancia_sonda` exportados, origem nos pés | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
 | B07 | Som de passo não era chamado → `tocar_SFXPasso` nas `walk_*` | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
+| L08 | Links do README e da Landing Page para sprites removidos agora apontam para o commit `ebea2a2` | [limpeza](implementacoes/2026-11-22-remove-sprites-antigos-castor.md) |
 | L07 | Sprites antigos do castor sem uso removidos | [limpeza](implementacoes/2026-11-22-remove-sprites-antigos-castor.md) |
 | B10 | 6 erros `blend_points_used = 0` ao carregar a cidade → BlendSpace2D do Player com `auto_triangles` padrão | [correção](implementacoes/2026-11-22-corrige-blendspace-player.md) |
 | B09 | Erros de console do walk (`travel("walk")` no slime sem esse estado) + `hframes/vframes < 1` | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |

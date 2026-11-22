@@ -6,7 +6,7 @@
 | Tipo | `chore` |
 | Pendência | L07 |
 | Plano | [`planos/2026-11-22-remove-sprites-antigos-castor.md`](../planos/2026-11-22-remove-sprites-antigos-castor.md) |
-| Commit(s) | `34ba106` |
+| Commit(s) | `34ba106` (limpeza) · `2fa1026` (links, L08) |
 
 ## O que foi feito
 
@@ -19,5 +19,5 @@ Godot 4.7.1 headless: `--import` e `teste_player_headless.gd` rodaram sem nenhum
 ## Pontos de atenção
 
 - Os arquivos continuam recuperáveis pelo histórico do git.
-- **L08:** o `README.md` e os links para o GitHub em `docs/index.html` ainda citam `beaverSprite.png` e `custom/slash_128.png`. As imagens exibidas na Landing Page são cópias em `docs/assets` e não foram afetadas.
+- **L08 (resolvida):** os links do `README.md` e de `docs/index.html` para `beaverSprite.png` e `custom/` agora são permalinks do commit `ebea2a2`, preservando a evidência do trabalho original da equipe. As imagens exibidas na Landing Page são cópias em `docs/assets` e não foram afetadas.
 - `Assets/Player/Male_Spritesheet.png` foi mantido porque ainda é usado por `Scene/player.tscn` (cena sem uso, pendência L04).

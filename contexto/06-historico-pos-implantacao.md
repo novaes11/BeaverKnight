@@ -20,6 +20,7 @@ Ao concluir uma implementação, adicionar uma linha **no topo** da tabela:
 
 | Data | Tipo | Resumo | Pendência | Detalhes | Commit |
 | :--- | :--- | :--- | :-: | :--- | :--- |
+| 2026-11-22 | fix | Links do README e da Landing Page para os sprites removidos passam a apontar para o commit original `ebea2a2` | L08 | [implementação](implementacoes/2026-11-22-remove-sprites-antigos-castor.md) | `2fa1026` |
 | 2026-11-22 | chore | Remoção dos sprites antigos do castor sem uso (44 arquivos) | L07 | [implementação](implementacoes/2026-11-22-remove-sprites-antigos-castor.md) | `34ba106` |
 | 2026-11-22 | fix | BlendSpace2D do Player sem triângulos fixos: fim dos 6 erros `blend_points_used = 0` ao carregar a cidade | B10 | [implementação](implementacoes/2026-11-22-corrige-blendspace-player.md) | `3ec039a` |
 | 2026-11-22 | fix | Inimigo só viaja para estados existentes da AnimationTree: fim dos erros `walk is not found` / `states.has(travel)` | B09 | [implementação](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) | `6ec1c82` |
