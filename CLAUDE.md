@@ -27,6 +27,9 @@ $G = "$env:USERPROFILE\Downloads\Godot_v4.7.1-stable_win64.exe\Godot_v4.7.1-stab
 & $G --path beaver-knight-app -e                    # abre o editor
 # teste headless do Player (anda, ataca, deixa inimigos perseguirem) — erros da engine saem no console
 & $G --headless --path beaver-knight-app -s "$PWD/ferramentas/testes/teste_player_headless.gd"
+# testes de mapa (conectividade/limites) e de combate (escada, spawn, IA, caverna)
+& $G --headless --path beaver-knight-app -s "$PWD/ferramentas/testes/teste_mapa_headless.gd"
+& $G --headless --fixed-fps 60 --path beaver-knight-app -s "$PWD/ferramentas/testes/teste_combate_headless.gd"
 node ferramentas/sprites/gerar_beaver_knight.js     # regera o sprite sheet do BeaverKnight
 python -m http.server 8000 --directory docs         # Landing Page
 ```
@@ -35,6 +38,6 @@ python -m http.server 8000 --directory docs         # Landing Page
 
 - `.tscn` são gerados pelo editor e grandes (`town.tscn` ~11 mil linhas de TileMap): prefira editar `.gd`; em cenas, só mudanças pequenas e pontuais.
 - Não commitar mudanças incidentais do editor em `project.godot` (ex.: `config/features` 4.6 → 4.7).
-- A colisão do Player com o mapa é feita por código, classificando as `TileMapLayer` pelo **nome** (`tipo`, `caminh`, demais bloqueiam). Renomear/adicionar camadas muda a colisão.
+- A caminhabilidade fica em `RegrasTerreno`, compartilhada por Player e inimigos, e classifica as `TileMapLayer` pelo **nome** (`tipo`, `caminh`, demais bloqueiam). Renomear/adicionar camadas muda a colisão; decoração baixa nova precisa entrar em `DECORACAO_VEGETACAO`.
 - Manter o arquivo `.gd.uid` junto ao `.gd` ao criar ou mover scripts.
 - Animações não devem animar `texture`/`hframes`/`vframes` (gera `hframes cannot be smaller than 1` nos blends), e `travel()` só deve ir para estados que existem na máquina de estados (ver `_ir_para_estado()` em `inimigo.gd`).

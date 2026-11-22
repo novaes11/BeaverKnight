@@ -17,10 +17,12 @@ BeaverKnight/
     ├── Scripts/
     │   ├── Character/Player/player.gd
     │   ├── Character/Enemy/inimigo.gd          # IA usada pelo inimigo
-    │   ├── Character/Enemy/enemy_spawn.gd      # Spawner
+    │   ├── Character/Enemy/enemy_spawn.gd      # Gerencia as zonas
+    │   ├── Character/Enemy/zona_spawn.gd       # Zona de combate
     │   ├── Character/Enemy/enemy_movement.gd   # Protótipo NÃO usado por nenhuma cena
     │   ├── UI/main_menu.gd
-    │   └── World/audio_manager.gd, town.gd
+    │   └── World/audio_manager.gd, town.gd, regras_terreno.gd, terreno_colisao.gd,
+    │             mapa_navegacao.gd, passagem_caverna.gd
     ├── Assets/               # TileSets, água, grama, fontes, UI
     ├── Sounds/               # Effects/, Soundtrack/, Bus_DeControle.tres
     ├── Sprites/              # beaver_knight/ (folha do castor) e capanga de petróleo
@@ -53,35 +55,38 @@ Arquivo: `Scripts/World/audio_manager.gd`, registrado em `project.godot` como `A
 - Os scripts expõem `@export var sfx_*: AudioStream` e passam o volume em dB em cada chamada.
 - Layout de barramentos: `Sounds/Bus_DeControle.tres` (Master, Music, Effect).
 
-### Colisão / caminhabilidade do mapa (Player)
-A caminhabilidade é decidida **por código**, consultando as `TileMapLayer` irmãs do Player (`player.gd`):
+### Colisão e caminhabilidade do mapa
+`Scripts/World/regras_terreno.gd` (`RegrasTerreno`) é a **fonte única** usada pelo Player e pelos inimigos. As `TileMapLayer` são classificadas por parte do nome (só ASCII):
 
 | Nome da camada contém | Papel | Regra |
 | :--- | :--- | :--- |
-| `tipo` (`tipo_terreno`) | Terreno base (chão/água) | Bloqueia se o `source_id` da célula **não** estiver em `WALKABLE_TERRAIN_SOURCES` (`[5]`) |
-| `caminh` (`caminho_terreno`) | Estradas e pontes | Qualquer tile **libera** a passagem (sobrepõe a água) |
-| qualquer outro nome | Vegetação, construções etc. | Qualquer tile **bloqueia** |
+| `tipo` (`tipo_terreno`) | Terreno base | Sem tile ou `source_id` fora de `FONTES_ANDAVEIS` (`[5]`) bloqueia |
+| `caminh` (`caminho_terreno`) | Estradas, pontes e escadas | Qualquer tile **libera** |
+| outros | Vegetação, construções | Bloqueiam, exceto decoração baixa (canos, capim, plantas, areia) |
 
-- A classificação é feita **por substring do nome do nó** (só ASCII, para evitar problemas com ç/ã). **Renomear camadas ou adicionar novas TileMapLayers muda a colisão.**
-- A **origem do Player fica nos pés** do castor. O teste é feito a partir de `global_position + pe_offset`, `distancia_sonda` px à frente (variáveis exportadas, padrão `(0, -2)` e `8`), separadamente em X e Y — isso permite deslizar pelas margens dos rios.
-- `CollisionShape2D` do Player: caixa 14×8 nos pés (`(0, -4)`).
-- Depois disso o `move_and_slide()` ainda trata colisões físicas normais.
-- Os inimigos **não** usam essa lógica (atravessam água/obstáculos sem colisor).
+- Objetos de várias células sem colisão (tanques, turbinas, tocos) bloqueiam a metade de baixo do desenho.
+- `terreno_colisao.gd`, em `tipo_terreno`, remove a física da margem sob escada e ponte (atlas 42–47 × 10–12).
+- `LimitesMapa` (StaticBody2D) fecha os planaltos laterais, e o `Camera2D` tem `limit_*`.
+- A **origem do Player fica nos pés**. O teste usa `global_position + pe_offset`, `distancia_sonda` px à frente, separado em X e Y para deslizar nas margens. `CollisionShape2D`: 14×8 em `(0, -4)`.
+- **Camadas físicas:** 1 = mundo, 2 = Player, 3 (valor 4) = inimigos. Inimigos e Player não se empurram.
+
+### Passagens
+`PassagemCaverna` (nós em `Passagens`) leva o Player até um `Marker2D` com fade e `set_travado()`. Liga a caverna da praia ao túnel da refinaria. Inimigos não atravessam.
+
+### Navegação
+`MapaNavegacao` (grupo `mapa_navegacao`) monta um `AStarGrid2D` de 8 px na área de combate, no 3º quadro de física, e rotula regiões conectadas. API: `caminho()`, `conectados()`, `ponto_livre()`.
 
 ### Combate
-Comunicação por **grupos** e **métodos por convenção** (duck typing), sem signals:
+Comunicação por **grupos** e **métodos por convenção**:
 
-- Player está no grupo `player`; inimigos no grupo `enemies` (adicionados pelo spawner).
-- Ataque do Player (`attack`): trava o movimento (`can_move = false`), toca `attack_armed`, e percorre o grupo `enemies`:
-  - distância ≤ 12 px → acerta em qualquer ângulo;
-  - distância ≤ 28 px e `dot(direção_olhar, direção_inimigo) > 0.3` → acerta (cone ~140°).
-  - Chama `take_damage(attack_damage)` se o alvo tiver o método.
-- O movimento é liberado de volta por uma **track de método** na animação de ataque que chama `set_move(true)` (em `town.tscn`).
-- Inimigo (`inimigo.gd`): persegue o primeiro nó do grupo `player`; dentro de `attack_range` ataca com cooldown via `await create_timer`; tem `apply_knockback(force)`; ao morrer toca SFX posicional e faz `queue_free()`.
-- Morte do Player: apenas respawn na posição inicial com vida cheia.
+- Player no grupo `player`; inimigos em `enemies`.
+- Ataque do Player: sai de `global_position + (0, -8)`, acerta até 12 px em qualquer ângulo ou até 28 px no cone frontal (`dot > 0.3`), chama `apply_knockback()` e `take_damage()`.
+- `set_move(true)` na animação de ataque devolve o movimento.
+- **Inimigo** (`inimigo.gd`): estados `PATRULHA`, `PERSEGUICAO`, `AVISO`, `RECUPERACAO`, `RETORNO`. Visão 110 px, desiste a 180 px, fora da zona ou sem rota.
+- Morte do Player: respawn na posição inicial com vida cheia.
 
 ### Spawner
-`enemy_spawn.gd` (nó `EnemySpawn` em `town.tscn`): a cada timeout do `SpawnTimer`, se houver menos que `max_enemies` no grupo `enemies`, instancia `inimigo.tscn` numa posição aleatória entre `spawn_area_min` e `spawn_area_max`, alinhada a 16 px, adicionando em `current_scene`.
+`enemy_spawn.gd` (nó `EnemySpawn`) percorre os filhos `ZonaSpawn` a cada 0,5 s. Só nasce em ponto livre, conectado ao jogador, a pelo menos 190 px e em zona próxima. A cidade não tem zona.
 
 ### Animação
 - `AnimationTree` com `AnimationNodeStateMachine`; os scripts definem `parameters/<estado>/blend_position` e chamam `playback.travel()`.

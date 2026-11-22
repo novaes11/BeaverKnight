@@ -15,16 +15,12 @@
 | :-: | :-: | :--- | :--- | :--- |
 | B01 | 🐞 | `play_sfx` não tem `return` dentro do laço: o som é tocado em **todos** os canais livres e depois ainda no canal 0 (o `play_sfx_2d` tem o `return` correto). Efeitos ficam mais altos/duplicados. | `Scripts/World/audio_manager.gd` | A validar |
 | B02 | 🐞 | `audio/buses/default_bus_layout=""` no `project.godot`: o `Bus_DeControle.tres` pode não estar sendo carregado, e os barramentos `Music`/`Effect` podem não existir em tempo de execução (o áudio cai no Master). | `project.godot`, `Sounds/Bus_DeControle.tres` | A validar |
-| B03 | 🐞 | O inimigo possui um nó `Camera2D` na cena; pode competir com a câmera do Player. | `Scene/inimigo.tscn` | A validar |
-| B04 | 🐞 | Inimigos ignoram a lógica de terreno (água/vegetação/construções) e podem atravessar áreas que o Player não atravessa. | `Scripts/Character/Enemy/inimigo.gd` | A validar |
-| B08 | 🐞 | Origens do Player e do inimigo no canto superior esquerdo dos sprites: o inimigo persegue o "canto" do Player e o alcance do ataque (12/28 px) é medido entre cantos, não entre corpos. | `player.gd`, `inimigo.gd`, `inimigo.tscn` | A validar |
 | B06 | 🐞 | Se o Player morrer/respawnar durante o ataque, depende da track de animação para liberar o movimento; risco de ficar travado se a animação for interrompida. | `player.gd`, animação `attack_armed` | A validar |
 
 ## Funcionalidades faltando
 
 | ID | Tipo | Descrição | Status |
 | :-: | :-: | :--- | :--- |
-| F01 | ✨ | Knockback: `apply_knockback()` existe no inimigo mas o Player nunca o chama. | A validar |
 | F02 | ✨ | HUD: não há barra de vida do Player nem indicação de dano. | A validar |
 | F03 | ✨ | Feedback visual de dano/morte (piscar, animação de morte) para Player e inimigos. | A validar |
 | F04 | ✨ | Inimigo não tem animação de ataque própria (usa `slime`). | A validar |
@@ -57,6 +53,13 @@ _(O usuário pode listar aqui bugs e funcionalidades que conhece e que não apar
 | F07 | Novo sprite sheet integrado nas animações do Player | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
 | B05 | Offset dos pés fixo `(30, 41)` → `pe_offset` / `distancia_sonda` exportados, origem nos pés | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
 | B07 | Som de passo não era chamado → `tocar_SFXPasso` nas `walk_*` | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
+| B11 | Escada e ponte de madeira bloqueadas pela física da margem | [implementação](implementacoes/2026-11-22-colisoes-mapa-ia-spawn.md) |
+| B12 | Jogador saía do mapa e andava pelos planaltos | [implementação](implementacoes/2026-11-22-colisoes-mapa-ia-spawn.md) |
+| B13 | Spawn em paredes e áreas isoladas → zonas de combate validadas | [implementação](implementacoes/2026-11-22-colisoes-mapa-ia-spawn.md) |
+| B04 | Inimigos sem pathfinding → navegação A* e estados | [implementação](implementacoes/2026-11-22-colisoes-mapa-ia-spawn.md) |
+| B08 | Origem do inimigo no canto do sprite | [implementação](implementacoes/2026-11-22-colisoes-mapa-ia-spawn.md) |
+| B03 | `Camera2D` sobrando no inimigo | [implementação](implementacoes/2026-11-22-colisoes-mapa-ia-spawn.md) |
+| F01 | Knockback ligado ao golpe do jogador | [implementação](implementacoes/2026-11-22-colisoes-mapa-ia-spawn.md) |
 | L08 | Links do README e da Landing Page para sprites removidos agora apontam para o commit `ebea2a2` | [limpeza](implementacoes/2026-11-22-remove-sprites-antigos-castor.md) |
 | L07 | Sprites antigos do castor sem uso removidos | [limpeza](implementacoes/2026-11-22-remove-sprites-antigos-castor.md) |
 | B10 | 6 erros `blend_points_used = 0` ao carregar a cidade → BlendSpace2D do Player com `auto_triangles` padrão | [correção](implementacoes/2026-11-22-corrige-blendspace-player.md) |
