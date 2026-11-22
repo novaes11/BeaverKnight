@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ba17v3wewfyoe" path="res://Assets/UI/MenuPanel-Border.png" id="2_7vrkn"]
 [ext_resource type="FontFile" uid="uid://crnfpf3jj63td" path="res://Assets/UI/pkmnfl.ttf" id="2_fu7sn"]
 [ext_resource type="AudioStream" uid="uid://0qjsy1rk8k41" path="res://Sounds/Effects/Som-Botão.wav" id="2_hptlk"]
-[ext_resource type="AudioStream" uid="uid://qvgtk0qgmxbw" path="res://Sounds/Soundtrack/Som-musicaMenu.mp3" id="5_glbon"]
+[ext_resource type="AudioStream" uid="uid://b7tksgiiktbot" path="res://Sounds/Soundtrack/Som-musicaMenu.mp3" id="5_glbon"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
 content_margin_left = 7.0
@@ -158,18 +158,24 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="HelpPanel/HelpContent" unique_id=1055163747]
 layout_mode = 2
-theme_override_font_sizes/font_size = 9
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 13
 text = "COMO JOGAR"
 horizontal_alignment = 1
 
 [node name="InstructionLabel" type="Label" parent="HelpPanel/HelpContent" unique_id=1875266011]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 8
-text = "*USE AS SETAS DO TECLADO
-PARA MOVIMENTAR O CASTOR.
+text = "DERROTE OS SLIMES E O BOSS DE PETRÓLEO PARA LIMPAR A CIDADE E MANTER O EQUILÍBRIO ECOLÓGICO.
 
-*CLIQUE COM O BOTÃO ESQUERDO
-DO MOUSE PARA ATACAR OS INIMIGOS."
+1. SUBA A ESCADA E LIMPE A PRAIA
+2. ENTRE NA CAVERNA E LIMPE A REFINARIA
+3. VENÇA O BOSS DE PETRÓLEO
+
+SETAS: ANDAR
+CLIQUE ESQUERDO: ATACAR
+SE A VIDA ACABAR, A PARTIDA RECOMEÇA."
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -181,9 +187,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(120, 20)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 9
-text = "VOLTAR
-"
+theme_override_fonts/font = ExtResource("2_fu7sn")
+theme_override_font_sizes/font_size = 10
+text = "VOLTAR"
 
 [connection signal="pressed" from="MenuPanel/Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuPanel/Buttons/OptionsButton" to="." method="_on_options_button_pressed"]

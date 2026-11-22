@@ -8,6 +8,9 @@ extends Control
 func _ready() -> void:
 	AudioManager.stop_music()
 	AudioManager.play_music(musica_menu, -20.0)
+	# O navegador não permite que o jogo feche a própria aba.
+	if OS.has_feature("web"):
+		$MenuPanel/Buttons/ExitButton.hide()
 	
 
 
@@ -17,8 +20,8 @@ func _process(_delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	AudioManager.play_sfx(sfx_botao, -28.0)
-	get_tree().change_scene_to_file("res://Scene/town.tscn") # Replace with function body.
+	AudioManager.play_sfx(sfx_botao, 0.0)
+	get_tree().change_scene_to_file("res://Scene/tela_historia.tscn")
 	
 
 func _on_options_button_pressed() -> void:
@@ -26,15 +29,15 @@ func _on_options_button_pressed() -> void:
 	$LeafFrame.hide()
 	$HelpPanel.show()
 	$HelpPanel/HelpContent/BackButton.grab_focus()
-	AudioManager.play_sfx(sfx_botao, -28.0)
+	AudioManager.play_sfx(sfx_botao, 0.0)
 
 func _on_back_button_pressed() -> void:
 	$HelpPanel.hide()
 	$MenuPanel.show()
 	$LeafFrame.show()
 	$MenuPanel/Buttons/StartButton.grab_focus()
-	AudioManager.play_sfx(sfx_botao, -28.0)
+	AudioManager.play_sfx(sfx_botao, 0.0)
 
 func _on_exit_button_pressed() -> void:
-	AudioManager.play_sfx(sfx_botao, -28.0)
+	AudioManager.play_sfx(sfx_botao, 0.0)
 	get_tree().quit()

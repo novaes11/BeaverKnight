@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/UI/tela_fim.gd" id="1_script"]
+[ext_resource type="AudioStream" path="res://Sounds/Effects/Som-Botão.wav" id="2_botao"]
+
+[node name="TelaFim" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_script")
+sfx_botao = ExtResource("2_botao")
