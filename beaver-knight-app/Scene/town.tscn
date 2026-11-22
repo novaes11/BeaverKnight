@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://Scene/tela_fim.tscn" id="36_telafim"]
 [ext_resource type="PackedScene" path="res://Scene/hud.tscn" id="37_hud"]
 [ext_resource type="PackedScene" path="res://Scene/boss_petroleo.tscn" id="38_boss"]
+[ext_resource type="Texture2D" uid="uid://8tmbrnxou7e8" path="res://Assets/Tilesets/grass1_tileset.png" id="39_grama"]
 [ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="1_x4n5j"]
 [ext_resource type="Texture2D" uid="uid://brhw4o5hmxq81" path="res://Assets/Water/WaterTexture.tres" id="2_0mekn"]
 [ext_resource type="Texture2D" uid="uid://cm60rp8uvnoya" path="res://Assets/Grass/grass_step_animation.png" id="3_p57dp"]
@@ -105,12 +106,9 @@ texture = ExtResource("12_oghek")
 2:2/0/terrains_peering_bit/top_left_corner = 0
 2:2/0/terrains_peering_bit/top_side = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dwdjc"]
-load_path = "res://.godot/imported/grass1_tileset.png-9f0cfb888730e1a54739d6a21aa6c0f5.ctex"
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e8yg3"]
 resource_name = "gass1_tileset"
-texture = SubResource("CompressedTexture2D_dwdjc")
+texture = ExtResource("39_grama")
 3:0/next_alternative_id = 5
 3:0/0 = 0
 3:0/0/probability = 10.0
