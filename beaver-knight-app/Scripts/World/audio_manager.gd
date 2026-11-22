@@ -49,6 +49,7 @@ func play_sfx(stream: AudioStream, volume_db: float = 0.0, pitch_scale: float = 
 			pool.volume_db = volume_db
 			pool.pitch_scale = pitch_scale
 			pool.play()
+			return
 	#Trava caso acabar os espaços de Stream de audio
 	sfx_players[0].stream = stream
 	sfx_players[0].volume_db = volume_db
