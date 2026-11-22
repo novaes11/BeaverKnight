@@ -35,8 +35,7 @@ func _ready() -> void:
 		anim_tree = $AnimationTree
 		anim_tree.active = true
 		anim_state = anim_tree.get("parameters/playback")
-		if anim_state:
-			anim_state.travel("slime")
+		_ir_para_estado(&"slime")
 	else:
 		print("ERRO: Nó 'AnimationTree' não foi encontrado no Inimigo.")
 
@@ -79,22 +78,38 @@ func process_ai_behavior() -> void:
 	if distance <= attack_range:
 		velocity = Vector2.ZERO + knockback_velocity
 		is_moving = false
-		if anim_state:
-			anim_state.travel("slime")
-			
+		_ir_para_estado(&"slime")
+
 		if can_attack:
 			attack_player()
 	else:
 		# Persegue o Player
 		is_moving = true
 		velocity = (target_direction * move_speed) + knockback_velocity
-		if anim_state:
-			anim_state.travel("walk")
+		# A máquina de estados do slime hoje só tem "slime"; sem "walk" ele continua no "slime".
+		_ir_para_estado(&"walk")
 
 func update_animation_direction(direction: Vector2) -> void:
 	if anim_tree and direction != Vector2.ZERO:
-		anim_tree.set("parameters/slime/blend_position", direction)
-		anim_tree.set("parameters/walk/blend_position", direction)
+		_definir_blend(&"slime", direction)
+		_definir_blend(&"walk", direction)
+
+## Viaja para um estado da AnimationTree somente se ele existir e ainda não for o atual.
+## Evita os erros "_make_travel_path ... states.has(travel)" / "No such node: 'walk'".
+func _ir_para_estado(estado: StringName) -> void:
+	if anim_state == null or anim_tree == null:
+		return
+	var maquina := anim_tree.tree_root as AnimationNodeStateMachine
+	if maquina == null or not maquina.has_node(estado):
+		return
+	if anim_state.get_current_node() != estado:
+		anim_state.travel(estado)
+
+## Define o blend_position apenas se o estado existir e for um BlendSpace2D.
+func _definir_blend(estado: StringName, direcao: Vector2) -> void:
+	var maquina := anim_tree.tree_root as AnimationNodeStateMachine
+	if maquina and maquina.has_node(estado) and maquina.get_node(estado) is AnimationNodeBlendSpace2D:
+		anim_tree.set("parameters/%s/blend_position" % estado, direcao)
 
 func attack_player() -> void:
 	is_attacking = true
