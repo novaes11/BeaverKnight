@@ -6,7 +6,7 @@
 | Tipo | `fix` (spawn e áudio) + `feat` (boss e pausa) |
 | Pendências | B14, B15, F11, F12 |
 | Plano | [`planos/2026-11-23-feedback-gameplay.md`](../planos/2026-11-23-feedback-gameplay.md) |
-| Commit(s) | _(preencher após o commit)_ |
+| Commit(s) | `9fe2d63`, `6b662b0`, `10834e0`, `2df5de4`, `26c14ca`, `33e4119`, `68e1aa8`, `fc60b14` |
 
 ## O que foi feito
 
