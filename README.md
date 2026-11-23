@@ -30,7 +30,7 @@ O projeto gamifica a conscientização ambiental — conservação da água, con
 Derrote os monstros da poluição para **limpar a cidade e manter o equilíbrio ecológico**. Cada partida dura de 5 a 8 minutos:
 
 1. **Praia:** saia da cidade, suba a escada e derrote **6 slimes** para abrir a caverna.
-2. **Refinaria:** atravesse a caverna e derrote mais **10 slimes**.
+2. **Refinaria:** atravesse a caverna e derrote mais **16 slimes**, que vão atrás de você.
 3. **Boss de Petróleo:** vá ao pátio da fábrica e vença a gosma gigante.
 
 Ao vencer ou perder, a tela final mostra tempo, inimigos derrotados e melhor tempo, com a opção de **jogar novamente**. Se a vida acabar, a partida recomeça do início.
@@ -43,20 +43,21 @@ Ao vencer ou perder, a tela final mostra tempo, inimigos derrotados e melhor tem
 | :--- | :--- |
 | **Setas Direcionais (`←` `↑` `↓` `→`) / D-Pad** | Movimentam o Cavaleiro Castor |
 | **Botão Esquerdo do Mouse (`Clique`)** | Ataca com a espada |
+| **`Esc` ou `P`** | Pausa o jogo: continuar, reiniciar ou voltar ao menu |
 
-**Dicas contra o boss:** saia do círculo vermelho antes da pancada, desvie das gotas de petróleo e revide enquanto ele se recupera. Abaixo de 50% da vida ele entra em fúria, e você recebe **+30 de vida**.
+**Dicas contra o boss:** saia do círculo vermelho antes da pancada, desvie das gotas de petróleo e revide enquanto ele se recupera. Abaixo de 50% da vida ele entra em fúria, e você recebe **+35 de vida**. Ficar parado só batendo não vence a luta.
 
 ---
 
 ## ⚙️ Arquitetura Técnica & Sistemas (Godot 4.7)
 
-- **Resolução Pixel-Perfect:** `320×180 px` com upscale para `1280×720 px`.
+- **Resolução:** base de `320×180 px` ampliada para `1280×720 px`, com texto renderizado na resolução da tela para ficar nítido.
 - **Partida (`Scripts/World/partida.gd`):** etapas, objetivos, vitória, derrota, tempo, recorde e recomeço.
 - **Mapa em camadas (`Scene/town.tscn`):** `tipo_terreno`, `caminho_terreno`, `vegetação_layer` e `construções_layer`, com regras centralizadas em `Scripts/World/regras_terreno.gd`.
 - **Jogador (`Scripts/Character/Player/player.gd`):** movimento em 8 direções, golpe em cone frontal no quadro de impacto, invencibilidade temporária, recuo e `AnimationTree` (`idle`, `walk`, `attack_armed`).
 - **Inimigos (`Scripts/Character/Enemy/`):** navegação A* (`mapa_navegacao.gd`), estados de patrulha, perseguição, ataque com aviso e retorno (`inimigo.gd`) e spawn por zonas (`enemy_spawn.gd`, `zona_spawn.gd`).
 - **Boss de Petróleo (`boss_petroleo.gd`):** pancada em área, cuspe de petróleo e fúria abaixo de 50% da vida.
-- **Interface (`Scripts/UI/`):** HUD, barras de vida, menu, tela de missão e telas de fim de jogo.
+- **Interface (`Scripts/UI/`):** HUD, barras de vida, menu, tela de missão, tela de pausa e telas de fim de jogo.
 - **Áudio (`Scripts/World/audio_manager.gd`):** Autoload com 8 canais globais e 8 posicionais 2D, nos barramentos de `Sounds/Bus_DeControle.tres` (`Master`, `Music`, `Effect`).
 - **Web:** exportação HTML5 sem threads, publicada em `docs/jogo/` pelo GitHub Pages.
 
@@ -80,7 +81,7 @@ Ao vencer ou perder, a tela final mostra tempo, inimigos derrotados e melhor tem
 BeaverKnight/
 ├── beaver-knight-app/               # Projeto principal na Godot Engine 4.7
 │   ├── Assets/                      # TileSets, texturas de água, fontes e UI
-│   ├── Scene/                       # main_menu, tela_historia, town, hud, tela_fim, inimigo, boss_petroleo
+│   ├── Scene/                       # main_menu, tela_historia, town, hud, tela_pausa, tela_fim, inimigo, boss_petroleo
 │   ├── Scripts/                     # GDScript: Character (Player/Enemy), UI e World
 │   ├── Sounds/                      # Barramentos, SFX 8-bit e trilhas
 │   ├── Sprites/                     # Folhas do castor e do boss, e arte dos capangas
