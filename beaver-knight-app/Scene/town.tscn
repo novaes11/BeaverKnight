@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/World/partida.gd" id="35_partida"]
 [ext_resource type="PackedScene" path="res://Scene/tela_fim.tscn" id="36_telafim"]
 [ext_resource type="PackedScene" path="res://Scene/hud.tscn" id="37_hud"]
+[ext_resource type="PackedScene" path="res://Scene/tela_pausa.tscn" id="40_pausa"]
 [ext_resource type="PackedScene" path="res://Scene/boss_petroleo.tscn" id="38_boss"]
 [ext_resource type="Texture2D" uid="uid://8tmbrnxou7e8" path="res://Assets/Tilesets/grass1_tileset.png" id="39_grama"]
 [ext_resource type="Texture2D" uid="uid://d0k0wvcgcv0xl" path="res://Assets/levels/environment.png" id="1_x4n5j"]
@@ -11208,3 +11209,5 @@ ponto_boss = Vector2(400, -720)
 tela_fim_scene = ExtResource("36_telafim")
 
 [node name="HUD" parent="." instance=ExtResource("37_hud")]
+
+[node name="TelaPausa" parent="." instance=ExtResource("40_pausa")]

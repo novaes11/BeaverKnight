@@ -43,7 +43,7 @@ func _ready() -> void:
 	var etapas := EstiloUI.rotulo("1. SUBA A ESCADA E LIMPE A PRAIA\n2. ENTRE NA CAVERNA E LIMPE A REFINARIA\n3. VENÇA O BOSS DE PETRÓLEO", 8, Color(0.72, 0.92, 0.62))
 	coluna.add_child(etapas)
 
-	var controles := EstiloUI.rotulo("SETAS: ANDAR   -   CLIQUE ESQUERDO: ATACAR")
+	var controles := EstiloUI.rotulo("SETAS: ANDAR  -  CLIQUE: ATACAR  -  ESC: PAUSAR")
 	controles.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	coluna.add_child(controles)
 
