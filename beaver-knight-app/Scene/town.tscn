@@ -11141,19 +11141,16 @@ etapa = 0
 total_inimigos = 6
 max_inimigos = 3
 
-[node name="ZonaRefinariaOeste" type="Node" parent="EnemySpawn"]
+[node name="ZonaRefinaria" type="Node" parent="EnemySpawn"]
 script = ExtResource("32_zona")
-area = Rect2(-253, -874, 365, 370)
+area = Rect2(-253, -894, 880, 430)
 etapa = 1
-total_inimigos = 5
-max_inimigos = 4
-
-[node name="ZonaRefinariaLeste" type="Node" parent="EnemySpawn"]
-script = ExtResource("32_zona")
-area = Rect2(112, -894, 515, 430)
-etapa = 1
-total_inimigos = 5
+total_inimigos = 16
 max_inimigos = 5
+intervalo_spawn = 1.5
+intervalo_reposicao = 1.5
+nascer_perto = true
+cacar_jogador = true
 
 [node name="MapaNavegacao" type="Node2D" parent="."]
 script = ExtResource("31_nav")
