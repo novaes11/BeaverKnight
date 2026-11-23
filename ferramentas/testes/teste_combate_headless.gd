@@ -44,6 +44,8 @@ func _rodar() -> void:
 	_checar(player.global_position.y > -500.0, "caverna fechada antes de limpar a praia")
 
 	# Invencibilidade: dois golpes seguidos só contam uma vez.
+	# Zera a invencibilidade: um slime da praia pode ter acertado o jogador logo antes.
+	player._invencivel = 0.0
 	var vida: int = player.current_health
 	player.take_damage(10, player.global_position + Vector2(8, 0))
 	player.take_damage(10, player.global_position + Vector2(8, 0))
@@ -61,6 +63,17 @@ func _rodar() -> void:
 	Input.action_release("ui_up")
 	await _esperar(45)
 	_checar(player.global_position.y < -520.0, "caverna abre depois da praia")
+
+	# Refinaria: parado, os slimes precisam vir até o jogador.
+	var espera := 0
+	var chegou := false
+	while espera < 1500 and not chegou:
+		await physics_frame
+		espera += 1
+		player.current_health = player.max_health
+		for inimigo: Node2D in _inimigos():
+			chegou = chegou or inimigo.global_position.distance_to(player.global_position) <= 40.0
+	_checar(chegou, "slimes da refinaria alcançam o jogador parado (%.0f s)" % (espera / 60.0))
 	await _limpar_etapa(Partida.Etapa.REFINARIA)
 	_checar(partida.etapa == Partida.Etapa.BOSS, "limpar a refinaria desperta o boss")
 	var chefe := _boss()
@@ -84,17 +97,44 @@ func _rodar() -> void:
 		print("BALANCO %s: %s em %.0f s, vida final %d" % ["desviando" if desviar else "sem desviar", "venceu" if luta["venceu"] else "perdeu", luta["tempo"], luta["vida"]])
 		if desviar:
 			_checar(luta["venceu"], "luta com desvio é vencível")
+		else:
+			_checar(not luta["venceu"], "ficar parado batendo perde para o boss")
 
 	# Partida 2: derrota e rejogar.
 	partida.jogar_novamente()
 	await _nova_cena()
 	_checar(not paused and partida.etapa == Partida.Etapa.PRAIA and partida.total_derrotados == 0, "jogar novamente zera a partida")
 	_checar(player.current_health == player.max_health, "vida cheia na nova partida")
+
+	# Pausa: congela a partida, retoma e reinicia.
+	var pausa: Node = town.get_node("TelaPausa")
+	await _esperar(10)
+	pausa.alternar()
+	var tempo_pausa: float = partida.tempo
+	var posicao_pausa := player.global_position
+	Input.action_press("ui_down")
+	for _i in 30:
+		await process_frame
+	Input.action_release("ui_down")
+	_checar(paused and pausa.aberta and is_equal_approx(partida.tempo, tempo_pausa) and player.global_position == posicao_pausa, "pausa congela o jogo")
+	pausa.alternar()
+	_checar(not paused and not pausa.aberta, "pausa retoma o jogo")
+	await _esperar(5)
+	_checar(partida.tempo > tempo_pausa, "cronômetro volta a contar")
+	pausa.alternar()
+	partida.derrotados_etapa = 3
+	partida.jogar_novamente()
+	await _nova_cena()
+	pausa = town.get_node("TelaPausa")
+	_checar(not paused and not pausa.aberta and partida.derrotados_etapa == 0, "reiniciar pela pausa zera a partida")
+
 	player.current_health = 5
 	player.take_damage(10)
 	await process_frame
 	_checar(partida.etapa == Partida.Etapa.FIM and player.morto, "morrer encerra a partida")
 	_checar(_tela_fim() != null, "tela de derrota aparece")
+	town.get_node("TelaPausa").alternar()
+	_checar(not town.get_node("TelaPausa").aberta, "pausa não abre na tela final")
 
 	# Partida 3: recomeça de novo e continua jogável.
 	partida.jogar_novamente()
