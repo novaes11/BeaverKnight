@@ -20,9 +20,9 @@ Ao concluir uma implementação, adicionar uma linha **no topo** da tabela:
 
 | Data | Tipo | Resumo | Pendência | Detalhes | Commit |
 | :--- | :--- | :--- | :-: | :--- | :--- |
-| 2026-11-23 | fix | Câmera alinhada ao pixel do sprite, eliminando o tremor do castor ao andar | — | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) | |
-| 2026-11-23 | feat | Boss mais forte e tela de pausa | F11, F12 | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) | |
-| 2026-11-23 | fix | Slimes da refinaria caçam o jogador e volume da Web reforçado | B14, B15 | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) | |
+| 2026-11-23 | fix | Câmera alinhada ao pixel do sprite, eliminando o tremor do castor ao andar | — | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) | `26c14ca` |
+| 2026-11-23 | feat | Boss mais forte e tela de pausa | F11, F12 | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) | `6b662b0`, `2df5de4` |
+| 2026-11-23 | fix | Slimes da refinaria caçam o jogador e volume da Web reforçado | B14, B15 | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) | `10834e0`, `9fe2d63` |
 | 2026-11-22 | chore | Godot 4.7 oficial, Landing Page e README atualizados para o jogo atual e remoção de arquivos sem uso | L01, L02, L04, L06, L11 | [implementação](implementacoes/2026-11-22-pendencias-finais.md) | `497b8ed`, `83166f9`, `cb2d571`, `2c414ba` |
 | 2026-11-22 | chore | Merge do PR #23 na `main` e publicação do jogo no GitHub Pages | F09 | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `e843871` |
 | 2026-11-22 | chore | Documentação do modelo de gameplay e da build Web | — | [implementação](implementacoes/2026-11-22-gameplay-rejogavel-boss-web.md) | `0b4d285` |
