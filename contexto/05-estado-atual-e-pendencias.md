@@ -41,6 +41,10 @@ _(O usuário pode listar aqui bugs e funcionalidades que conhece e que não apar
 | F07 | Novo sprite sheet integrado nas animações do Player | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
 | B05 | Offset dos pés fixo `(30, 41)` → `pe_offset` / `distancia_sonda` exportados, origem nos pés | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
 | B07 | Som de passo não era chamado → `tocar_SFXPasso` nas `walk_*` | [integração](implementacoes/2026-11-22-integracao-sprite-sheet-player.md) |
+| F12 | Boss mais forte (proposta A) | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) |
+| F11 | Tela de pausa com continuar, reiniciar e menu | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) |
+| B15 | Volume da versão Web reforçado | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) |
+| B14 | Slimes da refinaria nascem perto e caçam o jogador | [implementação](implementacoes/2026-11-23-feedback-gameplay.md) |
 | L11 | Landing Page e README atualizados para o jogo atual, com capturas reais e Boss de Petróleo | [limpeza final](implementacoes/2026-11-22-pendencias-finais.md) |
 | L06 | Godot 4.7 adotada como versão oficial | [limpeza final](implementacoes/2026-11-22-pendencias-finais.md) |
 | L04 | `Scene/player.tscn` removida | [limpeza final](implementacoes/2026-11-22-pendencias-finais.md) |

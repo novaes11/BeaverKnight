@@ -15,7 +15,7 @@ Landing Page oficial: https://novaes11.github.io/BeaverKnight/
 | Engine | Godot 4.7 (padrão, não .NET) |
 | Linguagem | GDScript |
 | Renderizador | GL Compatibility |
-| Resolução | 320×180 nativa, ampliada para 1280×720 (`stretch/mode = viewport`) |
+| Resolução | 320×180 nativa, ampliada para 1280×720 (`stretch/mode = canvas_items`) |
 | Filtro de textura | Nearest (pixel art) + `snap_2d_transforms_to_pixel = true` |
 | Grade de tiles | 16 px |
 | Física 3D | Jolt (irrelevante — jogo é 2D) |
