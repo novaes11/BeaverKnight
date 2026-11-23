@@ -13,6 +13,10 @@ extends Node
 @export var intervalo_spawn: float = 2.0
 ## Tempo para repor um inimigo depois que ele morre.
 @export var intervalo_reposicao: float = 3.0
+## Nasce em volta do jogador, fora da tela, em vez de em qualquer ponto da área.
+@export var nascer_perto: bool = false
+## Os inimigos da zona já nascem indo atrás do jogador, sem depender da visão.
+@export var cacar_jogador: bool = false
 
 # Sem tipo: guarda referências que podem já ter sido liberadas quando o inimigo morre.
 var _vivos: Array = []

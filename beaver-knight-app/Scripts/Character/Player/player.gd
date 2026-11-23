@@ -141,6 +141,9 @@ func _physics_process(delta: float) -> void:
 	update_blend(direction)
 	movement_animation()
 	move_and_slide()
+	# Com stretch `canvas_items`, a câmera aceita frações de pixel e o sprite não (snap 2D).
+	# Alinhar a câmera ao mesmo arredondamento do sprite evita que o castor trema na tela.
+	camera.position = (global_position + Vector2(0.5, 0.5)).floor() - global_position
 
 # --- FUNÇÕES DE MOVIMENTAÇÃO E ANIMAÇÃO ---
 

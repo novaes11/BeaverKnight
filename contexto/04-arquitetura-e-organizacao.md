@@ -87,14 +87,19 @@ Comunicação por **grupos** e **métodos por convenção**:
 `enemy_spawn.gd` (nó `EnemySpawn`) percorre os filhos `ZonaSpawn` a cada 0,5 s. Só nasce em ponto livre, conectado ao jogador, a pelo menos 190 px e em zona próxima. A cidade não tem zona.
 
 ### Partida
-`Partida` (`Scripts/World/partida.gd`, grupo `partida`) controla as etapas `PRAIA → REFINARIA → BOSS → FIM`, a contagem, o tempo e o recorde. Cada `ZonaSpawn` tem `etapa` e `total_inimigos`. A caverna usa `requer_etapa`. No fim, o jogo pausa e mostra `tela_fim.tscn`; rejogar recarrega a cena.
+`Partida` (`Scripts/World/partida.gd`, grupo `partida`) controla as etapas `PRAIA → REFINARIA → BOSS → FIM`, a contagem, o tempo e o recorde. Cada `ZonaSpawn` tem `etapa`, `total_inimigos`, `nascer_perto` e `cacar_jogador`. A caverna usa `requer_etapa`. No fim, o jogo pausa e mostra `tela_fim.tscn`; rejogar recarrega a cena.
 
-Fluxo de telas: `main_menu.tscn → tela_historia.tscn → town.tscn`. O `hud.tscn` é instanciado na cidade.
+Fluxo de telas: `main_menu.tscn → tela_historia.tscn → town.tscn`. `hud.tscn` e `tela_pausa.tscn` são instanciados na cidade. A ação `pausar` (`Esc` ou `P`) pausa a árvore; o `AudioManager` roda com `PROCESS_MODE_ALWAYS`.
 
 ### Boss
 `BossPetroleo` (`boss_petroleo.gd`) usa uma folha 6×6 de 96 px animada por código. Estados: `SURGINDO`, `ESPERANDO`, `ANDANDO`, `PANCADA`, `CUSPE`, `RECUPERANDO`, `MORRENDO`. Anda só dentro de `arena` e expõe `ponto_mais_proximo()` para o golpe considerar o corpo grande.
 
+### Resolução
+Base de 320×180 com `window/stretch/mode = "canvas_items"`: o texto é renderizado na resolução da tela e a pixel art usa filtro Nearest. Como a câmera aceita frações de pixel nesse modo, `player.gd` a alinha ao arredondamento do sprite depois de `move_and_slide()`; sem isso, o castor treme ao andar.
+
 ### Exportação Web
+Na Web, o `AudioManager` soma `GANHO_WEB_MUSICA` e `GANHO_WEB_EFEITOS` aos barramentos, sem alterar o som do desktop.
+
 Preset em `beaver-knight-app/export_presets.cfg`, sem threads, com lista explícita em `export_files` (**cenas e scripts novos precisam entrar nela**). A build fica em `docs/jogo/`. Texturas não podem ficar embutidas apontando para `.godot/imported`, senão ficam fora da build.
 
 ### Animação

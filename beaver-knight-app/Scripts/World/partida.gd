@@ -13,7 +13,7 @@ const ARQUIVO_RECORDE := "user://recorde.cfg"
 const CENA_MENU := "res://Scene/main_menu.tscn"
 
 @export var meta_praia: int = 6
-@export var meta_refinaria: int = 10
+@export var meta_refinaria: int = 16
 ## Cena do boss. Sem ela, concluir a refinaria encerra a partida com vitória.
 @export var boss_scene: PackedScene
 @export var ponto_boss := Vector2(402, -690)

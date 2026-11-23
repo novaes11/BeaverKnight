@@ -1,6 +1,10 @@
 extends Node
 
 
+# Reforço de volume só na versão Web (dB), sobre os barramentos do projeto.
+const GANHO_WEB_MUSICA := 14.0
+const GANHO_WEB_EFEITOS := 8.0
+
 #2 Variaveis que definem a quantidade de audios que podem tocar ao mesmo tempo
 var pool_Tamanho: int = 8
 
@@ -15,6 +19,11 @@ var musica_player: AudioStreamPlayer
 
 #Cria os Arrays de AudioStreamPlayer
 func _ready() -> void:
+	# O áudio continua respondendo na tela de pausa e nas telas finais.
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	if OS.has_feature("web"):
+		_aplicar_ganho_web()
+
 	# pool de efeitos sonoros
 	for i in range(pool_Tamanho):
 		var pool = AudioStreamPlayer.new()
@@ -35,6 +44,12 @@ func _ready() -> void:
 	add_child(musica_player)
 	
 
+
+func _aplicar_ganho_web() -> void:
+	for par in [["Music", GANHO_WEB_MUSICA], ["Effect", GANHO_WEB_EFEITOS]]:
+		var indice := AudioServer.get_bus_index(par[0])
+		if indice >= 0:
+			AudioServer.set_bus_volume_db(indice, AudioServer.get_bus_volume_db(indice) + par[1])
 
 # Funções que controlam os efeitos sonoros
 func play_sfx(stream: AudioStream, volume_db: float = 0.0, pitch_scale: float = 1.0) -> void:

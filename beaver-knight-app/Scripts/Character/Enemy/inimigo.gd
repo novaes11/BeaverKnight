@@ -41,6 +41,7 @@ var _nav: MapaNavegacao
 var _origem: Vector2
 var _zona := Rect2()
 var _tem_zona := false
+var _cacando := false
 var _caminho := PackedVector2Array()
 var _indice_caminho := 0
 var _tempo_caminho := 0.0
@@ -56,10 +57,11 @@ var anim_state: AnimationNodeStateMachinePlayback
 
 
 ## Chamado pelo spawner antes de o inimigo entrar na cena.
-func configurar(origem: Vector2, zona: Rect2) -> void:
+func configurar(origem: Vector2, zona: Rect2, cacar: bool = false) -> void:
 	_origem = origem
 	_zona = zona
 	_tem_zona = true
+	_cacando = cacar
 
 
 func _ready() -> void:
@@ -221,7 +223,7 @@ func _posicao_alvo() -> Vector2:
 
 
 func _na_zona(ponto: Vector2) -> bool:
-	return not _tem_zona or _zona.grow(48.0).has_point(ponto)
+	return not _tem_zona or _cacando or _zona.grow(48.0).has_point(ponto)
 
 
 func _alcancavel(ponto: Vector2) -> bool:
@@ -232,14 +234,14 @@ func _pode_engajar() -> bool:
 	if player == null:
 		return false
 	var alvo := _posicao_alvo()
-	return global_position.distance_to(alvo) <= raio_visao and _na_zona(alvo) and _alcancavel(alvo)
+	return (_cacando or global_position.distance_to(alvo) <= raio_visao) and _na_zona(alvo) and _alcancavel(alvo)
 
 
 func _alvo_valido() -> bool:
 	if player == null:
 		return false
 	var alvo := _posicao_alvo()
-	return global_position.distance_to(alvo) <= raio_perda and _na_zona(alvo) and _alcancavel(alvo)
+	return (_cacando or global_position.distance_to(alvo) <= raio_perda) and _na_zona(alvo) and _alcancavel(alvo)
 
 
 # --- MOVIMENTO ---

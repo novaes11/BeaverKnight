@@ -21,23 +21,23 @@ const AJUSTE_ALVO := Vector2(0, -8)
 const ALTURA_BOCA := 26.0
 
 # Balanceamento
-@export var max_health: int = 800
+@export var max_health: int = 1050
 @export var velocidade: float = 34.0
 @export var velocidade_furia: float = 44.0
 @export var raio_despertar: float = 170.0
 @export var raio_perda: float = 250.0
 @export var raio_pancada: float = 46.0
-@export var dano_pancada: int = 18
-@export var dano_cuspe: int = 8
+@export var dano_pancada: int = 27
+@export var dano_cuspe: int = 7
 @export var velocidade_cuspe: float = 85.0
-@export var aviso_pancada: float = 0.8
+@export var aviso_pancada: float = 1.0
 @export var aviso_cuspe: float = 0.55
 @export var recuperacao: float = 1.1
-@export var recuperacao_furia: float = 0.85
-@export var intervalo_ataque: float = 1.5
-@export var intervalo_furia: float = 1.1
+@export var recuperacao_furia: float = 0.9
+@export var intervalo_ataque: float = 1.4
+@export var intervalo_furia: float = 1.05
 ## Vida devolvida ao jogador quando o boss entra em fúria.
-@export var cura_na_furia: int = 30
+@export var cura_na_furia: int = 35
 ## Área do pátio da fábrica por onde o boss anda (coordenadas globais).
 @export var arena := Rect2(225, -770, 305, 95)
 @export var sfx_impacto: AudioStream
