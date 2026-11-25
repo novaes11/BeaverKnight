@@ -75,6 +75,19 @@ Ao vencer ou perder, a tela final mostra tempo, inimigos derrotados e melhor tem
 
 ---
 
+## 📚 Documentação do Projeto
+
+Toda a documentação oficial atualizada para a entrega final está disponível em Markdown e PDF:
+
+| Documento | Markdown (GitHub) | PDF (Download) |
+| :--- | :--- | :--- |
+| **Documento de Visão** | [`documentacao/visao.md`](documentacao/visao.md) | [`visao-beaverknight.pdf`](docs/assets/documents/visao-beaverknight.pdf) |
+| **Game Design Document (GDD)** | [`documentacao/gdd.md`](documentacao/gdd.md) | [`gdd-beaverknight.pdf`](docs/assets/documents/gdd-beaverknight.pdf) |
+| **Fluxo do Jogo e Casos de Uso** | [`documentacao/fluxo-e-casos-de-uso.md`](documentacao/fluxo-e-casos-de-uso.md) | [`fluxo-e-casos-de-uso-beaverknight.pdf`](docs/assets/documents/fluxo-e-casos-de-uso-beaverknight.pdf) |
+| **Relatório de Desenvolvimento** | [`documentacao/relatorio-desenvolvimento.md`](documentacao/relatorio-desenvolvimento.md) | [`relatorio-desenvolvimento-beaverknight.pdf`](docs/assets/documents/relatorio-desenvolvimento-beaverknight.pdf) |
+
+---
+
 ## 📂 Estrutura do Repositório
 
 ```text
@@ -87,11 +100,11 @@ BeaverKnight/
 │   ├── Sprites/                     # Folhas do castor e do boss, e arte dos capangas
 │   ├── export_presets.cfg           # Preset de exportação Web
 │   └── project.godot                # Configuração do projeto
-├── contexto/                        # Planos, arquitetura, pendências e histórico do desenvolvimento
 ├── docs/                            # Landing Page (GitHub Pages)
-│   ├── assets/                      # CSS, scripts, fotos da equipe e artes
+│   ├── assets/                      # CSS, scripts, fotos da equipe, artes e PDFs (documents/)
 │   ├── jogo/                        # Build HTML5 do jogo
 │   └── index.html                   # Página principal
+├── documentacao/                    # Documentação oficial (Visão, GDD, Fluxo/Casos de Uso, Relatório)
 └── ferramentas/                     # Geradores de sprites e testes automatizados
 ```
 

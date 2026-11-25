@@ -31,11 +31,11 @@
             </a>
 
             <nav class="nav-links" aria-label="Navegação Principal">
-                <a href="#sobre">Sobre o Jogo</a>
-                <a href="#mecanicas">Mecânicas & Física</a>
-                <a href="#arte">Bestiário & Arte</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#mecanicas">Mecânicas</a>
+                <a href="#arte">Bestiário</a>
                 <a href="#galeria">Galeria</a>
-                <a href="#equipe">Equipe & Evidências</a>
+                <a href="#equipe">Equipe</a>
                 <a href="#documentos">Documentos</a>
                 <a href="#comunidade">Comunidade</a>
             </nav>
@@ -91,7 +91,7 @@
                     </li>
                     <li>
                         <span class="check-badge">✓</span>
-                        <span>Projeto de extensão acadêmica — Ciência da Computação (UniFil).</span>
+                        <span>Projeto de extensão acadêmica em Ciência da Computação (UniFil).</span>
                     </li>
                     <li>
                         <span class="check-badge">✓</span>
@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="control-text">
                                         <h4>Movimentação</h4>
-                                        <p>Use as setas do teclado para andar pelo mapa.</p>
+                                        <p>Use as setas do teclado ou D-Pad para andar em 8 direções pelo mapa.</p>
                                     </div>
                                 </div>
 
@@ -156,7 +156,7 @@
                                     </div>
                                     <div class="control-text">
                                         <h4>Ataque</h4>
-                                        <p>Clique para golpear. Limpe a praia, a refinaria e vença o boss.</p>
+                                        <p>Clique para golpear com a espada. Limpe a praia, a refinaria e vença o boss.</p>
                                     </div>
                                 </div>
 
@@ -166,8 +166,8 @@
                                         <span class="keycap">P</span>
                                     </div>
                                     <div class="control-text">
-                                        <h4>Pausa</h4>
-                                        <p>Pause para continuar, reiniciar ou voltar ao menu.</p>
+                                        <h4>Pausa & Regras</h4>
+                                        <p>Pause para continuar, reiniciar ou voltar ao menu. Se a vida acabar, a partida recomeça.</p>
                                     </div>
                                 </div>
                             </div>
@@ -211,11 +211,11 @@
             <div class="about-container center">
                 <div class="about-text">
                     <span class="section-kicker">Proposta & Arquitetura</span>
-                    <h2>Mais que um jogo: educação ambiental gamificada com engenharia moderna.</h2>
+                    <h2>Educação ambiental gamificada em 2D na Godot 4.7.</h2>
                     <p>
-                        O <strong>BeaverKnight</strong> nasceu como um projeto de extensão universitária com uma missão
-                        clara: transformar temas urgentes de sustentabilidade — conservação da água, contaminação por
-                        petróleo e equilíbrio ecológico — em uma experiência interativa e memorável.
+                        O <strong>BeaverKnight</strong> nasceu como projeto de extensão universitária para levar temas
+                        de sustentabilidade (conservação da água, contaminação por petróleo e equilíbrio ecológico) a
+                        uma aventura jogável diretamente no navegador.
                     </p>
                     <p>
                         O jogador parte da cidade, sobe a escada até a <strong>praia</strong>, atravessa a caverna até a
@@ -252,6 +252,7 @@
                             <li><span>Engine & Core:</span> <code>Godot 4.7 + GDScript</code></li>
                             <li><span>Resolução Base:</span> <code>320×180 px (Snap 2D Pixel)</code></li>
                             <li><span>Plataforma:</span> <code>HTML5 / Web (GitHub Pages)</code></li>
+                            <li><span>Controles:</span> <strong>Setas / D-Pad, Mouse Esq., Esc/P</strong></li>
                             <li><span>Duração:</span> <strong>Partidas de 5 a 8 minutos</strong></li>
                             <li><span>Mapa & IA:</span> <code>TileMapLayer + AStarGrid2D</code></li>
                             <li><span>Animação:</span> <code>AnimationTree (StateMachine)</code></li>
@@ -928,67 +929,155 @@
             </div>
         </section>
 
-        <!-- Documentos & Materiais para Alunos: disponibiliza manuais e recursos pedagógicos sem duplicar a tabela de evidências -->
+        <!-- Documentação Oficial, Guias e Downloads -->
         <section id="documentos" class="documents-section">
             <div class="center">
                 <div class="section-header">
                     <span class="section-kicker">Acervo & Documentação</span>
-                    <h2>Documentos do Projeto para Alunos</h2>
-                    <p>Acesse os guias de execução, a documentação técnica do repositório e o espaço dedicado aos
-                        materiais didáticos do BeaverKnight.</p>
+                    <h2>Documentação Oficial & Materiais</h2>
+                    <p>Documentos completos escritos com base na versão final implementada em Godot 4.7, disponíveis para leitura no GitHub e download em PDF.</p>
+                </div>
+
+                <div class="docs-overview-bar">
+                    <div class="docs-overview-info">
+                        <span class="docs-overview-kicker">Sincronizado com a versão final · Godot 4.7</span>
+                        <p>Os arquivos editáveis em Markdown ficam em <code>documentacao/</code> no repositório e as versões diagramadas em PDF estão publicadas em <code>docs/assets/documents/</code>.</p>
+                    </div>
+                    <div class="docs-overview-actions">
+                        <a href="https://github.com/novaes11/BeaverKnight/tree/main/documentacao" target="_blank"
+                            rel="noopener noreferrer" class="btn-secondary">Pasta documentacao/ ↗</a>
+                    </div>
                 </div>
 
                 <div class="documents-grid">
                     <article class="document-card">
-                        <div class="document-top">
-                            <span class="document-icon">📘</span>
-                            <span class="document-badge">Guia Inicial • README.md</span>
+                        <div>
+                            <div class="document-top">
+                                <span class="document-icon">🌱</span>
+                                <span class="document-badge">Visão & ODS</span>
+                            </div>
+                            <h3>Documento de Visão</h3>
+                            <p>
+                                Propósito educacional, alinhamento às ODS 7, 12 e 15, público de 11 a 17 anos, equipe, premissas de execução no navegador e impacto social.
+                            </p>
                         </div>
-                        <h3>Manual de Execução & Como Jogar</h3>
-                        <p>
-                            Como jogar no navegador, importar o projeto na Godot Engine 4.7, consultar os controles e
-                            compreender o objetivo e a proposta educativa do jogo.
-                        </p>
-                        <div class="document-meta">Arquivo: <code>README.md</code></div>
-                        <div class="document-actions">
-                            <a href="https://github.com/novaes11/BeaverKnight/blob/main/README.md" target="_blank"
-                                rel="noopener noreferrer" class="btn-secondary">Ler Guia Completo ↗</a>
-                        </div>
-                    </article>
-
-                    <article class="document-card">
-                        <div class="document-top">
-                            <span class="document-icon">⚙️</span>
-                            <span class="document-badge">Código & Cenas • Godot 4.7</span>
-                        </div>
-                        <h3>Arquitetura Técnica do Jogo</h3>
-                        <p>
-                            Explore as cenas (<code>town.tscn</code>, <code>main_menu.tscn</code>,
-                            <code>boss_petroleo.tscn</code>, <code>inimigo.tscn</code>) e os scripts em GDScript para estudar
-                            física 2D, TileMapLayers, IA, o ciclo de partida e o controlador de áudio.
-                        </p>
-                        <div class="document-meta">Diretório: <code>beaver-knight-app/</code></div>
-                        <div class="document-actions">
-                            <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Scripts"
-                                target="_blank" rel="noopener noreferrer" class="btn-secondary">Explorar Scripts ↗</a>
+                        <div>
+                            <div class="document-meta">Arquivo: <code>documentacao/visao.md</code></div>
+                            <div class="document-actions">
+                                <a href="https://github.com/novaes11/BeaverKnight/blob/main/documentacao/visao.md" target="_blank"
+                                    rel="noopener noreferrer" class="btn-secondary">Ler Markdown ↗</a>
+                                <a href="assets/documents/visao-beaverknight.pdf" target="_blank"
+                                    rel="noopener noreferrer" class="btn-doc-pdf">Abrir PDF ↓</a>
+                            </div>
                         </div>
                     </article>
 
                     <article class="document-card">
-                        <div class="document-top">
-                            <span class="document-icon">📂</span>
-                            <span class="document-badge">Repositório de Arquivos</span>
+                        <div>
+                            <div class="document-top">
+                                <span class="document-icon">🎮</span>
+                                <span class="document-badge badge-amber">Design & Entidades</span>
+                            </div>
+                            <h3>Game Design Document (GDD)</h3>
+                            <p>
+                                Narrativa, fichas do Cavaleiro Castor, Death Slime e Boss de Petróleo, progressão em 3 etapas, regras de terreno, HUD, controles e áudio.
+                            </p>
                         </div>
-                        <h3>Central de Documentos dos Alunos</h3>
-                        <p>
-                            Espaço reservado na landing page para disponibilizar cartilhas em PDF, roteiros de atividade
-                            em sala de aula, Game Design Document (GDD) e relatórios da extensão universitária na
-                            UniFil.
-                        </p>
-                        <div class="document-meta">Pasta: <code>docs/assets/documents/</code></div>
-                        <div class="document-actions">
-                            <a href="https://github.com/novaes11/BeaverKnight/tree/main/docs/assets/documents"
-                                target="_blank" rel="noopener noreferrer" class="btn-secondary">Acessar Acervo ↗</a>
+                        <div>
+                            <div class="document-meta">Arquivo: <code>documentacao/gdd.md</code></div>
+                            <div class="document-actions">
+                                <a href="https://github.com/novaes11/BeaverKnight/blob/main/documentacao/gdd.md" target="_blank"
+                                    rel="noopener noreferrer" class="btn-secondary">Ler Markdown ↗</a>
+                                <a href="assets/documents/gdd-beaverknight.pdf" target="_blank"
+                                    rel="noopener noreferrer" class="btn-doc-pdf">Abrir PDF ↓</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="document-card">
+                        <div>
+                            <div class="document-top">
+                                <span class="document-icon">🗺️</span>
+                                <span class="document-badge badge-cyan">Fluxo & Casos de Uso</span>
+                            </div>
+                            <h3>Fluxo do Jogo e Casos de Uso</h3>
+                            <p>
+                                Diagramas e tabela dos 11 casos de uso reais, fluxo entre cenas, máquinas de estado dos inimigos e mapa de interações do jogador.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="document-meta">Arquivo: <code>documentacao/fluxo-e-casos-de-uso.md</code></div>
+                            <div class="document-actions">
+                                <a href="https://github.com/novaes11/BeaverKnight/blob/main/documentacao/fluxo-e-casos-de-uso.md" target="_blank"
+                                    rel="noopener noreferrer" class="btn-secondary">Ler Markdown ↗</a>
+                                <a href="assets/documents/fluxo-e-casos-de-uso-beaverknight.pdf" target="_blank"
+                                    rel="noopener noreferrer" class="btn-doc-pdf">Abrir PDF ↓</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="document-card">
+                        <div>
+                            <div class="document-top">
+                                <span class="document-icon">🧪</span>
+                                <span class="document-badge">Entrega & Testes</span>
+                            </div>
+                            <h3>Relatório de Desenvolvimento</h3>
+                            <p>
+                                Evolução do protótipo à entrega final em GDScript, soluções de colisão, A*, spawn, build HTML5 sem threads e resultados dos testes headless.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="document-meta">Arquivo: <code>documentacao/relatorio-desenvolvimento.md</code></div>
+                            <div class="document-actions">
+                                <a href="https://github.com/novaes11/BeaverKnight/blob/main/documentacao/relatorio-desenvolvimento.md" target="_blank"
+                                    rel="noopener noreferrer" class="btn-secondary">Ler Markdown ↗</a>
+                                <a href="assets/documents/relatorio-desenvolvimento-beaverknight.pdf" target="_blank"
+                                    rel="noopener noreferrer" class="btn-doc-pdf">Abrir PDF ↓</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="document-card">
+                        <div>
+                            <div class="document-top">
+                                <span class="document-icon">📘</span>
+                                <span class="document-badge badge-amber">Guia Inicial</span>
+                            </div>
+                            <h3>Manual de Execução & Como Jogar</h3>
+                            <p>
+                                Passo a passo para jogar no navegador, importar o projeto na Godot Engine 4.7, conferir os comandos e entender o objetivo de cada etapa.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="document-meta">Arquivo: <code>README.md</code></div>
+                            <div class="document-actions">
+                                <a href="https://github.com/novaes11/BeaverKnight/blob/main/README.md" target="_blank"
+                                    rel="noopener noreferrer" class="btn-secondary">Ler Guia ↗</a>
+                                <a href="jogo/index.html" class="btn-doc-pdf">Jogar Agora ▶</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="document-card">
+                        <div>
+                            <div class="document-top">
+                                <span class="document-icon">⚙️</span>
+                                <span class="document-badge badge-cyan">Código & Cenas</span>
+                            </div>
+                            <h3>Arquitetura Técnica & Scripts</h3>
+                            <p>
+                                Acesso direto às cenas (<code>town.tscn</code>, <code>boss_petroleo.tscn</code>, <code>inimigo.tscn</code>), scripts GDScript, geradores de sprites e testes.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="document-meta">Diretório: <code>beaver-knight-app/Scripts/</code></div>
+                            <div class="document-actions">
+                                <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Scripts"
+                                    target="_blank" rel="noopener noreferrer" class="btn-secondary">Explorar Scripts ↗</a>
+                                <a href="https://github.com/novaes11/BeaverKnight/blob/main/documentacao/README.md"
+                                    target="_blank" rel="noopener noreferrer" class="btn-doc-pdf">Índice Docs ↗</a>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -1060,7 +1149,7 @@
                 <a href="#arte">Bestiário & Pixel Art</a>
                 <a href="#galeria">Galeria do Projeto</a>
                 <a href="#equipe">Equipe & Evidências</a>
-                <a href="#documentos">Documentos para Alunos</a>
+                <a href="#documentos">Documentação & PDFs</a>
                 <a href="#comunidade">Impacto na Comunidade</a>
             </div>
 
@@ -1068,6 +1157,8 @@
                 <h4>Repositório & Código</h4>
                 <a href="https://github.com/novaes11/BeaverKnight" target="_blank" rel="noopener noreferrer">Repositório
                     Principal (GitHub) ↗</a>
+                <a href="https://github.com/novaes11/BeaverKnight/tree/main/documentacao" target="_blank"
+                    rel="noopener noreferrer">Documentação (documentacao/) ↗</a>
                 <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Scene" target="_blank"
                     rel="noopener noreferrer">Cenas Godot (Scene/) ↗</a>
                 <a href="https://github.com/novaes11/BeaverKnight/tree/main/beaver-knight-app/Scripts" target="_blank"
@@ -1078,7 +1169,7 @@
         </div>
 
         <div class="footer-bottom center">
-            <p>&copy; 2026 Equipe BeaverKnight — Projeto de Extensão Universitária em colaboração com a UniFil.</p>
+            <p>&copy; 2026 Equipe BeaverKnight · Projeto de Extensão Universitária em colaboração com a UniFil.</p>
             <span>Desenvolvido com Godot Engine 4.7 & GitHub Pages</span>
         </div>
     </footer>
